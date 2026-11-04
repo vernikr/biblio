@@ -1,6 +1,6 @@
 {
   "name": "@vernikr/biblio-mcp",
-  "version": "2.2.11",
+  "version": "2.3.0",
   "description": "One MCP server for Anna's Archive, Library Genesis, Sci-Hub, and Z-Library. Search books and papers, resolve download links, and fetch files \u2014 across all shadow libraries through a single unified interface.",
   "type": "module",
   "bin": {
@@ -15,11 +15,11 @@
   "author": "Yashar Mahmoudi <yashar.mahmudi@gmail.com> (https://github.com/yashimosh)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vernikr/biblio-mcp.git"
+    "url": "git+https://github.com/vernikr/biblio.git"
   },
-  "homepage": "https://github.com/vernikr/biblio-mcp",
+  "homepage": "https://github.com/vernikr/biblio",
   "bugs": {
-    "url": "https://github.com/vernikr/biblio-mcp/issues"
+    "url": "https://github.com/vernikr/biblio/issues"
   },
   "engines": {
     "node": ">=22"

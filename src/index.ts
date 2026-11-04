@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { createServer, SERVER_NAME, SERVER_VERSION } from "./server.js";
 import { runSelfcheck, printSelfcheck, runStartupSelftest } from "./selfcheck.js";
 import { environmentHelp } from "./config.js";
+import { runCli } from "./cli.js";
 import {
   buildLauncherConfig,
   ephemeralPathWarning,
@@ -21,6 +22,15 @@ Usage:
   node dist/index.js --selfcheck         verify install, tool surface, mirrors
   node dist/index.js --selfcheck --live  ...and perform one real search
   node dist/index.js --print-config      print an MCP client entry that runs the newest release via npx
+  biblio-mcp search books <query>        search books
+  biblio-mcp book details <md5>          show book details
+  biblio-mcp book links <md5>            resolve download links
+  biblio-mcp download book <md5>         download a book
+  biblio-mcp fetch book <query>          search and download a book
+  biblio-mcp search papers <query>       search academic papers
+  biblio-mcp paper get <identifier>      resolve a paper
+  biblio-mcp healthcheck                 check source mirrors
+  Add --json to any command for machine-readable output.
   node dist/index.js --version           print the version
   node dist/index.js --help              show this help
 
@@ -79,6 +89,10 @@ async function main(argv: string[]): Promise<number> {
     printSelfcheck(report);
     return report.ok ? 0 : 1;
   }
+
+  // CLI commands call the shared application layer directly. No MCP server,
+  // transport, or startup self-test is created for one-shot CLI invocations.
+  if (argv.length > 0) return await runCli(argv);
 
   // Validate one tool call before binding stdio, so incompatible installs fail early.
   if (!process.env.BIBLIO_SKIP_STARTUP_CHECK) {

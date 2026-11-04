@@ -40,8 +40,10 @@ offline dependency guard, run before the build and again after it.
 
 | Path | Lives here |
 |---|---|
-| `src/index.ts` | CLI: server, `--selfcheck`, `--print-config`, `--version` |
-| `src/server.ts` | The `McpServer`, tool registration, argument-error translation |
+| `src/index.ts` | Dispatches CLI commands and starts the MCP stdio server when called without arguments; retains maintenance flags |
+| `src/cli.ts` | CLI argument parsing, validation, human/JSON output, exit codes and terminal progress |
+| `src/application.ts` | Transport-neutral workflows shared by CLI and MCP, shared schemas and result status |
+| `src/server.ts` | The `McpServer`, tool registration, MCP response envelopes, progress notifications and argument-error translation |
 | `src/toolmeta.ts` | `TOOL_META`: each tool's description and call example |
 | `src/acquire.ts` | Ranking copies, `saveBook`, `fetchBook`, alternatives on failure |
 | `src/providers/` | One module per source; `index.ts` fans out and merges |

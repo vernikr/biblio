@@ -2,7 +2,7 @@
 // Pre-install / pre-run health check.
 
 import { createRequire } from "node:module";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -236,7 +236,8 @@ function printHuman(report) {
 }
 
 // Run directly (not when imported by dist/index.js --selfcheck or by tests).
-const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const invokedDirectly =
+  process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invokedDirectly) {
   const report = runPreflight({ requireBuild: process.argv.includes("--require-build") });
   if (process.argv.includes("--json")) {
@@ -244,5 +245,7 @@ if (invokedDirectly) {
   } else {
     printHuman(report);
   }
-  process.exit(report.ok ? 0 : 1);
+  // Let Node flush stdout/stderr before the process exits; process.exit() can
+  // truncate piped JSON output when this script is run by another process.
+  process.exitCode = report.ok ? 0 : 1;
 }

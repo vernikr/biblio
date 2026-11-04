@@ -9,7 +9,7 @@ checkpoints, not the current roadmap.
 - Public npm: [`@vernikr/biblio-mcp`](https://www.npmjs.com/package/@vernikr/biblio-mcp); the current
   version is the one in `package.json`. Cold npx and pnpm registry launchers pass.
 - Releases, with their `.tgz`, `.mcpb` and checksums, are on the
-  [releases page](https://github.com/vernikr/biblio-mcp/releases).
+  [releases page](https://github.com/vernikr/biblio/releases).
 - Node **22+**, pnpm **12.10.1** for maintainers; CI covers 22/24 and exact 22.0.0.
 - npm/MCPB use the same compiled stdio runtime. MCPB carries locked production dependencies;
   consumer checkout/TypeScript/build tools are not required. Source installer remains a developer utility.

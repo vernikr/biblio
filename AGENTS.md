@@ -16,7 +16,7 @@ CI checks Node 22/24 LTS and the exact 22.0 runtime floor.
 ## Verification
 
 ```bash
-git clone https://github.com/vernikr/biblio-mcp.git
+git clone https://github.com/vernikr/biblio.git
 cd biblio-mcp
 pnpm install --frozen-lockfile
 pnpm run verify

@@ -1,6 +1,6 @@
 # biblio-mcp
 
-[![CI](https://github.com/vernikr/biblio-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/vernikr/biblio-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/vernikr/biblio/actions/workflows/ci.yml/badge.svg)](https://github.com/vernikr/biblio/actions/workflows/ci.yml)
 [MIT license](LICENSE)
 
 **One [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that searches Anna's Archive, Library Genesis (Libgen), Sci-Hub, and Z-Library — all at once.**
@@ -36,7 +36,7 @@ a `PATH`. Run `npx --yes @vernikr/biblio-mcp@latest --print-config` and copy its
 absolute path to `npx` and a `PATH` that lists the folders holding `node` and `npx`.
 
 - **Claude Desktop:** install the newest `vernikr-biblio-mcp-*.mcpb` from the
-  [releases page](https://github.com/vernikr/biblio-mcp/releases) through Settings → Extensions
+  [releases page](https://github.com/vernikr/biblio/releases) through Settings → Extensions
   (Install Extension), review permissions and optional settings. No Git, pnpm or build step.
   The host's Node runtime must meet the extension's Node 22+ requirement.
 - **Other options:** the prepared npm tarball or the printed entry; see [Install](#install).
@@ -122,6 +122,23 @@ user only where a step says so.
 Rules: no `sudo`, no global installs. Never put a path containing `fnm_multishells` or `/tmp` into a
 config. Put API keys only into the client's `env` block, and only if the user gives them to you.
 Never print a key back.
+
+## Command-line interface
+
+The package also installs a `biblio-mcp` executable. It calls the same application logic as the MCP server and works as a one-shot command:
+
+```sh
+biblio-mcp search books "dune frank herbert" --limit 10
+biblio-mcp book details <md5>
+biblio-mcp book links <md5>
+biblio-mcp download book <md5> --output-dir ~/Downloads/books
+biblio-mcp fetch book "dune frank herbert" --format EPUB
+biblio-mcp search papers "retrieval augmented generation" --resolve-pdfs
+biblio-mcp paper get "10.1038/nature12373"
+biblio-mcp healthcheck
+```
+
+Use `--json` on any command for machine-readable output. Results go to stdout; diagnostics, validation errors, and download progress go to stderr. Exit codes are `0` for success, `1` when an operation completed without its requested result (for example, a failed download), and `2` for invalid command-line input. `biblio-mcp --help` lists all commands and options. Running `biblio-mcp` without arguments still starts the MCP stdio server.
 
 ## What is biblio-mcp?
 

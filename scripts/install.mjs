@@ -11,7 +11,7 @@ import { dirname, join, resolve as resolvePath, isAbsolute } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const DEFAULT_REPO = "https://github.com/vernikr/biblio-mcp.git";
+const DEFAULT_REPO = "https://github.com/vernikr/biblio.git";
 const NODE_MIN = { major: 22, minor: 0 };
 
 /** Flags the installer accepts. */
