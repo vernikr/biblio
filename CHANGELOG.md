@@ -5,6 +5,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); version
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-11-05
+
+### Added
+- A full `biblio-mcp` CLI with eight commands covering book search/details/downloads, paper search/resolution, and mirror health checks. Human-readable output is the default; `--json` provides machine-readable results.
+- A shared transport-neutral application layer used by both the CLI and MCP server, keeping provider workflows and validation consistent.
+
+### Fixed
+- Preflight direct-invocation detection now handles macOS temporary-directory symlinks and reliably flushes piped output.
+
+### Changed
+- Repository, homepage, issue tracker, CI badge, release links, and source-installer default now point to `vernikr/biblio`.
+
 ## [2.2.11] - 2026-10-11
 
 ### Changed
@@ -449,7 +461,8 @@ impossible to get silently wrong, and make the network layer fast and honest.
 - Libgen `author` comes from the wrong table column, so it reports the series name and ISBNs.
 - Both are pinned with `todo` tests describing the intended behaviour.
 
-[Unreleased]: https://github.com/vernikr/biblio-mcp/compare/v2.2.11...HEAD
+[Unreleased]: https://github.com/vernikr/biblio/compare/v2.3.0...HEAD
+[2.3.0]: https://github.com/vernikr/biblio/compare/v2.2.11...v2.3.0
 [2.2.11]: https://github.com/vernikr/biblio-mcp/compare/v2.2.10...v2.2.11
 [2.2.10]: https://github.com/vernikr/biblio-mcp/compare/v2.2.9...v2.2.10
 [2.2.9]: https://github.com/vernikr/biblio-mcp/compare/v2.2.8...v2.2.9

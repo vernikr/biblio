@@ -1,6 +1,6 @@
 # biblio-mcp
 
-[![CI](https://github.com/vernikr/biblio-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/vernikr/biblio-mcp/actions/workflows/ci.yml)
+[![CI](https://github.com/vernikr/biblio/actions/workflows/ci.yml/badge.svg)](https://github.com/vernikr/biblio/actions/workflows/ci.yml)
 [MIT license](LICENSE)
 
 **One [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that searches Anna's Archive, Library Genesis (Libgen), Sci-Hub, and Z-Library — all at once.**
@@ -36,7 +36,7 @@ a `PATH`. Run `npx --yes @vernikr/biblio-mcp@latest --print-config` and copy its
 absolute path to `npx` and a `PATH` that lists the folders holding `node` and `npx`.
 
 - **Claude Desktop:** install the newest `vernikr-biblio-mcp-*.mcpb` from the
-  [releases page](https://github.com/vernikr/biblio-mcp/releases) through Settings → Extensions
+  [releases page](https://github.com/vernikr/biblio/releases) through Settings → Extensions
   (Install Extension), review permissions and optional settings. No Git, pnpm or build step.
   The host's Node runtime must meet the extension's Node 22+ requirement.
 - **Other options:** the prepared npm tarball or the printed entry; see [Install](#install).
