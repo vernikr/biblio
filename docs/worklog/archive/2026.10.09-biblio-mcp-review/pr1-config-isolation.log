@@ -1,0 +1,140 @@
+TAP version 13
+# Subtest: runStartupSelftest passes on a healthy build
+ok 1 - runStartupSelftest passes on a healthy build # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.178038
+  ...
+# Subtest: the entry point refuses to start when the tool surface is broken
+ok 2 - the entry point refuses to start when the tool surface is broken # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.119071
+  ...
+# Subtest: the startup check can be bypassed, and says so when it refuses
+ok 3 - the startup check can be bypassed, and says so when it refuses # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.081218
+  ...
+# Subtest: the installer runs end to end in dry-run mode and writes nothing
+ok 4 - the installer runs end to end in dry-run mode and writes nothing # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.082399
+  ...
+# Subtest: the installer stops at an unsupported Node prerequisite
+ok 5 - the installer stops at an unsupported Node prerequisite # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.083245
+  ...
+# Subtest: the installer refuses npm fallback when the checkout has a pnpm lockfile
+ok 6 - the installer refuses npm fallback when the checkout has a pnpm lockfile # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.068955
+  ...
+# Subtest: the installer --live flag runs the live selfcheck
+ok 7 - the installer --live flag runs the live selfcheck # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.199358
+  ...
+# Subtest: the installer rejects contradictory --live and --skip-network flags immediately
+ok 8 - the installer rejects contradictory --live and --skip-network flags immediately # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.095586
+  ...
+# Subtest: the installer refuses to overwrite a config it cannot parse
+ok 9 - the installer refuses to overwrite a config it cannot parse # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.179883
+  ...
+# Subtest: the installer refuses a config that is not a JSON object
+ok 10 - the installer refuses a config that is not a JSON object # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.171827
+  ...
+# Subtest: the installer rejects mcpServers=[] even in dry-run mode
+ok 11 - the installer rejects mcpServers=[] even in dry-run mode
+  ---
+  duration_ms: 320.373718
+  ...
+# Subtest: the installer rejects mcpServers=null even in dry-run mode
+ok 12 - the installer rejects mcpServers=null even in dry-run mode
+  ---
+  duration_ms: 112.192883
+  ...
+# Subtest: the installer rejects mcpServers="not an object" even in dry-run mode
+ok 13 - the installer rejects mcpServers="not an object" even in dry-run mode
+  ---
+  duration_ms: 107.242759
+  ...
+# Subtest: the installer rejects mcpServers=42 even in dry-run mode
+ok 14 - the installer rejects mcpServers=42 even in dry-run mode
+  ---
+  duration_ms: 101.768521
+  ...
+# Subtest: the installer rejects mcpServers=false even in dry-run mode
+ok 15 - the installer rejects mcpServers=false even in dry-run mode
+  ---
+  duration_ms: 107.118363
+  ...
+# Subtest: the installer accepts a config with an absent mcpServers field
+ok 16 - the installer accepts a config with an absent mcpServers field
+  ---
+  duration_ms: 117.502793
+  ...
+# Subtest: the installer leaves a malformed config and its previous backup untouched on a real install
+ok 17 - the installer leaves a malformed config and its previous backup untouched on a real install # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.152852
+  ...
+# Subtest: the installer builds a clean checkout, merges an existing config and keeps a backup
+ok 18 - the installer builds a clean checkout, merges an existing config and keeps a backup # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.098532
+  ...
+# Subtest: the installer rejects an incompatible pair after installation and before building
+ok 19 - the installer rejects an incompatible pair after installation and before building # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.086519
+  ...
+# Subtest: the installer validates the path it is about to put in a config
+ok 20 - the installer validates the path it is about to put in a config # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.098212
+  ...
+# Subtest: the installer is plain JavaScript with no imports from src
+ok 21 - the installer is plain JavaScript with no imports from src # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.094369
+  ...
+# Subtest: every BIBLIO_* variable in the code is documented in --help and the README
+ok 22 - every BIBLIO_* variable in the code is documented in --help and the README # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.086375
+  ...
+# Subtest: every command the README tells you to run actually exists
+ok 23 - every command the README tells you to run actually exists # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.100056
+  ...
+# Subtest: the published tarball contains the installer the README points at
+ok 24 - the published tarball contains the installer the README points at # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.063984
+  ...
+# Subtest: the fork package is private while the upstream owns the npm name
+ok 25 - the fork package is private while the upstream owns the npm name # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.056588
+  ...
+# Subtest: every version in the CHANGELOG has a matching compare link
+ok 26 - every version in the CHANGELOG has a matching compare link # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.057169
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 20
+# todo 0
+# duration_ms 1520.119234

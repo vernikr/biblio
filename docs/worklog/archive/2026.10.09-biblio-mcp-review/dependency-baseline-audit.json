@@ -1,0 +1,39 @@
+{
+  "advisories": {
+    "1241339": {
+      "findings": [
+        {
+          "version": "1.29.0",
+          "paths": [
+            ".>@modelcontextprotocol/sdk"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1241339,
+      "title": "MCP TypeScript SDK: OAuth client could send credentials to an authorization server chosen by the MCP server",
+      "module_name": "@modelcontextprotocol/sdk",
+      "vulnerable_versions": ">=1.12.0 <1.31.0",
+      "patched_versions": ">=1.31.0",
+      "severity": "high",
+      "cwe": "CWE-345, CWE-522",
+      "github_advisory_id": "GHSA-6qxp-vccf-f47h",
+      "url": "https://github.com/advisories/GHSA-6qxp-vccf-f47h"
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 1,
+      "critical": 0
+    },
+    "dependencies": 114,
+    "devDependencies": 0,
+    "optionalDependencies": 14,
+    "totalDependencies": 128
+  }
+}

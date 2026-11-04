@@ -1,0 +1,7 @@
+{
+  "check": "scihub-miss",
+  "error": "not found — Sci-Hub has no PDF for this identifier (the page is not an article)",
+  "errorName": "ResourceNotFoundError",
+  "workingMirrorHits": 0,
+  "workingMirrorHasPdf": true
+}

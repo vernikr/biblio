@@ -1,0 +1,76 @@
+TAP version 13
+# Subtest: every tool description ends with a runnable Example line
+ok 1 - every tool description ends with a runnable Example line
+  ---
+  duration_ms: 35.544806
+  ...
+# Subtest: each tool's example only uses arguments that tool accepts
+ok 2 - each tool's example only uses arguments that tool accepts
+  ---
+  duration_ms: 4.126821
+  ...
+# Subtest: TOOL_META covers every registered tool
+ok 3 - TOOL_META covers every registered tool
+  ---
+  duration_ms: 4.164369
+  ...
+# Subtest: a missing argument names the argument, instead of dumping zod issues
+ok 4 - a missing argument names the argument, instead of dumping zod issues
+  ---
+  duration_ms: 4.760455
+  ...
+# Subtest: readable tool validation performs only the SDK's single schema parse
+ok 5 - readable tool validation performs only the SDK's single schema parse
+  ---
+  duration_ms: 3.686278
+  ...
+# Subtest: a malformed md5 says what a valid one looks like
+ok 6 - a malformed md5 says what a valid one looks like
+  ---
+  duration_ms: 3.1879
+  ...
+# Subtest: an out-of-range value reports the range and the correct call
+ok 7 - an out-of-range value reports the range and the correct call
+  ---
+  duration_ms: 2.846857
+  ...
+# Subtest: download_book names both required arguments at once
+ok 8 - download_book names both required arguments at once
+  ---
+  duration_ms: 2.74716
+  ...
+# Subtest: describeArgsError stays informative for an error it does not recognise
+ok 9 - describeArgsError stays informative for an error it does not recognise
+  ---
+  duration_ms: 0.17613
+  ...
+# Subtest: download_book schema explains HOME-relative output paths
+ok 10 - download_book schema explains HOME-relative output paths
+  ---
+  duration_ms: 5.271042
+  ...
+# Subtest: an empty output_dir is rejected with a readable message
+ok 11 - an empty output_dir is rejected with a readable message
+  ---
+  duration_ms: 3.044481
+  ...
+# Subtest: healthcheck is registered and advertises only optional arguments
+ok 12 - healthcheck is registered and advertises only optional arguments
+  ---
+  duration_ms: 3.472672
+  ...
+# Subtest: every mirror group has a positive site-identity marker
+ok 13 - every mirror group has a positive site-identity marker
+  ---
+  duration_ms: 0.527042
+  ...
+# Subtest: search_books rejects an explicitly empty source list
+ok 14 - search_books rejects an explicitly empty source list
+  ---
+  duration_ms: 2.714903
+  ...
+# Subtest: the member key is sent only to the mirror that proves it is Anna's Archive
+ok 15 - the member key is sent only to the mirror that proves it is Anna's Archive
+  ---
+  duration_ms: 44.636703
+  ...

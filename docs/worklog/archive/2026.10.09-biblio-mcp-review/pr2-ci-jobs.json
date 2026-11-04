@@ -1,0 +1,32 @@
+[
+  {
+    "name": "live",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37847481797/job/113551863771"
+  },
+  {
+    "name": "build (22)",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37847481797/job/113551863839"
+  },
+  {
+    "name": "build (18.19.0)",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37847481797/job/113551863922"
+  },
+  {
+    "name": "runtime-floor",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37847481797/job/113551863984"
+  },
+  {
+    "name": "build (20)",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37847481797/job/113551863996"
+  }
+]

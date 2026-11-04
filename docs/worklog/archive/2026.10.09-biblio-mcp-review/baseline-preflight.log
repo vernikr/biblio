@@ -1,0 +1,10 @@
+biblio-mcp preflight — Node v20.20.2
+project: /home/user/biblio-mcp-review/repo
+
+  ok   node            v20.20.2
+  ok   lockfiles       pnpm-lock.yaml
+  ok   dependencies    node_modules present
+  ok   zod-sdk-compat  sdk 1.29.0 + zod 4.4.3 (range "^3.25 || ^4.0")
+  ok   build           /home/user/biblio-mcp-review/repo/dist/index.js
+
+ready to run: node dist/index.js

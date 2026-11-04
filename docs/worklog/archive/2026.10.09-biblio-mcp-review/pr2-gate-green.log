@@ -1,0 +1,230 @@
+TAP version 13
+# Subtest: runStartupSelftest passes on a healthy build
+ok 1 - runStartupSelftest passes on a healthy build
+  ---
+  duration_ms: 24.503852
+  ...
+# Subtest: the version flag prints the package version without starting stdio
+ok 2 - the version flag prints the package version without starting stdio
+  ---
+  duration_ms: 309.464862
+  ...
+# Subtest: the entry point refuses an unhealthy startup check
+ok 3 - the entry point refuses an unhealthy startup check
+  ---
+  duration_ms: 352.786756
+  ...
+# Subtest: the entry point explicitly bypasses an unhealthy startup check
+ok 4 - the entry point explicitly bypasses an unhealthy startup check
+  ---
+  duration_ms: 322.271275
+  ...
+# Subtest: the installer runs end to end in dry-run mode and writes nothing
+ok 5 - the installer runs end to end in dry-run mode and writes nothing
+  ---
+  duration_ms: 97.972796
+  ...
+# Subtest: the installer stops at an unsupported Node prerequisite
+ok 6 - the installer stops at an unsupported Node prerequisite
+  ---
+  duration_ms: 34.910013
+  ...
+# Subtest: the installer refuses npm fallback when the checkout has a pnpm lockfile
+ok 7 - the installer refuses npm fallback when the checkout has a pnpm lockfile
+  ---
+  duration_ms: 31.746627
+  ...
+# Subtest: the installer --live flag runs the live selfcheck
+ok 8 - the installer --live flag runs the live selfcheck
+  ---
+  duration_ms: 91.814664
+  ...
+# Subtest: the installer rejects contradictory --live and --skip-network flags immediately
+ok 9 - the installer rejects contradictory --live and --skip-network flags immediately
+  ---
+  duration_ms: 32.771379
+  ...
+# Subtest: the installer refuses to overwrite a config it cannot parse
+ok 10 - the installer refuses to overwrite a config it cannot parse
+  ---
+  duration_ms: 90.821501
+  ...
+# Subtest: the installer refuses a config that is not a JSON object
+ok 11 - the installer refuses a config that is not a JSON object
+  ---
+  duration_ms: 101.675345
+  ...
+# Subtest: the installer rejects mcpServers=[] even in dry-run mode
+ok 12 - the installer rejects mcpServers=[] even in dry-run mode
+  ---
+  duration_ms: 115.182514
+  ...
+# Subtest: the installer rejects mcpServers=null even in dry-run mode
+ok 13 - the installer rejects mcpServers=null even in dry-run mode
+  ---
+  duration_ms: 106.880855
+  ...
+# Subtest: the installer rejects mcpServers="not an object" even in dry-run mode
+ok 14 - the installer rejects mcpServers="not an object" even in dry-run mode
+  ---
+  duration_ms: 99.868687
+  ...
+# Subtest: the installer rejects mcpServers=42 even in dry-run mode
+ok 15 - the installer rejects mcpServers=42 even in dry-run mode
+  ---
+  duration_ms: 104.747678
+  ...
+# Subtest: the installer rejects mcpServers=false even in dry-run mode
+ok 16 - the installer rejects mcpServers=false even in dry-run mode
+  ---
+  duration_ms: 115.382254
+  ...
+# Subtest: the installer accepts a config with an absent mcpServers field
+ok 17 - the installer accepts a config with an absent mcpServers field
+  ---
+  duration_ms: 114.817528
+  ...
+# Subtest: the installer leaves a malformed config and its previous backup untouched on a real install
+ok 18 - the installer leaves a malformed config and its previous backup untouched on a real install
+  ---
+  duration_ms: 3739.083069
+  ...
+# Subtest: the installer builds a clean checkout, merges an existing config and keeps a backup
+ok 19 - the installer builds a clean checkout, merges an existing config and keeps a backup
+  ---
+  duration_ms: 3678.687855
+  ...
+# Subtest: the installer rejects an incompatible pair after installation and before building
+ok 20 - the installer rejects an incompatible pair after installation and before building
+  ---
+  duration_ms: 138.73263
+  ...
+# Subtest: the installer validates the path it is about to put in a config
+ok 21 - the installer validates the path it is about to put in a config
+  ---
+  duration_ms: 101.933345
+  ...
+# Subtest: the installer is plain JavaScript with no imports from src
+ok 22 - the installer is plain JavaScript with no imports from src
+  ---
+  duration_ms: 0.595501
+  ...
+# Subtest: every BIBLIO_* variable in the code is documented in --help and the README
+ok 23 - every BIBLIO_* variable in the code is documented in --help and the README
+  ---
+  duration_ms: 308.618129
+  ...
+# Subtest: every command the README tells you to run actually exists
+ok 24 - every command the README tells you to run actually exists
+  ---
+  duration_ms: 0.614083
+  ...
+# Subtest: the published tarball contains the installer the README points at
+ok 25 - the published tarball contains the installer the README points at
+  ---
+  duration_ms: 0.349221
+  ...
+# Subtest: the fork package is private while the upstream owns the npm name
+ok 26 - the fork package is private while the upstream owns the npm name
+  ---
+  duration_ms: 0.138275
+  ...
+# Subtest: every version in the CHANGELOG has a matching compare link
+ok 27 - every version in the CHANGELOG has a matching compare link
+  ---
+  duration_ms: 0.555079
+  ...
+# Subtest: the installer rejects Node 18.16 before fetching or installing
+ok 28 - the installer rejects Node 18.16 before fetching or installing
+  ---
+  duration_ms: 32.777282
+  ...
+# Subtest: docs:env builds changed source before generating the README table
+ok 29 - docs:env builds changed source before generating the README table
+  ---
+  duration_ms: 3028.769195
+  ...
+# Subtest: preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+ok 30 - preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+  ---
+  duration_ms: 53.529954
+  ...
+# Subtest: preflight passes a zod-3-only SDK paired with zod 3
+ok 31 - preflight passes a zod-3-only SDK paired with zod 3
+  ---
+  duration_ms: 49.113858
+  ...
+# Subtest: preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+ok 32 - preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+  ---
+  duration_ms: 38.807284
+  ...
+# Subtest: preflight reports a missing dependency tree instead of crashing
+ok 33 - preflight reports a missing dependency tree instead of crashing
+  ---
+  duration_ms: 36.187573
+  ...
+# Subtest: the shipped tree passes preflight
+ok 34 - the shipped tree passes preflight
+  ---
+  duration_ms: 57.039591
+  ...
+# Subtest: a missing build is a note by default but a failure with --require-build
+ok 35 - a missing build is a note by default but a failure with --require-build
+  ---
+  duration_ms: 1.698347
+  ...
+# Subtest: preflight passes for an installed package, not just a source checkout
+ok 36 - preflight passes for an installed package, not just a source checkout
+  ---
+  duration_ms: 39.903383
+  ...
+# Subtest: preflight enforces the actual Node 18.17 floor
+ok 37 - preflight enforces the actual Node 18.17 floor
+  ---
+  duration_ms: 2.533196
+  ...
+# Subtest: offline selfcheck verifies preflight and a real invalid call without touching mirrors
+ok 38 - offline selfcheck verifies preflight and a real invalid call without touching mirrors
+  ---
+  duration_ms: 115.813071
+  ...
+# Subtest: startup and offline selfcheck reject an unrelated isError response
+ok 39 - startup and offline selfcheck reject an unrelated isError response
+  ---
+  duration_ms: 106.22566
+  ...
+# Subtest: ordinary and live selfchecks retain their mirror and search stages
+ok 40 - ordinary and live selfchecks retain their mirror and search stages
+  ---
+  duration_ms: 903.810641
+  ...
+# Subtest: the offline CLI succeeds with all fetches disabled
+ok 41 - the offline CLI succeeds with all fetches disabled
+  ---
+  duration_ms: 526.910873
+  ...
+# Subtest: the CLI rejects incompatible flags --offline
+ok 42 - the CLI rejects incompatible flags --offline
+  ---
+  duration_ms: 362.035502
+  ...
+# Subtest: the CLI rejects incompatible flags --selfcheck --offline --live
+ok 43 - the CLI rejects incompatible flags --selfcheck --offline --live
+  ---
+  duration_ms: 340.593392
+  ...
+# Subtest: stdio initializes, lists all tools and returns the expected invalid-call response
+ok 44 - stdio initializes, lists all tools and returns the expected invalid-call response
+  ---
+  duration_ms: 400.960759
+  ...
+1..44
+# tests 44
+# suites 0
+# pass 44
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17295.575268

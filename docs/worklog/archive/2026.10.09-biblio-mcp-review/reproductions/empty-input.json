@@ -1,0 +1,16 @@
+{
+  "check": "empty-input",
+  "result": {
+    "isError": false,
+    "payload": {
+      "query": "   ",
+      "results": [],
+      "errors": [],
+      "total": 0,
+      "sourcesSearched": [
+        "libgen"
+      ]
+    }
+  },
+  "providerRequests": 1
+}

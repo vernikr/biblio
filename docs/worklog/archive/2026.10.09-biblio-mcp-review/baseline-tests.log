@@ -1,0 +1,847 @@
+$ pnpm run build && node scripts/run-tests.mjs
+$ tsc
+TAP version 13
+# Subtest: every tool description ends with a runnable Example line
+ok 1 - every tool description ends with a runnable Example line
+  ---
+  duration_ms: 78.258234
+  ...
+# Subtest: each tool's example only uses arguments that tool accepts
+ok 2 - each tool's example only uses arguments that tool accepts
+  ---
+  duration_ms: 15.313944
+  ...
+# Subtest: TOOL_META covers every registered tool
+ok 3 - TOOL_META covers every registered tool
+  ---
+  duration_ms: 4.398706
+  ...
+# Subtest: a missing argument names the argument, instead of dumping zod issues
+ok 4 - a missing argument names the argument, instead of dumping zod issues
+  ---
+  duration_ms: 14.074597
+  ...
+# Subtest: readable tool validation performs only the SDK's single schema parse
+ok 5 - readable tool validation performs only the SDK's single schema parse
+  ---
+  duration_ms: 3.505953
+  ...
+# Subtest: a malformed md5 says what a valid one looks like
+ok 6 - a malformed md5 says what a valid one looks like
+  ---
+  duration_ms: 3.430201
+  ...
+# Subtest: an out-of-range value reports the range and the correct call
+ok 7 - an out-of-range value reports the range and the correct call
+  ---
+  duration_ms: 10.455743
+  ...
+# Subtest: download_book names both required arguments at once
+ok 8 - download_book names both required arguments at once
+  ---
+  duration_ms: 3.426106
+  ...
+# Subtest: describeArgsError stays informative for an error it does not recognise
+ok 9 - describeArgsError stays informative for an error it does not recognise
+  ---
+  duration_ms: 0.32265
+  ...
+# Subtest: download_book reports the resolved directory for a relative path
+ok 10 - download_book reports the resolved directory for a relative path
+  ---
+  duration_ms: 16.007162
+  ...
+# Subtest: an empty output_dir is rejected with a readable message
+ok 11 - an empty output_dir is rejected with a readable message
+  ---
+  duration_ms: 3.048537
+  ...
+# Subtest: healthcheck is registered and advertises only optional arguments
+ok 12 - healthcheck is registered and advertises only optional arguments
+  ---
+  duration_ms: 8.568075
+  ...
+# Subtest: every mirror group has a positive site-identity marker
+ok 13 - every mirror group has a positive site-identity marker
+  ---
+  duration_ms: 0.588221
+  ...
+# Subtest: search_books rejects an explicitly empty source list
+ok 14 - search_books rejects an explicitly empty source list
+  ---
+  duration_ms: 2.900644
+  ...
+# Subtest: the member key is sent only to the mirror that proves it is Anna's Archive
+ok 15 - the member key is sent only to the mirror that proves it is Anna's Archive
+  ---
+  duration_ms: 125.347546
+  ...
+# Subtest: AsyncTtlCache shares in-flight work and expires successful results
+ok 16 - AsyncTtlCache shares in-flight work and expires successful results
+  ---
+  duration_ms: 51.868585
+  ...
+# Subtest: AsyncTtlCache does not retain failures
+ok 17 - AsyncTtlCache does not retain failures
+  ---
+  duration_ms: 0.671275
+  ...
+# Subtest: AsyncTtlCache bounds entries using least-recently-used order
+ok 18 - AsyncTtlCache bounds entries using least-recently-used order
+  ---
+  duration_ms: 0.536405
+  ...
+# Subtest: Libgen book search parses the captured live table
+ok 19 - Libgen book search parses the captured live table
+  ---
+  duration_ms: 249.772167
+  ...
+# Subtest: Libgen article search parses the captured live scimag table
+ok 20 - Libgen article search parses the captured live scimag table
+  ---
+  duration_ms: 71.697705
+  ...
+# Subtest: Libgen details parses the captured ads.php BibTeX and download URL
+ok 21 - Libgen details parses the captured ads.php BibTeX and download URL
+  ---
+  duration_ms: 74.307268
+  ...
+# Subtest: Sci-Hub resolves the PDF from the captured DOI page
+ok 22 - Sci-Hub resolves the PDF from the captured DOI page
+  ---
+  duration_ms: 14.919934
+  ...
+# Subtest: Anna's Archive is summarized, skipped while all mirrors are cooling down, and circuit-broken after three failures
+ok 23 - Anna's Archive is summarized, skipped while all mirrors are cooling down, and circuit-broken after three failures
+  ---
+  duration_ms: 80.8031
+  ...
+# Subtest: get_paper opens the source circuit after three full failures
+ok 24 - get_paper opens the source circuit after three full failures
+  ---
+  duration_ms: 108.695497
+  ...
+# Subtest: a late in-flight success cannot close a circuit that has already opened
+ok 25 - a late in-flight success cannot close a circuit that has already opened
+  ---
+  duration_ms: 1.0254
+  ...
+# Subtest: every numeric setting is listed in --help with its real default
+ok 26 - every numeric setting is listed in --help with its real default
+  ---
+  duration_ms: 1.359418
+  ...
+# Subtest: readNumber takes a positive number from the environment and falls back otherwise
+ok 27 - readNumber takes a positive number from the environment and falls back otherwise
+  ---
+  duration_ms: 0.353475
+  ...
+# Subtest: the README environment table is generated from the registry
+ok 28 - the README environment table is generated from the registry
+  ---
+  duration_ms: 2.74193
+  ...
+# Subtest: isUsefulLink rejects links that are not about this book
+ok 29 - isUsefulLink rejects links that are not about this book
+  ---
+  duration_ms: 423.738563
+  ...
+# Subtest: isUsefulLink accepts the mirrors that actually serve this book
+ok 30 - isUsefulLink accepts the mirrors that actually serve this book
+  ---
+  duration_ms: 562.728653
+  ...
+# Subtest: resolveDownloads drops the bare-domain link Libgen's ads page advertises
+ok 31 - resolveDownloads drops the bare-domain link Libgen's ads page advertises
+  ---
+  duration_ms: 733.535507
+  ...
+# Subtest: bookDetails falls back to Libgen when Anna's Archive is unavailable
+ok 32 - bookDetails falls back to Libgen when Anna's Archive is unavailable
+  ---
+  duration_ms: 497.280651
+  ...
+# Subtest: bookDetails starts Anna's and Libgen concurrently and returns the first usable result
+ok 33 - bookDetails starts Anna's and Libgen concurrently and returns the first usable result
+  ---
+  duration_ms: 371.341057
+  ...
+# Subtest: bookDetails identifies an explicitly empty Anna's mirror list
+ok 34 - bookDetails identifies an explicitly empty Anna's mirror list
+  ---
+  duration_ms: 455.027726
+  ...
+# Subtest: bookDetails reports both failures instead of a plausible-looking stub
+ok 35 - bookDetails reports both failures instead of a plausible-looking stub
+  ---
+  duration_ms: 522.828564
+  ...
+# Subtest: download_book preserves a successful staging file and warns on an MD5 mismatch
+ok 36 - download_book preserves a successful staging file and warns on an MD5 mismatch
+  ---
+  duration_ms: 781.136806
+  ...
+# Subtest: Libgen reuses ads.php HTML across details and download-link lookups
+ok 37 - Libgen reuses ads.php HTML across details and download-link lookups
+  ---
+  duration_ms: 594.885613
+  ...
+# Subtest: libgen.details filters junk links too, not only resolveDownloads
+ok 38 - libgen.details filters junk links too, not only resolveDownloads
+  ---
+  duration_ms: 705.536718
+  ...
+# Subtest: a filename with parent-directory segments is rejected and writes nothing
+ok 39 - a filename with parent-directory segments is rejected and writes nothing
+  ---
+  duration_ms: 48.16836
+  ...
+# Subtest: a filename containing a path separator is rejected
+ok 40 - a filename containing a path separator is rejected
+  ---
+  duration_ms: 8.531986
+  ...
+# Subtest: a plain filename is saved inside output_dir
+ok 41 - a plain filename is saved inside output_dir
+  ---
+  duration_ms: 261.656839
+  ...
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 42 - two concurrent downloads of the same md5 into one directory both succeed intact
+  ---
+  duration_ms: 466.23865
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 43 - a filename that already exists is refused, and the existing file is untouched
+  ---
+  duration_ms: 22.066203
+  ...
+# Subtest: resolveDownloads keeps a verified member URL without an MD5 in its signed URL
+ok 44 - resolveDownloads keeps a verified member URL without an MD5 in its signed URL
+  ---
+  duration_ms: 273.761283
+  ...
+# Subtest: libgen-books.html matches its captured SHA-256
+ok 45 - libgen-books.html matches its captured SHA-256
+  ---
+  duration_ms: 19.470394
+  ...
+# Subtest: libgen-scimag.html matches its captured SHA-256
+ok 46 - libgen-scimag.html matches its captured SHA-256
+  ---
+  duration_ms: 1.722218
+  ...
+# Subtest: libgen-ads.html matches its captured SHA-256
+ok 47 - libgen-ads.html matches its captured SHA-256
+  ---
+  duration_ms: 3.384913
+  ...
+# Subtest: scihub-doi.html matches its captured SHA-256
+ok 48 - scihub-doi.html matches its captured SHA-256
+  ---
+  duration_ms: 2.430279
+  ...
+# Subtest: scihub-altcha.html matches its captured SHA-256
+ok 49 - scihub-altcha.html matches its captured SHA-256
+  ---
+  duration_ms: 3.090912
+  ...
+# Subtest: scihub-no-pdf.html matches its captured SHA-256
+ok 50 - scihub-no-pdf.html matches its captured SHA-256
+  ---
+  duration_ms: 5.155469
+  ...
+# Subtest: the captured Libgen book page includes its title and author
+ok 51 - the captured Libgen book page includes its title and author
+  ---
+  duration_ms: 1.649779
+  ...
+# Subtest: the captured Libgen ads page yields the expected BibTeX metadata
+ok 52 - the captured Libgen ads page yields the expected BibTeX metadata
+  ---
+  duration_ms: 2.606757
+  ...
+# Subtest: the captured Sci-Hub page contains a PDF embed, not a challenge
+ok 53 - the captured Sci-Hub page contains a PDF embed, not a challenge
+  ---
+  duration_ms: 2.02923
+  ...
+# Subtest: the captured Sci-Hub challenge page is a human-verification page, not an article
+ok 54 - the captured Sci-Hub challenge page is a human-verification page, not an article
+  ---
+  duration_ms: 4.342534
+  ...
+# Subtest: fetchFromMirrors times out while reading a stalled response body
+ok 55 - fetchFromMirrors times out while reading a stalled response body
+  ---
+  duration_ms: 211.048376
+  ...
+# Subtest: downloadToFile times out while reading an HTML interstitial body
+ok 56 - downloadToFile times out while reading an HTML interstitial body
+  ---
+  duration_ms: 210.613757
+  ...
+# Subtest: fetchFromMirrors falls through a failing mirror to a working one
+ok 57 - fetchFromMirrors falls through a failing mirror to a working one
+  ---
+  duration_ms: 139.85187
+  ...
+# Subtest: fetchFromMirrors tries a route fallback on the same mirror after HTTP 404
+ok 58 - fetchFromMirrors tries a route fallback on the same mirror after HTTP 404
+  ---
+  duration_ms: 19.125428
+  ...
+# Subtest: an empty mirror group rejects immediately with its configuration variable
+ok 59 - an empty mirror group rejects immediately with its configuration variable
+  ---
+  duration_ms: 0.671683
+  ...
+# Subtest: a failed mirror is skipped on the next request (negative cache)
+ok 60 - a failed mirror is skipped on the next request (negative cache)
+  ---
+  duration_ms: 135.041011
+  ...
+# Subtest: the mirror cache is half-open: once everything is dead, all are retried
+ok 61 - the mirror cache is half-open: once everything is dead, all are retried
+  ---
+  duration_ms: 751.740173
+  ...
+# Subtest: a mirror that succeeds becomes the preferred one
+ok 62 - a mirror that succeeds becomes the preferred one
+  ---
+  duration_ms: 53.888966
+  ...
+# Subtest: resetDeadCache clears cooldowns but preserves the last-known-good mirror
+ok 63 - resetDeadCache clears cooldowns but preserves the last-known-good mirror
+  ---
+  duration_ms: 124.182644
+  ...
+# Subtest: fetchFromMirrors rejects a mirror that answers 200 but is not the expected site
+ok 64 - fetchFromMirrors rejects a mirror that answers 200 but is not the expected site
+  ---
+  duration_ms: 122.965627
+  ...
+# Subtest: a mirror failing the identity check is cooled down like any other failure
+ok 65 - a mirror failing the identity check is cooled down like any other failure
+  ---
+  duration_ms: 125.716485
+  ...
+# Subtest: probeMirror cancels an unread body when no identity marker is requested
+ok 66 - probeMirror cancels an unread body when no identity marker is requested
+  ---
+  duration_ms: 16.783221
+  ...
+# Subtest: probeMirror flags an answering host that is not the expected site
+ok 67 - probeMirror flags an answering host that is not the expected site
+  ---
+  duration_ms: 29.454741
+  ...
+# Subtest: probeGroup shares reachability and identity summaries
+ok 68 - probeGroup shares reachability and identity summaries
+  ---
+  duration_ms: 5.231311
+  ...
+# Subtest: downloadToFile streams to disk and reports the true byte count and md5
+ok 69 - downloadToFile streams to disk and reports the true byte count and md5
+  ---
+  duration_ms: 35.581569
+  ...
+# Subtest: downloadToFile rejects an HTML interstitial instead of saving it as a book
+ok 70 - downloadToFile rejects an HTML interstitial instead of saving it as a book
+  ---
+  duration_ms: 2.613202
+  ...
+# Subtest: downloadToFile surfaces a non-2xx status as an error
+ok 71 - downloadToFile surfaces a non-2xx status as an error
+  ---
+  duration_ms: 7.150089
+  ...
+# Subtest: downloadToFile reports progress repeatedly during a slow transfer
+ok 72 - downloadToFile reports progress repeatedly during a slow transfer
+  ---
+  duration_ms: 248.298695
+  ...
+# Subtest: downloadToFile aborts a connection that stops sending bytes
+ok 73 - downloadToFile aborts a connection that stops sending bytes
+  ---
+  duration_ms: 707.140414
+  ...
+# Subtest: runStartupSelftest passes on a healthy build
+ok 74 - runStartupSelftest passes on a healthy build
+  ---
+  duration_ms: 37.578691
+  ...
+# Subtest: the entry point refuses to start when the tool surface is broken
+ok 75 - the entry point refuses to start when the tool surface is broken
+  ---
+  duration_ms: 639.304895
+  ...
+# Subtest: the startup check can be bypassed, and says so when it refuses
+ok 76 - the startup check can be bypassed, and says so when it refuses
+  ---
+  duration_ms: 631.50476
+  ...
+# Subtest: the installer runs end to end in dry-run mode and writes nothing
+ok 77 - the installer runs end to end in dry-run mode and writes nothing
+  ---
+  duration_ms: 250.387413
+  ...
+# Subtest: the installer refuses npm fallback when the checkout has a pnpm lockfile
+ok 78 - the installer refuses npm fallback when the checkout has a pnpm lockfile
+  ---
+  duration_ms: 57.215714
+  ...
+# Subtest: the installer --live flag runs the live selfcheck
+ok 79 - the installer --live flag runs the live selfcheck
+  ---
+  duration_ms: 222.268779
+  ...
+# Subtest: the installer rejects contradictory --live and --skip-network flags immediately
+ok 80 - the installer rejects contradictory --live and --skip-network flags immediately
+  ---
+  duration_ms: 126.897472
+  ...
+# Subtest: the installer refuses to overwrite a config it cannot parse
+ok 81 - the installer refuses to overwrite a config it cannot parse
+  ---
+  duration_ms: 360.247428
+  ...
+# Subtest: the installer refuses a config that is not a JSON object
+ok 82 - the installer refuses a config that is not a JSON object
+  ---
+  duration_ms: 147.545067
+  ...
+# Subtest: the installer merges into an existing config and keeps a backup
+ok 83 - the installer merges into an existing config and keeps a backup
+  ---
+  duration_ms: 4867.248653
+  ...
+# Subtest: the installer validates the path it is about to put in a config
+ok 84 - the installer validates the path it is about to put in a config
+  ---
+  duration_ms: 90.903221
+  ...
+# Subtest: the installer is plain JavaScript with no imports from src
+ok 85 - the installer is plain JavaScript with no imports from src
+  ---
+  duration_ms: 0.613204
+  ...
+# Subtest: every BIBLIO_* variable in the code is documented in --help and the README
+ok 86 - every BIBLIO_* variable in the code is documented in --help and the README
+  ---
+  duration_ms: 347.512622
+  ...
+# Subtest: every command the README tells you to run actually exists
+ok 87 - every command the README tells you to run actually exists
+  ---
+  duration_ms: 0.689496
+  ...
+# Subtest: the published tarball contains the installer the README points at
+ok 88 - the published tarball contains the installer the README points at
+  ---
+  duration_ms: 0.399167
+  ...
+# Subtest: the fork package is private while the upstream owns the npm name
+ok 89 - the fork package is private while the upstream owns the npm name
+  ---
+  duration_ms: 0.246603
+  ...
+# Subtest: every version in the CHANGELOG has a matching compare link
+ok 90 - every version in the CHANGELOG has a matching compare link
+  ---
+  duration_ms: 0.762802
+  ...
+# Subtest: parseSize reads ordinary sizes
+ok 91 - parseSize reads ordinary sizes
+  ---
+  duration_ms: 1.980594
+  ...
+# Subtest: parseSize refuses to match inside a longer digit run
+ok 92 - parseSize refuses to match inside a longer digit run
+  ---
+  duration_ms: 0.184509
+  ...
+# Subtest: parseSize rejects implausible values
+ok 93 - parseSize rejects implausible values
+  ---
+  duration_ms: 0.129698
+  ...
+# Subtest: parseSize finds a size embedded in a sentence
+ok 94 - parseSize finds a size embedded in a sentence
+  ---
+  duration_ms: 0.103101
+  ...
+# Subtest: parseSize applies its plausibility limit in terabytes
+ok 95 - parseSize applies its plausibility limit in terabytes
+  ---
+  duration_ms: 0.179272
+  ...
+# Subtest: parseYear extracts a year from a date or a bare year
+ok 96 - parseYear extracts a year from a date or a bare year
+  ---
+  duration_ms: 0.280118
+  ...
+# Subtest: parseYear does not match inside an ISBN or an id
+ok 97 - parseYear does not match inside an ISBN or an id
+  ---
+  duration_ms: 0.108462
+  ...
+# Subtest: parseFormat normalises the Ext. column and rejects junk
+ok 98 - parseFormat normalises the Ext. column and rejects junk
+  ---
+  duration_ms: 0.173063
+  ...
+# Subtest: parseLanguage accepts known languages and rejects free text
+ok 99 - parseLanguage accepts known languages and rejects free text
+  ---
+  duration_ms: 0.427883
+  ...
+# Subtest: parsePages reduces '223 / 223' to a number and drops zero
+ok 100 - parsePages reduces '223 / 223' to a number and drops zero
+  ---
+  duration_ms: 0.43941
+  ...
+# Subtest: isIsbnLike recognises ISBN runs and rejects titles
+ok 101 - isIsbnLike recognises ISBN runs and rejects titles
+  ---
+  duration_ms: 0.447986
+  ...
+# Subtest: parseIsbns pulls an ISBN run out of free text
+ok 102 - parseIsbns pulls an ISBN run out of free text
+  ---
+  duration_ms: 0.3772
+  ...
+# Subtest: columnMap resolves the real Libgen header row
+ok 103 - columnMap resolves the real Libgen header row
+  ---
+  duration_ms: 1.073991
+  ...
+# Subtest: columnMap survives a reordered or padded header row
+ok 104 - columnMap survives a reordered or padded header row
+  ---
+  duration_ms: 0.245714
+  ...
+# Subtest: columnMap returns nothing usable for an empty header row
+ok 105 - columnMap returns nothing usable for an empty header row
+  ---
+  duration_ms: 0.170098
+  ...
+# Subtest: the positional fallback matches the common .li layout
+ok 106 - the positional fallback matches the common .li layout
+  ---
+  duration_ms: 0.158636
+  ...
+# Subtest: parseBibtex reads the real Libgen entry
+ok 107 - parseBibtex reads the real Libgen entry
+  ---
+  duration_ms: 3.138105
+  ...
+# Subtest: parseBibtex finds an entry embedded in surrounding page text
+ok 108 - parseBibtex finds an entry embedded in surrounding page text
+  ---
+  duration_ms: 0.302637
+  ...
+# Subtest: parseBibtex handles braces inside a value
+ok 109 - parseBibtex handles braces inside a value
+  ---
+  duration_ms: 0.17998
+  ...
+# Subtest: parseBibtex returns an empty object rather than throwing on junk
+ok 110 - parseBibtex returns an empty object rather than throwing on junk
+  ---
+  duration_ms: 0.154328
+  ...
+# Subtest: preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+ok 111 - preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+  ---
+  duration_ms: 134.795863
+  ...
+# Subtest: preflight passes a zod-3-only SDK paired with zod 3
+ok 112 - preflight passes a zod-3-only SDK paired with zod 3
+  ---
+  duration_ms: 87.536145
+  ...
+# Subtest: preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+ok 113 - preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+  ---
+  duration_ms: 50.25978
+  ...
+# Subtest: preflight reports a missing dependency tree instead of crashing
+ok 114 - preflight reports a missing dependency tree instead of crashing
+  ---
+  duration_ms: 47.401152
+  ...
+# Subtest: the shipped tree passes preflight
+ok 115 - the shipped tree passes preflight
+  ---
+  duration_ms: 98.93994
+  ...
+# Subtest: a missing build is a note by default but a failure with --require-build
+ok 116 - a missing build is a note by default but a failure with --require-build
+  ---
+  duration_ms: 5.28602
+  ...
+# Subtest: preflight passes for an installed package, not just a source checkout
+ok 117 - preflight passes for an installed package, not just a source checkout
+  ---
+  duration_ms: 173.682637
+  ...
+# Subtest: makeProgressReporter swallows a rejected progress notification
+ok 118 - makeProgressReporter swallows a rejected progress notification
+  ---
+  duration_ms: 1.606278
+  ...
+# Subtest: Z-Library is excluded from the default source set
+ok 119 - Z-Library is excluded from the default source set
+  ---
+  duration_ms: 1.528303
+  ...
+# Subtest: searchBooks rejects an explicitly empty source list
+ok 120 - searchBooks rejects an explicitly empty source list
+  ---
+  duration_ms: 0.63562
+  ...
+# Subtest: searchBooks deduplicates requested sources before making requests
+ok 121 - searchBooks deduplicates requested sources before making requests
+  ---
+  duration_ms: 88.874571
+  ...
+# Subtest: searchBooks reuses source results for 45 seconds, keyed by source, query, and limit
+ok 122 - searchBooks reuses source results for 45 seconds, keyed by source, query, and limit
+  ---
+  duration_ms: 44.264835
+  ...
+# Subtest: search_books reports the de-duplicated source list over MCP
+ok 123 - search_books reports the de-duplicated source list over MCP
+  ---
+  duration_ms: 111.855485
+  ...
+# Subtest: search_papers resolves direct PDFs only when requested and keeps search best-effort
+ok 124 - search_papers resolves direct PDFs only when requested and keeps search best-effort
+  ---
+  duration_ms: 189.547662
+  ...
+# Subtest: Libgen caps requested result rows and scales them with the caller's limit
+ok 125 - Libgen caps requested result rows and scales them with the caller's limit
+  ---
+  duration_ms: 66.87476
+  ...
+# Subtest: libgen.searchPapers separates the article title, journal, and author on the live scimag layout
+ok 126 - libgen.searchPapers separates the article title, journal, and author on the live scimag layout
+  ---
+  duration_ms: 22.014191
+  ...
+# Subtest: libgen.search extracts md5 and the reliable metadata columns
+ok 127 - libgen.search extracts md5 and the reliable metadata columns
+  ---
+  duration_ms: 22.037061
+  ...
+# Subtest: libgen.search returns an empty list rather than throwing on no matches
+ok 128 - libgen.search returns an empty list rather than throwing on no matches
+  ---
+  duration_ms: 13.266312
+  ...
+# Subtest: libgen.search reads the author from the Author(s) column
+ok 129 - libgen.search reads the author from the Author(s) column
+  ---
+  duration_ms: 29.889636
+  ...
+# Subtest: libgen.search keeps the series out of the title
+ok 130 - libgen.search keeps the series out of the title
+  ---
+  duration_ms: 3.214924
+  ...
+# Subtest: libgen.search extracts ISBNs and publisher into their own fields
+ok 131 - libgen.search extracts ISBNs and publisher into their own fields
+  ---
+  duration_ms: 7.769671
+  ...
+# Subtest: libgen.search falls back to positional columns when the header row is absent
+ok 132 - libgen.search falls back to positional columns when the header row is absent
+  ---
+  duration_ms: 8.872045
+  ...
+# Subtest: a single 404 for one record does not put the mirror into cooldown
+ok 133 - a single 404 for one record does not put the mirror into cooldown
+  ---
+  duration_ms: 57.268156
+  ...
+# Subtest: a server error still cools the mirror down
+ok 134 - a server error still cools the mirror down
+  ---
+  duration_ms: 28.480914
+  ...
+# Subtest: three missing records do not open the libgen circuit; a healthy record still resolves
+ok 135 - three missing records do not open the libgen circuit; a healthy record still resolves
+  ---
+  duration_ms: 35.354762
+  ...
+# Subtest: an opened circuit closes again once its cooldown has passed
+ok 136 - an opened circuit closes again once its cooldown has passed
+  ---
+  duration_ms: 451.010415
+  ...
+# Subtest: absoluteUrl returns undefined for a malformed href instead of throwing
+ok 137 - absoluteUrl returns undefined for a malformed href instead of throwing
+  ---
+  duration_ms: 2.661802
+  ...
+# Subtest: a malformed link on an Anna's detail page is skipped; the valid download survives
+ok 138 - a malformed link on an Anna's detail page is skipped; the valid download survives
+  ---
+  duration_ms: 57.941068
+  ...
+# Subtest: download_book with no usable direct link is a failed call
+ok 139 - download_book with no usable direct link is a failed call
+  ---
+  duration_ms: 37.180813
+  ...
+# Subtest: book_details for a record no source has is a failed call, not an empty book
+ok 140 - book_details for a record no source has is a failed call, not an empty book
+  ---
+  duration_ms: 16.121428
+  ...
+# Subtest: a challenge page on one mirror is skipped in favour of a mirror that serves the article
+ok 141 - a challenge page on one mirror is skipped in favour of a mirror that serves the article
+  ---
+  duration_ms: 158.529053
+  ...
+# Subtest: when every mirror answers with a challenge, the error says so instead of returning an empty paper
+ok 142 - when every mirror answers with a challenge, the error says so instead of returning an empty paper
+  ---
+  duration_ms: 122.81457
+  ...
+# Subtest: a page with no PDF is reported as a missing record, not returned as a paper
+ok 143 - a page with no PDF is reported as a missing record, not returned as a paper
+  ---
+  duration_ms: 131.585868
+  ...
+# Subtest: the server exposes exactly the documented tool set
+ok 144 - the server exposes exactly the documented tool set
+  ---
+  duration_ms: 35.97872
+  ...
+# Subtest: every tool advertises an input schema with its required fields
+ok 145 - every tool advertises an input schema with its required fields
+  ---
+  duration_ms: 4.28924
+  ...
+# Subtest: search_papers advertises opt-in PDF resolution without making it required
+ok 146 - search_papers advertises opt-in PDF resolution without making it required
+  ---
+  duration_ms: 3.770598
+  ...
+# Subtest: download_book requires md5 and output_dir
+ok 147 - download_book requires md5 and output_dir
+  ---
+  duration_ms: 3.997724
+  ...
+# Subtest: argument validation names the field an agent got wrong
+ok 148 - argument validation names the field an agent got wrong
+  ---
+  duration_ms: 5.246616
+  ...
+# Subtest: search_books documents which sources are searched by default
+ok 149 - search_books documents which sources are searched by default
+  ---
+  duration_ms: 3.542063
+  ...
+# Subtest: search_books advertises that an explicit source list must be non-empty
+ok 150 - search_books advertises that an explicit source list must be non-empty
+  ---
+  duration_ms: 29.331023
+  ...
+# Subtest: the reported version matches package.json
+ok 151 - the reported version matches package.json
+  ---
+  duration_ms: 35.866293
+  ...
+# Subtest: sniffExt recognises PDF by magic bytes
+ok 152 - sniffExt recognises PDF by magic bytes
+  ---
+  duration_ms: 1.304575
+  ...
+# Subtest: sniffExt distinguishes EPUB from a plain ZIP
+ok 153 - sniffExt distinguishes EPUB from a plain ZIP
+  ---
+  duration_ms: 0.376941
+  ...
+# Subtest: sniffExt recognises RAR, MOBI and DjVu
+ok 154 - sniffExt recognises RAR, MOBI and DjVu
+  ---
+  duration_ms: 0.260544
+  ...
+# Subtest: sniffExt falls back to content-type, then to bin
+ok 155 - sniffExt falls back to content-type, then to bin
+  ---
+  duration_ms: 0.201531
+  ...
+# Subtest: sniffExt does not crash on an empty buffer
+ok 156 - sniffExt does not crash on an empty buffer
+  ---
+  duration_ms: 0.111612
+  ...
+# Subtest: book_details returns as soon as Libgen answers, and cancels the slower Anna's request
+ok 157 - book_details returns as soon as Libgen answers, and cancels the slower Anna's request
+  ---
+  duration_ms: 206.834053
+  ...
+# Subtest: the member fast-download races verified mirrors and cancels the rest
+ok 158 - the member fast-download races verified mirrors and cancels the rest
+  ---
+  duration_ms: 46.612331
+  ...
+# Subtest: Sci-Hub enrichment runs its three lookups in parallel, not one after another
+ok 159 - Sci-Hub enrichment runs its three lookups in parallel, not one after another
+  ---
+  duration_ms: 468.706134
+  ...
+# Subtest: every served tool has a TOOL_META entry, and no entry is stale
+ok 160 - every served tool has a TOOL_META entry, and no entry is stale
+  ---
+  duration_ms: 1.868223
+  ...
+# Subtest: the served description is exactly the one src/toolmeta.ts defines
+ok 161 - the served description is exactly the one src/toolmeta.ts defines
+  ---
+  duration_ms: 0.221255
+  ...
+# Subtest: every example is a valid call under its tool's input schema
+ok 162 - every example is a valid call under its tool's input schema
+  ---
+  duration_ms: 0.339161
+  ...
+# Subtest: Anna's Archive resolves protocol-relative image and download URLs
+ok 163 - Anna's Archive resolves protocol-relative image and download URLs
+  ---
+  duration_ms: 192.660003
+  ...
+# Subtest: Libgen resolves protocol-relative and path-relative download URLs
+ok 164 - Libgen resolves protocol-relative and path-relative download URLs
+  ---
+  duration_ms: 10.748789
+  ...
+# Subtest: Sci-Hub resolves a protocol-relative PDF URL and strips its fragment
+ok 165 - Sci-Hub resolves a protocol-relative PDF URL and strips its fragment
+  ---
+  duration_ms: 27.519054
+  ...
+# Subtest: Z-Library resolves protocol-relative book URLs
+ok 166 - Z-Library resolves protocol-relative book URLs
+  ---
+  duration_ms: 5.818318
+  ...
+# Subtest: zlibrary.search validates its parsed year, format, and size
+ok 167 - zlibrary.search validates its parsed year, format, and size
+  ---
+  duration_ms: 110.359774
+  ...
+1..167
+# tests 167
+# suites 0
+# pass 167
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 10788.4083

@@ -1,0 +1,39 @@
+# Dependabot policy.
+#
+# The two rules below exist because of a specific, shipped failure. Upstream
+# resolved @modelcontextprotocol/sdk@1.12.1 — whose peer range is `zod: ^3.23.8`
+# — against zod@4.4.3. That combination starts, answers `tools/list`, and then
+# fails every `tools/call` with `keyValidator._parse is not a function`. Two
+# separate, individually reasonable bumps produced it: zod's major 3 -> 4, and an
+# SDK minor that had not yet widened its peer range to accept zod 4.
+#
+# So these two packages must move together, and a zod major must never land on
+# its own. CI enforces the pairing (the `zod-sdk-compat` preflight check plus a
+# `tools/call` smoke test), but keeping the bumps in one PR means the pairing is
+# reviewed as one change instead of discovered after the fact.
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # One PR for the MCP core, so the zod/SDK pairing is validated together.
+      mcp-core:
+        patterns:
+          - zod
+          - "@modelcontextprotocol/sdk"
+    ignore:
+      # Major upgrades are done by hand, together with the matching SDK/zod pair.
+      - dependency-name: zod
+        update-types:
+          - version-update:semver-major
+      - dependency-name: "@modelcontextprotocol/sdk"
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

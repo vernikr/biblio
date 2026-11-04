@@ -1,0 +1,80 @@
+TAP version 13
+# Subtest: a missing argument names the argument, instead of dumping zod issues
+not ok 1 - a missing argument names the argument, instead of dumping zod issues
+  ---
+  duration_ms: 22.711753
+  type: 'test'
+  location: '/home/user/biblio-mcp-review/repo/test/agent.test.mjs:89:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /search_books: "query" is missing/. Input:
+    
+    'MCP error -32602: Input validation error: Invalid arguments for tool search_books: Invalid input: expected string, received undefined at query'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'MCP error -32602: Input validation error: Invalid arguments for tool search_books: Invalid input: expected string, received undefined at query'
+  operator: 'match'
+  stack: |-
+    file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:93:12
+    async withClient (file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:16:12)
+    async TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:90:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: readable tool validation performs only the SDK's single schema parse
+not ok 2 - readable tool validation performs only the SDK's single schema parse
+  ---
+  duration_ms: 3.021455
+  type: 'test'
+  location: '/home/user/biblio-mcp-review/repo/test/agent.test.mjs:103:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /search_books: "query" is missing/. Input:
+    
+    'MCP error -32602: Input validation error: Invalid arguments for tool search_books: Invalid input: expected string, received undefined at query'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'MCP error -32602: Input validation error: Invalid arguments for tool search_books: Invalid input: expected string, received undefined at query'
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:119:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a malformed md5 says what a valid one looks like
+not ok 3 - a malformed md5 says what a valid one looks like
+  ---
+  duration_ms: 3.255958
+  type: 'test'
+  location: '/home/user/biblio-mcp-review/repo/test/agent.test.mjs:127:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /book_details: "md5" must be a 32-char MD5 hash/. Input:
+    
+    'MCP error -32602: Input validation error: Invalid arguments for tool book_details: must be a 32-char MD5 hash at md5'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'MCP error -32602: Input validation error: Invalid arguments for tool book_details: must be a 32-char MD5 hash at md5'
+  operator: 'match'
+  stack: |-
+    file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:131:12
+    async withClient (file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:16:12)
+    async TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/agent.test.mjs:128:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 380.15849

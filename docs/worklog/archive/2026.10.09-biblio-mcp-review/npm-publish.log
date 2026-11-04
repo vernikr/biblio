@@ -1,0 +1,37 @@
++ @vernikr/biblio-mcp@2.0.0
+npm notice
+npm notice 📦  @vernikr/biblio-mcp@2.0.0
+npm notice Tarball Contents
+npm notice 1.1kB LICENSE
+npm notice 30.9kB README.md
+npm notice 2.0kB dist/cache.js
+npm notice 4.2kB dist/config.js
+npm notice 16.1kB dist/http.js
+npm notice 3.1kB dist/index.js
+npm notice 4.4kB dist/mirrors.js
+npm notice 8.3kB dist/parse.js
+npm notice 6.9kB dist/providers/annas.js
+npm notice 5.4kB dist/providers/circuit.js
+npm notice 8.6kB dist/providers/index.js
+npm notice 10.8kB dist/providers/libgen.js
+npm notice 2.7kB dist/providers/scihub.js
+npm notice 1.9kB dist/providers/zlibrary.js
+npm notice 9.8kB dist/selfcheck.js
+npm notice 18.7kB dist/server.js
+npm notice 1.3kB dist/sniff.js
+npm notice 5.4kB dist/toolmeta.js
+npm notice 163B dist/types.js
+npm notice 2.7kB package.json
+npm notice 7.7kB scripts/preflight.mjs
+npm notice Tarball Details
+npm notice name: @vernikr/biblio-mcp
+npm notice version: 2.0.0
+npm notice filename: vernikr-biblio-mcp-2.0.0.tgz
+npm notice package size: 49.1 kB
+npm notice unpacked size: 152.2 kB
+npm notice shasum: 411899f3347d087f97ee21ffc9d6b658deec9390
+npm notice integrity: sha512-TZPkgRbJctelj[...]+3iXplD87yCow==
+npm notice total files: 21
+npm notice
+npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
+npm notice Your package is being processed and may take a few minutes to become available.

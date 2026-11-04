@@ -1,0 +1,177 @@
+From a9b5c557d7020bad6b76afdcf4bdef8d6d99b57f Mon Sep 17 00:00:00 2001
+From: Arena Agent <agent@arena.invalid>
+Date: Thu, 8 Oct 2026 20:07:02 +0000
+Subject: [PATCH 2/3] fix(install): validate MCP config before touching backups
+
+Reject array, null and scalar mcpServers without a false success; preserve malformed configs and previous backups. Cover dry-run shapes and the real installer write path.
+---
+ AGENTS.md             |  8 ++++----
+ README.md             |  8 ++++----
+ docs/decisions.md     |  3 ++-
+ scripts/install.mjs   | 19 +++++++++++------
+ test/install.test.mjs | 47 +++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 70 insertions(+), 15 deletions(-)
+
+diff --git a/AGENTS.md b/AGENTS.md
+index 8c9a4d6..a1fd6ce 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -20,10 +20,10 @@ default offline suite.
+ Running tests:
+ 
+ - One file: `node --test test/<file>.test.mjs` (after `pnpm run build`, since tests import `dist/`).
+-- The full offline suite takes about 15 seconds. `test/install.test.mjs` is the slowest file because
+-  its merge case runs a real build.
+-- Installer tests that need pnpm are reported as skipped, with the reason, when `pnpm` is not on
+-  `PATH`. Put pnpm on `PATH` to run them.
++- The offline suite takes roughly 15–20 seconds, plus its initial build. Installer write-path tests
++  start without `node_modules`/`dist` and run real dependency installation and builds.
++- Installer tests that need pnpm are reported as skipped when it is absent from `PATH`. Run
++  `pnpm install --frozen-lockfile` once to prime the store; clean fixtures install in offline mode.
+ - Servers that stand in for mirrors start with `listenLocal` and stop with `closeServer` from
+   `test/helpers/mirror-server.mjs`. `closeServer` drops keep-alive sockets first, which keeps the
+   suite from waiting on idle connections.
+diff --git a/README.md b/README.md
+index 46c8f9f..090a06d 100644
+--- a/README.md
++++ b/README.md
+@@ -12,7 +12,7 @@ that something you can rely on.
+ 
+ - **It works the first time.** One setup command installs what is missing and checks the
+   server before you use it. A broken setup is caught on the spot, with the fix spelled out,
+-  instead of failing every request.
++  instead of failing every request. Invalid client configuration is left untouched.
+ - **Faster answers.** Searches come back many times faster, because the server stops waiting on
+   websites that are no longer there.
+ - **Honest results.** A source that is down is reported, not silently dropped. A website that
+@@ -78,9 +78,9 @@ Use the [Quick start](#quick-start) command above.
+ 
+ The installer checks Node and your package manager, installs locked dependencies, checks the
+ SDK/Zod pairing, builds, and verifies a real tool call before printing your MCP config.
+-Add `--write-config <path>` and it merges the entry into an existing config for you — keeping a
+-`.bak` copy, and refusing to touch a file it cannot parse. Add `--dry-run` to see every step
+-without writing anything. Live mirror checks are skipped by default; pass `--live` to run
++Add `--write-config <path>` to merge the entry into your config and keep a `.bak` copy.
++Invalid JSON or a non-object `mcpServers` value is refused before changing the file or its backup.
++Add `--dry-run` to see every step without writing anything. Live mirror checks are skipped by default; pass `--live` to run
+ `dist/index.js --selfcheck --live` after the build, or `--skip-network` to explicitly skip them.
+ Dependency installation may still need registry access. A checkout with `pnpm-lock.yaml`
+ requires pnpm and installs with `--frozen-lockfile`; npm is not used as a substitute.
+diff --git a/docs/decisions.md b/docs/decisions.md
+index 86011ca..391447f 100644
+--- a/docs/decisions.md
++++ b/docs/decisions.md
+@@ -41,7 +41,8 @@ This file keeps the rationale for non-obvious behavior out of implementation com
+ 
+ ## Installation and project size
+ 
+-- A checkout with `pnpm-lock.yaml` must stop when pnpm is missing; silently falling back to npm can produce a different dependency tree. After prerequisite checks, install with `--frozen-lockfile` before running the dependency preflight; an incompatible SDK/Zod pair must still stop the build. MCP config writes use a backup and atomic rename.
++- A checkout with `pnpm-lock.yaml` must stop when pnpm is missing; silently falling back to npm can produce a different dependency tree. After prerequisite checks, install with `--frozen-lockfile` before running the dependency preflight; an incompatible SDK/Zod pair must still stop the build.
++- MCP config writes validate the root object and any existing `mcpServers` object before touching the file or its backup. Create a missing `mcpServers`, never silently replace an invalid value; preserve other entries. Successful writes use a backup and atomic rename.
+ - Preflight checks the SDK's Zod range and runtime internals because an incompatible pair can answer `tools/list` but fail every `tools/call`. It locates package manifests by filesystem path before resolving an entry point, since `exports` can hide `package.json`; installed-package checks use the consumer's lockfile and dependencies.
+ - `package.json` is `private: true`: the upstream owns the `biblio-mcp` npm name, and this fork's supported install is from source. Keep `npm pack` tests working, but do not enable publishing without an explicit release/name decision.
+ - The original Phase 4 ceiling of 4,700 lines was set before Phase 0–3 and the subsequent completed Phase 4 work. The comparable baseline at `f6c4e42` is already 5,487 `.ts`/`.mjs` lines under `src/`, `scripts/`, and `test/`; the post-Phase-3/pre-D1 working tree had 7,127. Meeting 4,700 at that point would have required deleting 2,427 lines, including useful implementation and regression coverage, and is lower than the historical baseline itself.
+diff --git a/scripts/install.mjs b/scripts/install.mjs
+index cc59133..af8daa5 100644
+--- a/scripts/install.mjs
++++ b/scripts/install.mjs
+@@ -224,7 +224,8 @@ function writeConfig(configPath, entry, entryPath) {
+   }
+ 
+   let existing = {};
+-  if (existsSync(abs)) {
++  const hadConfig = existsSync(abs);
++  if (hadConfig) {
+     let raw;
+     try {
+       raw = readFileSync(abs, "utf8");
+@@ -239,17 +240,23 @@ function writeConfig(configPath, entry, entryPath) {
+       note("add the snippet above by hand, or fix the file and re-run");
+       return;
+     }
+-    if (!DRY_RUN) {
+-      copyFileSync(abs, `${abs}.bak`);
+-      note(`backed up the existing config to ${abs}.bak`);
+-    }
+   }
+ 
+   if (!existing || typeof existing !== "object" || Array.isArray(existing)) {
+     bad(`${abs} does not contain a JSON object, so it was left untouched`);
+     return;
+   }
+-  if (!existing.mcpServers || typeof existing.mcpServers !== "object") existing.mcpServers = {};
++  if (existing.mcpServers !== undefined && (
++    !existing.mcpServers || typeof existing.mcpServers !== "object" || Array.isArray(existing.mcpServers)
++  )) {
++    bad(`${abs}: mcpServers must be a JSON object, so the file was left untouched`);
++    return;
++  }
++  if (hadConfig && !DRY_RUN) {
++    copyFileSync(abs, `${abs}.bak`);
++    note(`backed up the existing config to ${abs}.bak`);
++  }
++  existing.mcpServers ??= {};
+   if (existing.mcpServers.biblio) note(`replacing the existing "biblio" entry`);
+   existing.mcpServers.biblio = entry;
+ 
+diff --git a/test/install.test.mjs b/test/install.test.mjs
+index c6a6471..3051f95 100644
+--- a/test/install.test.mjs
++++ b/test/install.test.mjs
+@@ -180,6 +180,53 @@ test("the installer refuses a config that is not a JSON object", needsPnpm, () =
+   assert.equal(readFileSync(cfg, "utf8"), "[1,2,3]\n");
+ });
+ 
++for (const mcpServers of [[], null, "not an object", 42, false]) {
++  test(`the installer rejects mcpServers=${JSON.stringify(mcpServers)} even in dry-run mode`, needsPnpm, (t) => {
++    const dir = mkdtempSync(join(tmpdir(), "biblio-install-shape-"));
++    t.after(() => rmSync(dir, { recursive: true, force: true }));
++    const cfg = join(dir, "mcp.json");
++    const original = JSON.stringify({ mcpServers, theme: "dark" });
++    writeFileSync(cfg, original);
++    writeFileSync(`${cfg}.bak`, "previous backup");
++    const r = runInstaller(["--dry-run", "--dir", join(dir, "repo"), "--write-config", cfg]);
++    assert.equal(r.status, 1, r.stdout);
++    assert.match(r.stdout, /mcpServers must be a JSON object/);
++    assert.doesNotMatch(r.stdout, /install complete|would write/);
++    assert.equal(readFileSync(cfg, "utf8"), original);
++    assert.equal(readFileSync(`${cfg}.bak`, "utf8"), "previous backup");
++    assert.equal(existsSync(`${cfg}.tmp`), false);
++  });
++}
++
++test("the installer accepts a config with an absent mcpServers field", needsPnpm, (t) => {
++  const dir = mkdtempSync(join(tmpdir(), "biblio-install-shape-"));
++  t.after(() => rmSync(dir, { recursive: true, force: true }));
++  const cfg = join(dir, "mcp.json");
++  writeFileSync(cfg, JSON.stringify({ theme: "dark" }));
++  const r = runInstaller(["--dry-run", "--dir", join(dir, "repo"), "--write-config", cfg]);
++  assert.equal(r.status, 0, r.stdout);
++  assert.match(r.stdout, /would write/);
++  assert.equal(existsSync(`${cfg}.bak`), false);
++});
++
++test("the installer leaves a malformed config and its previous backup untouched on a real install", needsPnpm, (t) => {
++  const { dir, projectDir } = freshCheckout(t);
++  const cfg = join(dir, "mcp.json");
++  const original = JSON.stringify({ mcpServers: [], theme: "dark" });
++  writeFileSync(cfg, original);
++  writeFileSync(`${cfg}.bak`, "previous backup");
++  const r = runInstaller(["--skip-network", "--dir", projectDir, "--write-config", cfg], projectDir, {
++    ...process.env,
++    npm_config_offline: "true",
++  });
++  assert.equal(r.status, 1, r.stdout);
++  assert.match(r.stdout, /mcpServers must be a JSON object/);
++  assert.doesNotMatch(r.stdout, /backed up|wrote .*mcp\.json|install complete/);
++  assert.equal(readFileSync(cfg, "utf8"), original);
++  assert.equal(readFileSync(`${cfg}.bak`, "utf8"), "previous backup");
++  assert.equal(existsSync(`${cfg}.tmp`), false);
++});
++
+ test("the installer builds a clean checkout, merges an existing config and keeps a backup", needsPnpm, (t) => {
+   const { dir, projectDir } = freshCheckout(t);
+   const cfg = join(dir, "mcp.json");
+-- 
+2.47.3
+

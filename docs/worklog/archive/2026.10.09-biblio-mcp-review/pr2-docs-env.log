@@ -1,0 +1,3 @@
+$ pnpm run build && node scripts/sync-env-docs.mjs
+$ tsc
+README.md already up to date

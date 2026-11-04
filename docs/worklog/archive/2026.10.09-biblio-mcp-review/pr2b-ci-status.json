@@ -1,0 +1,57 @@
+{
+  "id": 37855356970,
+  "status": "in_progress",
+  "conclusion": null,
+  "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970",
+  "jobs": [
+    {
+      "name": "live",
+      "id": 113578094856,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578094856"
+    },
+    {
+      "name": "artifacts (windows-latest)",
+      "id": 113578095062,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095062"
+    },
+    {
+      "name": "artifacts (macos-latest)",
+      "id": 113578095107,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095107"
+    },
+    {
+      "name": "runtime-floor",
+      "id": 113578095126,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095126"
+    },
+    {
+      "name": "artifacts (ubuntu-latest)",
+      "id": 113578095174,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095174"
+    },
+    {
+      "name": "build (24)",
+      "id": 113578095311,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095311"
+    },
+    {
+      "name": "build (22)",
+      "id": 113578095350,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/vernikr/biblio-mcp/actions/runs/37855356970/job/113578095350"
+    }
+  ]
+}

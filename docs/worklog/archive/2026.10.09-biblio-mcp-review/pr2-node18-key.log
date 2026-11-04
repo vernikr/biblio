@@ -1,0 +1,6 @@
+TAP version 13
+# Subtest: the member key is sent only to the mirror that proves it is Anna's Archive
+ok 1 - the member key is sent only to the mirror that proves it is Anna's Archive
+  ---
+  duration_ms: 50.798682
+  ...

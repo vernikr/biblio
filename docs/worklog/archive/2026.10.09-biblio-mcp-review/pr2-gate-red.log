@@ -1,0 +1,158 @@
+TAP version 13
+# Subtest: offline selfcheck verifies preflight and a real invalid call without touching mirrors
+not ok 1 - offline selfcheck verifies preflight and a real invalid call without touching mirrors
+  ---
+  duration_ms: 114.121054
+  location: '/home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:30:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    {"ok":false,"stages":[{"name":"preflight","ok":true,"summary":"5/5 checks passed","details":[{"name":"node","ok":true,"blocking":true,"info":"v20.20.2"},{"name":"lockfiles","ok":true,"blocking":true,"info":"pnpm-lock.yaml"},{"name":"dependencies","ok":true,"blocking":true,"info":"node_modules present"},{"name":"zod-sdk-compat","ok":true,"blocking":true,"info":"sdk 1.29.0 + zod 4.4.3 (range \"^3.25 || ^4.0\")"},{"name":"build","ok":true,"blocking":false,"info":"/home/user/biblio-mcp-review/repo/dist/index.js"}]},{"name":"tools","ok":true,"summary":"7 tools exposed by biblio-mcp v1.8.0","details":{"names":["search_books","book_details","get_download_links","download_book","search_papers","get_paper","healthcheck"],"serverInfo":{"name":"biblio-mcp","version":"1.8.0"}}},{"name":"mirrors","ok":false,"summary":"reachable sources: none","details":[{"group":"annas","results":[{"base":"https://annas-archive.gl","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://annas-archive.gd","ok":false,"ms":2,"error":"network disabled in selfcheck test"},{"base":"https://annas-archive.pk","ok":false,"ms":1,"error":"network disabled in selfcheck test"}]},{"group":"libgen","results":[{"base":"https://libgen.li","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.bz","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.vg","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.is","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.rs","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.st","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://libgen.gs","ok":false,"ms":1,"error":"network disabled in selfcheck test"}]},{"group":"scihub","results":[{"base":"https://sci-hub.ru","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://sci-hub.ren","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://sci-hub.mksa.top","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://sci-hub.st","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://sci-hub.hkvisa.net","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://sci-hub.se","ok":false,"ms":1,"error":"network disabled in selfcheck test"}]},{"group":"zlibrary","results":[{"base":"https://z-library.sk","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://1lib.sk","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://z-lib.io","ok":false,"ms":1,"error":"network disabled in selfcheck test"},{"base":"https://zlibrary-global.se","ok":false,"ms":1,"error":"network disabled in selfcheck test"}]}],"problem":"no mirror in any group answered — this looks like a network or DNS block, not a code fault"}],"defaults":{"sources":["annas","libgen"],"disabledByDefault":["zlibrary"]}}
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:32:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: startup and offline selfcheck reject an unrelated isError response
+not ok 2 - startup and offline selfcheck reject an unrelated isError response
+  ---
+  duration_ms: 5.912473
+  location: '/home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:37:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:42:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    async Test.run (node:internal/test_runner/test:797:9)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: ordinary and live selfchecks retain their mirror and search stages
+ok 3 - ordinary and live selfchecks retain their mirror and search stages
+  ---
+  duration_ms: 889.337267
+  ...
+# Subtest: the offline CLI succeeds with all fetches disabled
+not ok 4 - the offline CLI succeeds with all fetches disabled
+  ---
+  duration_ms: 395.671502
+  location: '/home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:61:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp selfcheck
+    
+      ok   preflight 5/5 checks passed
+      ok   tools     7 tools exposed by biblio-mcp v1.8.0
+     FAIL  mirrors   reachable sources: none
+            ↳ no mirror in any group answered — this looks like a network or DNS block, not a code fault
+              ✗ annas     https://annas-archive.gl       unreachable 2ms
+              ✗ annas     https://annas-archive.gd       unreachable 1ms
+              ✗ annas     https://annas-archive.pk       unreachable 1ms
+              ✗ libgen    https://libgen.li              unreachable 1ms
+              ✗ libgen    https://libgen.bz              unreachable 1ms
+              ✗ libgen    https://libgen.vg              unreachable 1ms
+              ✗ libgen    https://libgen.is              unreachable 1ms
+              ✗ libgen    https://libgen.rs              unreachable 1ms
+              ✗ libgen    https://libgen.st              unreachable 1ms
+              ✗ libgen    https://libgen.gs              unreachable 1ms
+              ✗ scihub    https://sci-hub.ru             unreachable 1ms
+              ✗ scihub    https://sci-hub.ren            unreachable 1ms
+              ✗ scihub    https://sci-hub.mksa.top       unreachable 1ms
+              ✗ scihub    https://sci-hub.st             unreachable 1ms
+              ✗ scihub    https://sci-hub.hkvisa.net     unreachable 1ms
+              ✗ scihub    https://sci-hub.se             unreachable 1ms
+              ✗ zlibrary  https://z-library.sk           unreachable 1ms
+              ✗ zlibrary  https://1lib.sk                unreachable 1ms
+              ✗ zlibrary  https://z-lib.io               unreachable 1ms
+              ✗ zlibrary  https://zlibrary-global.se     unreachable 1ms
+    
+    default sources: annas, libgen (excluded by default: zlibrary)
+    
+    selfcheck FAILED — see the lines above.
+    requests=20
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:63:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the CLI rejects incompatible flags --offline
+not ok 5 - the CLI rejects incompatible flags --offline
+  ---
+  duration_ms: 319.961408
+  location: '/home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:70:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:72:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the CLI rejects incompatible flags --selfcheck --offline --live
+not ok 6 - the CLI rejects incompatible flags --selfcheck --offline --live
+  ---
+  duration_ms: 1199.322757
+  location: '/home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:70:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /--offline requires --selfcheck|--offline.*--live/. Input:
+    
+    'requests=30\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    requests=30
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/selfcheck.test.mjs:73:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 1
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3250.371876

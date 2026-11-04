@@ -1,0 +1,86 @@
+{
+  "name": "@vernikr/biblio-mcp",
+  "version": "2.2.11",
+  "description": "One MCP server for Anna's Archive, Library Genesis, Sci-Hub, and Z-Library. Search books and papers, resolve download links, and fetch files \u2014 across all shadow libraries through a single unified interface.",
+  "type": "module",
+  "bin": {
+    "biblio-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "scripts/preflight.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "Yashar Mahmoudi <yashar.mahmudi@gmail.com> (https://github.com/yashimosh)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vernikr/biblio-mcp.git"
+  },
+  "homepage": "https://github.com/vernikr/biblio-mcp",
+  "bugs": {
+    "url": "https://github.com/vernikr/biblio-mcp/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@12.10.1",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "preflight": "node scripts/preflight.mjs",
+    "preflight:strict": "node scripts/preflight.mjs --require-build",
+    "fixtures:capture": "node scripts/capture-fixtures.mjs",
+    "selfcheck": "node dist/index.js --selfcheck",
+    "selfcheck:live": "node dist/index.js --selfcheck --live",
+    "benchmark": "pnpm run build && node scripts/benchmark.mjs",
+    "test": "pnpm run build && node scripts/run-tests.mjs",
+    "test:live": "pnpm run build && node --test test/live/*.live.test.mjs",
+    "verify": "pnpm run test && pnpm run selfcheck:offline",
+    "prepublishOnly": "pnpm run package:verify",
+    "selfcheck:offline": "node dist/index.js --selfcheck --offline",
+    "verify:live": "pnpm run verify && pnpm run selfcheck:live",
+    "docs:env": "pnpm run build && node scripts/sync-env-docs.mjs",
+    "package:artifacts": "pnpm run build && node scripts/package-artifacts.mjs",
+    "package:verify": "pnpm run verify && node scripts/package-artifacts.mjs && node scripts/check-artifacts.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "annas-archive",
+    "libgen",
+    "library-genesis",
+    "sci-hub",
+    "zlibrary",
+    "books",
+    "ebook",
+    "academic-papers",
+    "book-search",
+    "paper-search",
+    "pdf-download",
+    "doi",
+    "open-access",
+    "claude",
+    "cursor",
+    "cline",
+    "ai-tools"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "cheerio": "1.2.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "2.1.2",
+    "@types/node": "22.20.5",
+    "cross-spawn": "7.0.6",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

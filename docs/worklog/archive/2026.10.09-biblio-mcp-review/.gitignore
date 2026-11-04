@@ -1,0 +1,13 @@
+# Audit evidence is versioned; executable environments and credentials are not.
+!*.log
+**/node_modules/
+**/dist/
+**/.git/
+**/.cache/
+**/.npm/
+**/.local/
+**/__pycache__/
+**/.env
+**/.npmrc
+**/.netrc
+**/.git-credentials

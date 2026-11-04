@@ -1,0 +1,150 @@
+TAP version 13
+# Subtest: every numeric setting is listed in --help with its real default
+ok 1 - every numeric setting is listed in --help with its real default
+  ---
+  duration_ms: 1.429447
+  ...
+# Subtest: readNumber takes a positive number from the environment and falls back otherwise
+ok 2 - readNumber takes a positive number from the environment and falls back otherwise
+  ---
+  duration_ms: 0.206658
+  ...
+# Subtest: the README environment table is generated from the registry
+ok 3 - the README environment table is generated from the registry
+  ---
+  duration_ms: 1.002941
+  ...
+# Subtest: zero disables only mirror staggering, not timeout or TTL budgets
+ok 4 - zero disables only mirror staggering, not timeout or TTL budgets
+  ---
+  duration_ms: 0.327116
+  ...
+# Subtest: empty mirror groups name their real documented configuration variables
+ok 5 - empty mirror groups name their real documented configuration variables
+  ---
+  duration_ms: 9.116673
+  ...
+# Subtest: preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+ok 6 - preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3)
+  ---
+  duration_ms: 43.372732
+  ...
+# Subtest: preflight passes a zod-3-only SDK paired with zod 3
+ok 7 - preflight passes a zod-3-only SDK paired with zod 3
+  ---
+  duration_ms: 44.723593
+  ...
+# Subtest: preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+ok 8 - preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message
+  ---
+  duration_ms: 37.669979
+  ...
+# Subtest: preflight reports a missing dependency tree instead of crashing
+ok 9 - preflight reports a missing dependency tree instead of crashing
+  ---
+  duration_ms: 42.615718
+  ...
+# Subtest: the shipped tree passes preflight
+ok 10 - the shipped tree passes preflight
+  ---
+  duration_ms: 57.151276
+  ...
+# Subtest: a missing build is a note by default but a failure with --require-build
+ok 11 - a missing build is a note by default but a failure with --require-build
+  ---
+  duration_ms: 1.341982
+  ...
+# Subtest: preflight passes for an installed package, not just a source checkout
+ok 12 - preflight passes for an installed package, not just a source checkout
+  ---
+  duration_ms: 47.087636
+  ...
+# Subtest: preflight enforces the actual Node 18.17 floor
+ok 13 - preflight enforces the actual Node 18.17 floor
+  ---
+  duration_ms: 1.33057
+  ...
+# Subtest: offline selfcheck verifies preflight and a real invalid call without touching mirrors
+ok 14 - offline selfcheck verifies preflight and a real invalid call without touching mirrors
+  ---
+  duration_ms: 120.871015
+  ...
+# Subtest: startup and offline selfcheck reject an unrelated isError response
+ok 15 - startup and offline selfcheck reject an unrelated isError response
+  ---
+  duration_ms: 93.207758
+  ...
+# Subtest: ordinary and live selfchecks retain their mirror and search stages
+ok 16 - ordinary and live selfchecks retain their mirror and search stages
+  ---
+  duration_ms: 907.316183
+  ...
+# Subtest: the offline CLI succeeds with all fetches disabled
+ok 17 - the offline CLI succeeds with all fetches disabled
+  ---
+  duration_ms: 439.072694
+  ...
+# Subtest: the CLI rejects incompatible flags --offline
+ok 18 - the CLI rejects incompatible flags --offline
+  ---
+  duration_ms: 328.588724
+  ...
+# Subtest: the CLI rejects incompatible flags --selfcheck --offline --live
+ok 19 - the CLI rejects incompatible flags --selfcheck --offline --live
+  ---
+  duration_ms: 369.291962
+  ...
+# Subtest: the server exposes exactly the documented tool set
+ok 20 - the server exposes exactly the documented tool set
+  ---
+  duration_ms: 26.217635
+  ...
+# Subtest: every tool advertises an input schema with its required fields
+ok 21 - every tool advertises an input schema with its required fields
+  ---
+  duration_ms: 4.155207
+  ...
+# Subtest: search_papers advertises opt-in PDF resolution without making it required
+ok 22 - search_papers advertises opt-in PDF resolution without making it required
+  ---
+  duration_ms: 7.13643
+  ...
+# Subtest: download_book requires md5 and output_dir
+ok 23 - download_book requires md5 and output_dir
+  ---
+  duration_ms: 3.185549
+  ...
+# Subtest: argument validation names the field an agent got wrong
+ok 24 - argument validation names the field an agent got wrong
+  ---
+  duration_ms: 5.12778
+  ...
+# Subtest: search_books documents which sources are searched by default
+ok 25 - search_books documents which sources are searched by default
+  ---
+  duration_ms: 3.426915
+  ...
+# Subtest: search_books advertises that an explicit source list must be non-empty
+ok 26 - search_books advertises that an explicit source list must be non-empty
+  ---
+  duration_ms: 3.08201
+  ...
+# Subtest: the reported version matches package.json
+ok 27 - the reported version matches package.json
+  ---
+  duration_ms: 14.584754
+  ...
+# Subtest: stdio initializes, lists all tools and returns the expected invalid-call response
+ok 28 - stdio initializes, lists all tools and returns the expected invalid-call response
+  ---
+  duration_ms: 375.168209
+  ...
+1..28
+# tests 28
+# suites 0
+# pass 28
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3988.372841

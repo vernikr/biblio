@@ -1,0 +1,8 @@
+npm-installed: initialize + 7 tools + invalid call + complete download passed
+npx-pinned: initialize + 7 tools + invalid call + complete download passed
+pnpm-dlx: initialize + 7 tools + invalid call + complete download passed
+pnpm-dlx-offline: initialize + 7 tools + invalid call + complete download passed
+npx-public-registry: initialize + 7 tools + invalid call + complete download passed
+pnpm-public-registry: initialize + 7 tools + invalid call + complete download passed
+mcpb: initialize + 7 tools + invalid call + complete download passed
+npm/MCPB runtime bytes match; no consumer build or dev tools used.

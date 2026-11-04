@@ -1,0 +1,462 @@
+TAP version 13
+# Subtest: runStartupSelftest passes on a healthy build
+ok 1 - runStartupSelftest passes on a healthy build # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.219643
+  ...
+# Subtest: the entry point refuses to start when the tool surface is broken
+ok 2 - the entry point refuses to start when the tool surface is broken # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.176468
+  ...
+# Subtest: the startup check can be bypassed, and says so when it refuses
+ok 3 - the startup check can be bypassed, and says so when it refuses # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.090294
+  ...
+# Subtest: the installer runs end to end in dry-run mode and writes nothing
+ok 4 - the installer runs end to end in dry-run mode and writes nothing # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.079054
+  ...
+# Subtest: the installer stops at an unsupported Node prerequisite
+ok 5 - the installer stops at an unsupported Node prerequisite # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.086998
+  ...
+# Subtest: the installer refuses npm fallback when the checkout has a pnpm lockfile
+ok 6 - the installer refuses npm fallback when the checkout has a pnpm lockfile # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.071206
+  ...
+# Subtest: the installer --live flag runs the live selfcheck
+ok 7 - the installer --live flag runs the live selfcheck # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.267031
+  ...
+# Subtest: the installer rejects contradictory --live and --skip-network flags immediately
+ok 8 - the installer rejects contradictory --live and --skip-network flags immediately # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.141853
+  ...
+# Subtest: the installer refuses to overwrite a config it cannot parse
+ok 9 - the installer refuses to overwrite a config it cannot parse # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.185357
+  ...
+# Subtest: the installer refuses a config that is not a JSON object
+ok 10 - the installer refuses a config that is not a JSON object # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.175403
+  ...
+# Subtest: the installer rejects mcpServers=[] even in dry-run mode
+not ok 11 - the installer rejects mcpServers=[] even in dry-run mode
+  ---
+  duration_ms: 107.000312
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:184:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ·    would write /tmp/biblio-install-shape-gdWt6h/mcp.json
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:192:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer rejects mcpServers=null even in dry-run mode
+not ok 12 - the installer rejects mcpServers=null even in dry-run mode
+  ---
+  duration_ms: 101.878789
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:184:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ·    would write /tmp/biblio-install-shape-oyv31g/mcp.json
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:192:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer rejects mcpServers="not an object" even in dry-run mode
+not ok 13 - the installer rejects mcpServers="not an object" even in dry-run mode
+  ---
+  duration_ms: 103.11157
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:184:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ·    would write /tmp/biblio-install-shape-zM8nzy/mcp.json
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:192:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer rejects mcpServers=42 even in dry-run mode
+not ok 14 - the installer rejects mcpServers=42 even in dry-run mode
+  ---
+  duration_ms: 107.078551
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:184:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ·    would write /tmp/biblio-install-shape-KbGSsE/mcp.json
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:192:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer rejects mcpServers=false even in dry-run mode
+not ok 15 - the installer rejects mcpServers=false even in dry-run mode
+  ---
+  duration_ms: 100.849388
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:184:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ·    would write /tmp/biblio-install-shape-fd1RGG/mcp.json
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:192:12)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer accepts a config with an absent mcpServers field
+ok 16 - the installer accepts a config with an absent mcpServers field # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.175725
+  ...
+# Subtest: the installer leaves a malformed config and its previous backup untouched on a real install
+not ok 17 - the installer leaves a malformed config and its previous backup untouched on a real install
+  ---
+  duration_ms: 3808.208737
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:212:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    biblio-mcp installer
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /tmp/biblio-install-clean-atT42q/repo
+      ok   already present — reusing it (run `git pull` yourself to update)
+    
+    [3] installing dependencies
+      $ pnpm install --frozen-lockfile
+    [WARN] The store at /home/user/.local/share/pnpm/store/v11 is not used because packages cannot be hard linked from it into this project. Using the store at /tmp/.pnpm-store/v11 instead. Set storeDir to choose the store.
+    ✓ Lockfile passes supply-chain policies (verified 54m ago)
+    Lockfile is up to date, resolution step is skipped
+    Packages are hard linked from the content-addressable store to the virtual store.
+      Content-addressable store is at: /tmp/.pnpm-store/v11
+      Virtual store is at:             node_modules/.pnpm
+    Packages: +121
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Progress: resolved 121, reused 121, downloaded 0, added 121, done
+    
+    dependencies:
+    + @modelcontextprotocol/sdk 1.29.0
+    + cheerio 1.0.0
+    + zod 4.4.3
+    
+    devDependencies:
+    + @types/node 20.14.9
+    + tsx 4.16.2
+    + typescript 5.5.3
+    
+    Done in 64ms using pnpm v12.10.1
+    
+    [4] preflight — the dependency guard
+      $ /usr/bin/node /tmp/biblio-install-clean-atT42q/repo/scripts/preflight.mjs
+    biblio-mcp preflight — Node v20.20.2
+    project: /tmp/biblio-install-clean-atT42q/repo
+    
+      ok   node            v20.20.2
+      ok   lockfiles       pnpm-lock.yaml
+      ok   dependencies    node_modules present
+      ok   zod-sdk-compat  sdk 1.29.0 + zod 4.4.3 (range "^3.25 || ^4.0")
+     note  build           dist/index.js missing
+            ↳ run `pnpm build`
+    
+    dependencies OK — run `pnpm build`, then `node dist/index.js`.
+    
+    [5] building
+      $ pnpm run build
+      ok   /tmp/biblio-install-clean-atT42q/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ok   the tool surface answers a real tool call
+      ·    skipping the live mirror check (--skip-network)
+    
+    [7] MCP client configuration
+      ·    backed up the existing config to /tmp/biblio-install-clean-atT42q/mcp.json.bak
+      ok   wrote /tmp/biblio-install-clean-atT42q/mcp.json
+      ·    verify the path it points at: /tmp/biblio-install-clean-atT42q/repo/dist/index.js
+    
+    install complete.
+    
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:222:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer builds a clean checkout, merges an existing config and keeps a backup
+ok 18 - the installer builds a clean checkout, merges an existing config and keeps a backup # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.164383
+  ...
+# Subtest: the installer rejects an incompatible pair after installation and before building
+ok 19 - the installer rejects an incompatible pair after installation and before building # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.105075
+  ...
+# Subtest: the installer validates the path it is about to put in a config
+ok 20 - the installer validates the path it is about to put in a config # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.079878
+  ...
+# Subtest: the installer is plain JavaScript with no imports from src
+ok 21 - the installer is plain JavaScript with no imports from src # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.081466
+  ...
+# Subtest: every BIBLIO_* variable in the code is documented in --help and the README
+ok 22 - every BIBLIO_* variable in the code is documented in --help and the README # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.075403
+  ...
+# Subtest: every command the README tells you to run actually exists
+ok 23 - every command the README tells you to run actually exists # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.057639
+  ...
+# Subtest: the published tarball contains the installer the README points at
+ok 24 - the published tarball contains the installer the README points at # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.053565
+  ...
+# Subtest: the fork package is private while the upstream owns the npm name
+ok 25 - the fork package is private while the upstream owns the npm name # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.060304
+  ...
+# Subtest: every version in the CHANGELOG has a matching compare link
+ok 26 - every version in the CHANGELOG has a matching compare link # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.12174
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 20
+# todo 0
+# duration_ms 4758.059743

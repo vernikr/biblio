@@ -1,0 +1,14 @@
+{
+  "repository": "vernikr/biblio-mcp",
+  "branch": "main",
+  "base_sha": "e07743a61f18a85d2a07edd1d798a794da94206e",
+  "pushed_sha": "4625ba452b5272393d22a1b60012fedc87936a25",
+  "github_verified_sha": "4625ba452b5272393d22a1b60012fedc87936a25",
+  "verified_at_utc": "2026-10-08T23:02:41.773249+00:00",
+  "force": false,
+  "commits": [
+    "14cf5f9c5fbb8b490268c5e70425c1d4ffdbeb8b build(deps): update stable dependencies and target Node 22 LTS",
+    "9065bd947714576d8701c7da88d2ef4bdd11d55a feat(distribution): package the scoped npm runtime and portable MCPB",
+    "4625ba452b5272393d22a1b60012fedc87936a25 fix(ci): bootstrap launcher caches before offline acceptance"
+  ]
+}

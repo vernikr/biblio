@@ -1,0 +1,33 @@
+{
+  "id": 407357475,
+  "tag": "v2.0.0",
+  "url": "https://github.com/vernikr/biblio-mcp/releases/tag/v2.0.0",
+  "draft": false,
+  "target_sha": "f40788427abdc652add3a8d82e097e280cff9aae",
+  "ci_url": "https://github.com/vernikr/biblio-mcp/actions/runs/37863870454",
+  "verified_at_utc": "2026-10-09T00:22:02.383157+00:00",
+  "public_downloads_match": true,
+  "assets": [
+    {
+      "id": 623350504,
+      "name": "SHA256SUMS",
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/v2.0.0/SHA256SUMS",
+      "bytes": 191,
+      "sha256": "5c3c0e49f70480c5b470e86610ade9e90daeba1ad5c7bcc442a33fd7a3e9cd8b"
+    },
+    {
+      "id": 623350444,
+      "name": "vernikr-biblio-mcp-2.0.0.mcpb",
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/v2.0.0/vernikr-biblio-mcp-2.0.0.mcpb",
+      "bytes": 5603303,
+      "sha256": "21c5d132678670d71a0a153f623d06d378bee99ef9c20c6725fed99d5cb841ec"
+    },
+    {
+      "id": 623350423,
+      "name": "vernikr-biblio-mcp-2.0.0.tgz",
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/v2.0.0/vernikr-biblio-mcp-2.0.0.tgz",
+      "bytes": 49062,
+      "sha256": "5d2882d65df7a04441ad9397565f94d728cbb6bc77f5bbc400836f32547c142e"
+    }
+  ]
+}

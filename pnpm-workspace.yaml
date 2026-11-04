@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+
+# Patched temp-file handling in MCPB CLI prompt dependencies (development only).
+overrides:
+  tmp: 0.2.7

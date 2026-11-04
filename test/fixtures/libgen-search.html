@@ -1,0 +1,101 @@
+<!--
+  Fixture: Library Genesis search results table, .li family layout.
+
+  Structure mirrors the live page captured 2026-10-07 for the query
+  "Vidyamurthy Pairs Trading". The details matter, because the parser reads
+  them:
+
+    * a <th> header row — column indices come from here, not from position
+    * cell 0 combines ID / Time add. / Title / Series:
+        <b>            -> series
+        first anchor   -> title (links to edition.php)
+        ISBN anchor    -> ISBNs, wrapped in <i><font color="green">
+        <nobr> badges  -> record type ("b") and internal id ("l 239926")
+    * cell 8 carries the ads.php?md5= link the md5 is read from
+
+  The md5 values are real catalogue hashes; row content is hand-written, so
+  this file is safe to keep in the repo.
+-->
+<html>
+  <body>
+    <table>
+      <tr>
+        <th>ID ↕ Time add. ↕ Title ↕ Series ↕</th>
+        <th>Author(s) ↕</th>
+        <th>Publisher ↕</th>
+        <th>Year ↕</th>
+        <th>Language</th>
+        <th>Pages</th>
+        <th>Size ↕</th>
+        <th>Ext. ↕</th>
+        <th>Mirrors</th>
+      </tr>
+      <tr>
+        <td colspan="9">Show Covers</td>
+      </tr>
+      <tr>
+        <td>
+          <b>Wiley Finance</b><br />
+          <a href="edition.php?id=136017193"
+            >Pairs Trading: Quantitative Methods and Analysis <i></i
+          ></a>
+          <br />
+          <a href="edition.php?id=136017193"
+            ><i><font color="green"> 9780471460671; 0471460672</font></i></a
+          >
+          <nobr
+            ><span class="badge badge-primary"
+              ><a title="Book">b</a></span
+            >
+            <span class="badge badge-secondary">l 239926</span></nobr
+          >
+        </td>
+        <td>Ganapathy Vidyamurthy</td>
+        <td>Wiley</td>
+        <td><nobr>2004</nobr></td>
+        <td>English</td>
+        <td>223 / 223</td>
+        <td><nobr><a href="/file.php?id=91346036">4 MB</a></nobr></td>
+        <td>pdf</td>
+        <td>
+          <nobr
+            ><a href="/ads.php?md5=524037f395462d37b31f2b28fede24fb"
+              ><span class="badge badge-primary">1</span></a
+            ></nobr
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>Wiley Finance</b><br />
+          <a href="edition.php?id=136071182">Pairs trading <i></i></a><br />
+          <a href="edition.php?id=136071182"
+            ><i
+              ><font color="green">
+                0471460672; 9780471460671; 9780471684572; 0471684570</font
+              ></i
+            ></a
+          >
+          <nobr
+            ><span class="badge badge-primary"><a title="Book">b</a></span>
+            <span class="badge badge-secondary">l 293915</span></nobr
+          >
+        </td>
+        <td>Ganapathy Vidyamurthy</td>
+        <td>John Wiley &amp; Sons, Inc.</td>
+        <td><nobr>2004</nobr></td>
+        <td>English</td>
+        <td>215 / 215</td>
+        <td><nobr><a href="/file.php?id=91397232">2 MB</a></nobr></td>
+        <td>pdf</td>
+        <td>
+          <nobr
+            ><a href="/ads.php?md5=88c9ab57d24d7a8ca0881d26def6fd13"
+              ><span class="badge badge-primary">1</span></a
+            ></nobr
+          >
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

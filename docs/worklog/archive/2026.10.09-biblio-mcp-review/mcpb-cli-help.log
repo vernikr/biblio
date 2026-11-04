@@ -1,0 +1,20 @@
+Usage: mcpb [options] [command]
+
+Tools for building MCP Bundles
+
+Options:
+  -V, --version                output the version number
+  -h, --help                   display help for command
+
+Commands:
+  init [options] [directory]   Create a new MCPB extension manifest
+  validate <manifest>          Validate an MCPB manifest file
+  clean <mcpb>                 Cleans an MCPB file, validates the manifest, and
+                               minimizes bundle size
+  pack [directory] [output]    Pack a directory into an MCPB extension
+  unpack <mcpb-file> [output]  Unpack an MCPB extension file
+  sign [options] <mcpb-file>   Sign an MCPB extension file
+  verify <mcpb-file>           Verify the signature of an MCPB extension file
+  info <mcpb-file>             Display information about an MCPB extension file
+  unsign <mcpb-file>           Remove signature from a MCPB bundle file
+  help [command]               display help for command

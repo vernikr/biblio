@@ -1,0 +1,10 @@
+{
+  "repository": "vernikr/biblio-mcp",
+  "private": false,
+  "default_branch": "main",
+  "sha": "e9b30ca60de1f954e91f69fcd66735f526f18b30",
+  "commit_date": "2026-10-08T18:29:47Z",
+  "commit_message": "docs: record wave-2 decisions; tell users about human-check pages in the cover\n\ndecisions.md gets a wave-2 section: why Sci-Hub human checks are reported rather than solved, why the member key goes only to verified hosts, why only the losing Anna's request is cancelled, and why the installer's end-to-end test stays. The README cover now says a human-check page is reported, not returned as the book, as the AGENTS.md rule asks for user-visible changes.",
+  "html_url": "https://github.com/vernikr/biblio-mcp",
+  "size_kb": 462
+}

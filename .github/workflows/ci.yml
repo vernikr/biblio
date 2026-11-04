@@ -1,0 +1,143 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A superseded commit on the same branch is never worth the runner minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Supported LTS majors.
+        node-version: [22, 24]
+
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      # pnpm, not npm: this repo ships a pnpm lockfile. The two lockfiles used
+      # to disagree — npm resolved @modelcontextprotocol/sdk 1.12.1 against
+      # zod 4.4.3, which is the broken pairing this CI now guards against.
+      - uses: pnpm/action-setup@v6.1.0
+
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Gate the dependency pairing BEFORE building. Cheap, offline, and it is
+      # the check whose absence let a build that starts but cannot serve a
+      # single tool call reach a release.
+      #
+      # Run without --require-build here: dist/ does not exist yet, and the
+      # build artefact is reported as a note rather than a failure at this
+      # stage. The strict variant runs after the build, below.
+      - name: Preflight (dependencies)
+        run: pnpm run preflight
+
+      # Includes real SDK stdio initialize/list/call assertions; no stdout grep.
+      - name: Offline verification (one build)
+        run: pnpm run verify
+
+      # The installer is the supported entry point for this fork (it is not
+      # published to npm), so a broken installer is a broken install path.
+      # Dry run only: CI must not clone or write configs.
+      - name: Installer dry run
+        run: node scripts/install.mjs --dry-run
+
+      # Prove the startup guard actually refuses a server that cannot serve.
+      # The real broken pairing (sdk 1.12.1 + zod 4) is exercised in a throwaway
+      # tree, because the point is to show what a user with that install sees.
+      #
+      # One leg only: what is under test is the dependency pairing, not the Node
+      # version, and the step pays for a throwaway npm install over the network.
+      - name: Startup guard rejects the broken zod/SDK pairing
+        if: matrix.node-version == 24
+        run: |
+          set -euo pipefail
+          trap 'rm -rf /tmp/broken-pairing' EXIT
+          mkdir -p /tmp/broken-pairing
+          cd /tmp/broken-pairing
+          npm init -y >/dev/null
+          npm install --silent --no-audit --no-fund \
+            @modelcontextprotocol/sdk@1.12.1 zod@4.4.3 cheerio@1.0.0 >/dev/null
+          node -e "const p=require('./package.json');p.type='module';require('fs').writeFileSync('package.json',JSON.stringify(p))"
+          cp -r "$OLDPWD/dist" ./dist
+
+          set +e
+          printf '%s\n' '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}' \
+            | node dist/index.js > out.txt 2> err.txt
+          code=$?
+          set -e
+
+          # It must refuse, non-zero, and say what to do.
+          [ "$code" -ne 0 ] || { echo "server started despite the broken pairing"; cat err.txt; exit 1; }
+          grep -q "refusing to start" err.txt || { echo "no clear refusal on stderr"; cat err.txt; exit 1; }
+          grep -q "@modelcontextprotocol/sdk" err.txt || { echo "the fix is not named"; cat err.txt; exit 1; }
+          echo "startup guard correctly refused the broken pairing (exit $code)"
+
+      # The declared floor is ">=22.0.0", so the five files that could regress on
+      # an older 22.x minor run against exactly that binary. They used to need a
+      # fourth full checkout + install + build of their own; dist/ is already
+      # built here, so only the Node binary changes.
+      - uses: actions/setup-node@v7.1.0
+        if: matrix.node-version == 22
+        with:
+          node-version: "22.0.0"
+
+      - name: Exact runtime floor (no live mirrors)
+        if: matrix.node-version == 22
+        run: |
+          node --version
+          node --test test/stdio.test.mjs test/selfcheck.test.mjs test/server.test.mjs test/config.test.mjs test/preflight.test.mjs
+          node dist/index.js --selfcheck --offline
+
+  artifacts:
+    timeout-minutes: 10
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Packaging is slow and rarely breaks on a PR-only change, and what it
+        # protects is release-time acceptance. main and tags still run all three.
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "windows-latest", "macos-latest"]') }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run package:artifacts
+      - name: Actual installed consumers (stdio and complete download)
+        run: node scripts/check-artifacts.mjs
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: biblio-mcp-${{ matrix.os }}
+          path: artifacts/
+
+  live:
+    # Mirror availability depends on the runner's network and can change
+    # independently of this code. Keep this diagnostic job visible but non-blocking.
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Optional live mirror tests
+        run: pnpm run test:live

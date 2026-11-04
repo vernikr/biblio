@@ -1,0 +1,10 @@
+{
+  "repository": "vernikr/biblio-mcp",
+  "authenticated_login": "vernikr",
+  "push_permission": true,
+  "oauth_scopes": "admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, admin:ssh_signing_key, audit_log, codespace, copilot, delete:packages, gist, notifications, project, repo, user, workflow, write:discussion, write:network_configurations, write:packages",
+  "main_protected": false,
+  "api_main_sha": "e9b30ca60de1f954e91f69fcd66735f526f18b30",
+  "fetched_main_sha": "e9b30ca60de1f954e91f69fcd66735f526f18b30",
+  "local_pr1_sha": "40c563032fdad138e7af2ce0ff235234b6602f9b"
+}

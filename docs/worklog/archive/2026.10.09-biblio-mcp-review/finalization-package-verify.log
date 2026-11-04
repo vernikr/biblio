@@ -1,0 +1,264 @@
+$ pnpm run verify && node scripts/package-artifacts.mjs && node scripts/check-artifacts.mjs
+$ pnpm run typecheck && pnpm run test && pnpm run selfcheck:offline
+$ tsc --noEmit
+$ pnpm run build && node scripts/run-tests.mjs
+$ tsc
+✔ every tool description ends with a runnable Example line (110.578267ms)
+✔ each tool's example only uses arguments that tool accepts (22.60806ms)
+✔ TOOL_META covers every registered tool (25.926172ms)
+✔ a missing argument names the argument, instead of dumping zod issues (5.660421ms)
+✔ readable tool validation performs only the SDK's single schema parse (4.472504ms)
+✔ a malformed md5 says what a valid one looks like (3.177364ms)
+✔ an out-of-range value reports the range and the correct call (3.715662ms)
+✔ download_book names both required arguments at once (2.579259ms)
+✔ describeArgsError stays informative for an error it does not recognise (0.212885ms)
+✔ download_book schema explains HOME-relative output paths (3.013722ms)
+✔ an empty output_dir is rejected with a readable message (2.432196ms)
+✔ healthcheck is registered and advertises only optional arguments (2.781799ms)
+✔ every mirror group has a positive site-identity marker (0.652683ms)
+✔ search_books rejects an explicitly empty source list (1.998168ms)
+✔ the member key is sent only to the mirror that proves it is Anna's Archive (94.348965ms)
+✔ AsyncTtlCache shares in-flight work and expires successful results (54.206583ms)
+✔ AsyncTtlCache does not retain failures (0.794821ms)
+✔ AsyncTtlCache bounds entries using least-recently-used order (2.952376ms)
+✔ Libgen book search parses the captured live table (231.317421ms)
+✔ Libgen article search parses the captured live scimag table (82.549803ms)
+✔ Libgen details parses the captured ads.php BibTeX and download URL (66.346859ms)
+✔ Sci-Hub resolves the PDF from the captured DOI page (26.657415ms)
+✔ Anna's Archive is summarized, skipped while all mirrors are cooling down, and circuit-broken after three failures (110.804739ms)
+✔ get_paper opens the source circuit after three full failures (47.706284ms)
+✔ a late in-flight success cannot close a circuit that has already opened (1.248124ms)
+✔ every numeric setting is listed in --help with its real default (22.299433ms)
+✔ readNumber takes a positive number from the environment and falls back otherwise (3.123488ms)
+✔ the README environment table is generated from the registry (0.796998ms)
+✔ zero disables only mirror staggering, not timeout or TTL budgets (3.414677ms)
+✔ empty mirror groups name their real documented configuration variables (28.98112ms)
+✔ isUsefulLink rejects links that are not about this book (330.226993ms)
+✔ isUsefulLink accepts the mirrors that actually serve this book (550.60971ms)
+✔ resolveDownloads drops the bare-domain link Libgen's ads page advertises (501.29345ms)
+✔ bookDetails falls back to Libgen when Anna's Archive is unavailable (327.9409ms)
+✔ bookDetails starts Anna's and Libgen concurrently and returns the first usable result (435.556126ms)
+✔ bookDetails identifies an explicitly empty Anna's mirror list (470.420094ms)
+✔ bookDetails reports both failures instead of a plausible-looking stub (385.387144ms)
+✔ download_book preserves a successful staging file and warns on an MD5 mismatch (1072.152153ms)
+✔ Libgen reuses ads.php HTML across details and download-link lookups (623.225138ms)
+✔ libgen.details filters junk links too, not only resolveDownloads (412.085362ms)
+✔ a filename with parent-directory segments is rejected and writes nothing (45.299464ms)
+✔ a filename containing a path separator is rejected (9.570267ms)
+✔ a plain filename is saved inside output_dir (186.353911ms)
+✔ a relative output_dir is resolved from HOME and reported after a real download (20.468105ms)
+✔ two concurrent downloads of the same md5 into one directory both succeed intact (318.794193ms)
+✔ a filename that already exists is refused, and the existing file is untouched (25.638938ms)
+✔ a filename created after the precheck is preserved without retrying the download (176.450267ms)
+✔ two concurrent downloads to the same caller filename have exactly one winner (190.364498ms)
+✔ a filesystem without hard-link support fails safely instead of falling back to rename (160.768613ms)
+✔ resolveDownloads keeps a verified member URL without an MD5 in its signed URL (127.091549ms)
+✔ libgen-books.html matches its captured SHA-256 (21.085274ms)
+✔ libgen-scimag.html matches its captured SHA-256 (8.198394ms)
+✔ libgen-ads.html matches its captured SHA-256 (1.43111ms)
+✔ scihub-doi.html matches its captured SHA-256 (4.788107ms)
+✔ scihub-altcha.html matches its captured SHA-256 (1.289073ms)
+✔ scihub-no-pdf.html matches its captured SHA-256 (0.9254ms)
+✔ the captured Libgen book page includes its title and author (3.913292ms)
+✔ the captured Libgen ads page yields the expected BibTeX metadata (2.676642ms)
+✔ the captured Sci-Hub page contains a PDF embed, not a challenge (2.88847ms)
+✔ the captured Sci-Hub challenge page is a human-verification page, not an article (2.913363ms)
+✔ fetchFromMirrors times out while reading a stalled response body (210.018777ms)
+✔ downloadToFile times out while reading an HTML interstitial body (214.381815ms)
+✔ fetchFromMirrors falls through a failing mirror to a working one (48.636428ms)
+✔ fetchFromMirrors tries a route fallback on the same mirror after HTTP 404 (34.020561ms)
+✔ an empty mirror group rejects immediately with its configuration variable (1.832205ms)
+✔ a failed mirror is skipped on the next request (negative cache) (36.762128ms)
+✔ the mirror cache is half-open: once everything is dead, all are retried (522.664438ms)
+✔ a mirror that succeeds becomes the preferred one (33.567227ms)
+✔ resetDeadCache clears cooldowns but preserves the last-known-good mirror (13.848044ms)
+✔ fetchFromMirrors rejects a mirror that answers 200 but is not the expected site (15.31241ms)
+✔ a mirror failing the identity check is cooled down like any other failure (8.589815ms)
+✔ probeMirror cancels an unread body when no identity marker is requested (15.244061ms)
+✔ probeMirror flags an answering host that is not the expected site (17.888926ms)
+✔ probeGroup shares reachability and identity summaries (6.637139ms)
+✔ downloadToFile streams to disk and reports the true byte count and md5 (23.453983ms)
+✔ downloadToFile rejects an HTML interstitial instead of saving it as a book (8.697667ms)
+✔ downloadToFile surfaces a non-2xx status as an error (2.447105ms)
+✔ downloadToFile reports progress repeatedly during a slow transfer (249.226962ms)
+✔ downloadToFile aborts a connection that stops sending bytes (708.124329ms)
+✔ search_books refuses "" before any provider request (29.476834ms)
+✔ search_books refuses " \t\n " before any provider request (9.254956ms)
+✔ search_papers refuses "" before any provider request (5.207907ms)
+✔ search_papers refuses " \t\n " before any provider request (5.634697ms)
+✔ get_paper refuses "" before any provider request (7.924985ms)
+✔ get_paper refuses " \t\n " before any provider request (3.164809ms)
+✔ search_books trims a non-empty query without changing its contents (88.651192ms)
+✔ search_papers trims a non-empty query without changing its contents (22.458404ms)
+✔ get_paper preserves 10.1234/input-test after trimming (9.943105ms)
+✔ get_paper preserves https://example.test/article/input-test after trimming (10.634997ms)
+✔ runStartupSelftest passes on a healthy build (39.119776ms)
+✔ the version flag prints the package version without starting stdio (473.499835ms)
+✔ the entry point refuses an unhealthy startup check (776.926234ms)
+✔ the entry point explicitly bypasses an unhealthy startup check (828.114904ms)
+✔ the installer runs end to end in dry-run mode and writes nothing (160.214764ms)
+✔ the installer stops at an unsupported Node prerequisite (38.502564ms)
+✔ the installer refuses npm fallback when the checkout has a pnpm lockfile (70.977353ms)
+✔ the installer --live flag runs the live selfcheck (296.326923ms)
+✔ the installer rejects contradictory --live and --skip-network flags immediately (94.660247ms)
+✔ the installer refuses to overwrite a config it cannot parse (296.242187ms)
+✔ the installer refuses a config that is not a JSON object (328.271944ms)
+✔ the installer rejects mcpServers=[] even in dry-run mode (253.858824ms)
+✔ the installer rejects mcpServers=null even in dry-run mode (345.670347ms)
+✔ the installer rejects mcpServers="not an object" even in dry-run mode (280.478181ms)
+✔ the installer rejects mcpServers=42 even in dry-run mode (284.046297ms)
+✔ the installer rejects mcpServers=false even in dry-run mode (114.860463ms)
+✔ the installer accepts a config with an absent mcpServers field (111.771348ms)
+✔ the installer leaves a malformed config and its previous backup untouched on a real install (2219.330428ms)
+✔ the installer builds a clean checkout, merges an existing config and keeps a backup (1350.069867ms)
+✔ the installer rejects an incompatible pair after installation and before building (167.765442ms)
+✔ the installer validates the path it is about to put in a config (95.077678ms)
+✔ the installer is plain JavaScript with no imports from src (0.64619ms)
+✔ every BIBLIO_* variable in the code is documented in --help and the README (311.155564ms)
+✔ every command the README tells you to run actually exists (0.693841ms)
+✔ the consumer package ships runtime checks, not the checkout installer (0.167471ms)
+✔ the package uses the approved fork scope, never the upstream npm name (0.153435ms)
+✔ every version in the CHANGELOG has a matching compare link (0.669133ms)
+✔ the installer rejects Node 21 before fetching or installing (38.917139ms)
+✔ docs:env builds changed source before generating the README table (635.009505ms)
+✔ parseSize reads ordinary sizes (2.619364ms)
+✔ parseSize refuses to match inside a longer digit run (0.396171ms)
+✔ parseSize rejects implausible values (0.194584ms)
+✔ parseSize finds a size embedded in a sentence (0.122206ms)
+✔ parseSize applies its plausibility limit in terabytes (2.188846ms)
+✔ parseYear extracts a year from a date or a bare year (0.366279ms)
+✔ parseYear does not match inside an ISBN or an id (0.21343ms)
+✔ parseFormat normalises the Ext. column and rejects junk (0.175037ms)
+✔ parseLanguage accepts known languages and rejects free text (0.500586ms)
+✔ parsePages reduces '223 / 223' to a number and drops zero (2.080201ms)
+✔ isIsbnLike recognises ISBN runs and rejects titles (0.408301ms)
+✔ parseIsbns pulls an ISBN run out of free text (0.253486ms)
+✔ columnMap resolves the real Libgen header row (1.004146ms)
+✔ columnMap survives a reordered or padded header row (0.155225ms)
+✔ columnMap returns nothing usable for an empty header row (1.980172ms)
+✔ the positional fallback matches the common .li layout (0.638443ms)
+✔ parseBibtex reads the real Libgen entry (0.420163ms)
+✔ parseBibtex finds an entry embedded in surrounding page text (0.213986ms)
+✔ parseBibtex handles braces inside a value (4.190151ms)
+✔ parseBibtex returns an empty object rather than throwing on junk (0.140401ms)
+✔ preflight passes the known-good pairing (SDK 1.29 + zod 4.4.3) (108.652439ms)
+✔ preflight passes a zod-3-only SDK paired with zod 3 (100.311309ms)
+✔ preflight FAILS the broken pairing (SDK 1.12.1 + zod 4.4.3) with an actionable message (102.157112ms)
+✔ preflight reports a missing dependency tree instead of crashing (98.262022ms)
+✔ the shipped tree passes preflight (156.536548ms)
+✔ a missing build is a note by default but a failure with --require-build (5.454547ms)
+✔ preflight passes for an installed package, not just a source checkout (86.62541ms)
+✔ preflight enforces the Node 22 floor (1.154403ms)
+✔ makeProgressReporter swallows a rejected progress notification (1.115204ms)
+✔ Z-Library is excluded from the default source set (1.70775ms)
+✔ searchBooks rejects an explicitly empty source list (0.645445ms)
+✔ searchBooks deduplicates requested sources before making requests (150.657415ms)
+✔ searchBooks reuses source results for 45 seconds, keyed by source, query, and limit (69.188709ms)
+✔ search_books reports the de-duplicated source list over MCP (103.446116ms)
+✔ search_papers resolves direct PDFs only when requested and keeps search best-effort (193.354059ms)
+✔ Libgen caps requested result rows and scales them with the caller's limit (23.396596ms)
+✔ libgen.searchPapers separates the article title, journal, and author on the live scimag layout (17.606959ms)
+✔ libgen.search extracts md5 and the reliable metadata columns (4.893448ms)
+✔ libgen.search returns an empty list rather than throwing on no matches (15.805147ms)
+✔ libgen.search reads the author from the Author(s) column (14.361145ms)
+✔ libgen.search keeps the series out of the title (3.875623ms)
+✔ libgen.search extracts ISBNs and publisher into their own fields (3.618654ms)
+✔ libgen.search falls back to positional columns when the header row is absent (3.966592ms)
+✔ a single 404 for one record does not put the mirror into cooldown (73.51121ms)
+✔ a server error still cools the mirror down (18.417305ms)
+✔ three missing records do not open the libgen circuit; a healthy record still resolves (98.535005ms)
+✔ an opened circuit closes again once its cooldown has passed (459.456203ms)
+✔ absoluteUrl returns undefined for a malformed href instead of throwing (0.94223ms)
+✔ a malformed link on an Anna's detail page is skipped; the valid download survives (89.051878ms)
+✔ download_book with no usable direct link is a failed call (64.996141ms)
+✔ book_details for a record no source has is a failed call, not an empty book (15.908901ms)
+✔ a challenge page on one mirror is skipped in favour of a mirror that serves the article (133.081867ms)
+✔ when every mirror answers with a challenge, the error says so instead of returning an empty paper (31.38132ms)
+✔ a page with no PDF is reported as a missing record, not returned as a paper (19.085906ms)
+✔ offline selfcheck verifies preflight and a real invalid call without touching mirrors (244.201296ms)
+✔ startup and offline selfcheck reject an unrelated isError response (299.005506ms)
+✔ ordinary and live selfchecks retain their mirror and search stages (1220.922575ms)
+✔ the offline CLI succeeds with all fetches disabled (813.421145ms)
+✔ the CLI rejects incompatible flags --offline (451.445816ms)
+✔ the CLI rejects incompatible flags --selfcheck --offline --live (389.196376ms)
+✔ the server exposes exactly the documented tool set (39.886239ms)
+✔ every tool advertises an input schema with its required fields (4.068374ms)
+✔ search_papers advertises opt-in PDF resolution without making it required (3.43244ms)
+✔ download_book requires md5 and output_dir (2.966884ms)
+✔ argument validation names the field an agent got wrong (6.056086ms)
+✔ search_books documents which sources are searched by default (3.060166ms)
+✔ search_books advertises that an explicit source list must be non-empty (2.517161ms)
+✔ the reported version matches package.json (2.455446ms)
+✔ sniffExt recognises PDF by magic bytes (1.870504ms)
+✔ sniffExt distinguishes EPUB from a plain ZIP (0.330079ms)
+✔ sniffExt recognises RAR, MOBI and DjVu (0.257681ms)
+✔ sniffExt falls back to content-type, then to bin (0.235797ms)
+✔ sniffExt does not crash on an empty buffer (1.145781ms)
+✔ book_details returns as soon as Libgen answers, and cancels the slower Anna's request (107.271834ms)
+✔ the member fast-download races verified mirrors and cancels the rest (52.580647ms)
+✔ Sci-Hub enrichment runs its three lookups in parallel, not one after another (465.511882ms)
+✔ stdio initializes, lists all tools and returns the expected invalid-call response (558.489065ms)
+✔ every served tool has a TOOL_META entry, and no entry is stale (1.344829ms)
+✔ the served description is exactly the one src/toolmeta.ts defines (0.279034ms)
+✔ every example is a valid call under its tool's input schema (0.463952ms)
+✔ Anna's Archive resolves protocol-relative image and download URLs (124.368352ms)
+✔ Libgen resolves protocol-relative and path-relative download URLs (2.793093ms)
+✔ Sci-Hub resolves a protocol-relative PDF URL and strips its fragment (26.862293ms)
+✔ Z-Library resolves protocol-relative book URLs (8.147835ms)
+✔ zlibrary.search validates its parsed year, format, and size (127.138093ms)
+ℹ tests 203
+ℹ suites 0
+ℹ pass 203
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13243.396176
+$ node dist/index.js --selfcheck --offline
+biblio-mcp selfcheck
+
+  ok   preflight 5/5 checks passed
+  ok   tools     7 tools exposed by biblio-mcp v2.0.0; invalid-call validation passed
+
+default sources: annas, libgen (excluded by default: zlibrary)
+
+selfcheck passed.
+package: @vernikr/biblio-mcp@2.0.0
+Tarball Contents
+dist/cache.js
+dist/config.js
+dist/http.js
+dist/index.js
+dist/mirrors.js
+dist/parse.js
+dist/providers/annas.js
+dist/providers/circuit.js
+dist/providers/index.js
+dist/providers/libgen.js
+dist/providers/scihub.js
+dist/providers/zlibrary.js
+dist/selfcheck.js
+dist/server.js
+dist/sniff.js
+dist/toolmeta.js
+dist/types.js
+LICENSE
+package.json
+README.md
+scripts/preflight.mjs
+Tarball Details
+/home/user/biblio-mcp/artifacts/vernikr-biblio-mcp-2.0.0.tgz
+✓ Lockfile at ../../../tmp/biblio-mcpb-stage-y3XJb6/pnpm-lock.yaml passes supply-chain policies (verified 1h ago)
+Packages are copied from the content-addressable store to the virtual store.
+  Content-addressable store is at: /home/user/.local/share/pnpm/store/v11
+  Virtual store is at:             ../../../tmp/biblio-mcpb-stage-y3XJb6/node_modules/.pnpm
+../../../tmp/biblio-mcpb-stage-y3XJb6    | Progress: resolved 114, reused 114, downloaded 0, added 116, done
+Done in 100ms using pnpm v12.10.1
+Manifest schema validation passes!
+Artifacts: /home/user/biblio-mcp/artifacts/vernikr-biblio-mcp-2.0.0.{tgz,mcpb}
+npm-installed: initialize + 7 tools + invalid call + complete download passed
+npx-pinned: initialize + 7 tools + invalid call + complete download passed
+pnpm-dlx: initialize + 7 tools + invalid call + complete download passed
+pnpm-dlx-offline: initialize + 7 tools + invalid call + complete download passed
+mcpb: initialize + 7 tools + invalid call + complete download passed
+npm/MCPB runtime bytes match; no consumer build or dev tools used.

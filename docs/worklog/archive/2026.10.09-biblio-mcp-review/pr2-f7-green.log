@@ -1,0 +1,35 @@
+TAP version 13
+# Subtest: every numeric setting is listed in --help with its real default
+ok 1 - every numeric setting is listed in --help with its real default
+  ---
+  duration_ms: 1.538767
+  ...
+# Subtest: readNumber takes a positive number from the environment and falls back otherwise
+ok 2 - readNumber takes a positive number from the environment and falls back otherwise
+  ---
+  duration_ms: 0.247455
+  ...
+# Subtest: the README environment table is generated from the registry
+ok 3 - the README environment table is generated from the registry
+  ---
+  duration_ms: 1.719557
+  ...
+# Subtest: zero disables only mirror staggering, not timeout or TTL budgets
+ok 4 - zero disables only mirror staggering, not timeout or TTL budgets
+  ---
+  duration_ms: 0.332177
+  ...
+# Subtest: empty mirror groups name their real documented configuration variables
+ok 5 - empty mirror groups name their real documented configuration variables
+  ---
+  duration_ms: 12.614715
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 71.115603

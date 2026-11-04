@@ -1,0 +1,125 @@
+TAP version 13
+# Subtest: every tool description ends with a runnable Example line
+ok 1 - every tool description ends with a runnable Example line
+  ---
+  duration_ms: 25.719161
+  ...
+# Subtest: each tool's example only uses arguments that tool accepts
+ok 2 - each tool's example only uses arguments that tool accepts
+  ---
+  duration_ms: 5.589582
+  ...
+# Subtest: TOOL_META covers every registered tool
+ok 3 - TOOL_META covers every registered tool
+  ---
+  duration_ms: 5.476853
+  ...
+# Subtest: a missing argument names the argument, instead of dumping zod issues
+ok 4 - a missing argument names the argument, instead of dumping zod issues
+  ---
+  duration_ms: 9.578878
+  ...
+# Subtest: readable tool validation performs only the SDK's single schema parse
+ok 5 - readable tool validation performs only the SDK's single schema parse
+  ---
+  duration_ms: 4.235743
+  ...
+# Subtest: a malformed md5 says what a valid one looks like
+ok 6 - a malformed md5 says what a valid one looks like
+  ---
+  duration_ms: 4.202935
+  ...
+# Subtest: an out-of-range value reports the range and the correct call
+ok 7 - an out-of-range value reports the range and the correct call
+  ---
+  duration_ms: 3.998936
+  ...
+# Subtest: download_book names both required arguments at once
+ok 8 - download_book names both required arguments at once
+  ---
+  duration_ms: 6.71144
+  ...
+# Subtest: describeArgsError stays informative for an error it does not recognise
+ok 9 - describeArgsError stays informative for an error it does not recognise
+  ---
+  duration_ms: 0.421153
+  ...
+# Subtest: download_book schema explains HOME-relative output paths
+ok 10 - download_book schema explains HOME-relative output paths
+  ---
+  duration_ms: 4.481462
+  ...
+# Subtest: an empty output_dir is rejected with a readable message
+ok 11 - an empty output_dir is rejected with a readable message
+  ---
+  duration_ms: 3.915887
+  ...
+# Subtest: healthcheck is registered and advertises only optional arguments
+ok 12 - healthcheck is registered and advertises only optional arguments
+  ---
+  duration_ms: 6.373628
+  ...
+# Subtest: every mirror group has a positive site-identity marker
+ok 13 - every mirror group has a positive site-identity marker
+  ---
+  duration_ms: 0.987357
+  ...
+# Subtest: search_books rejects an explicitly empty source list
+ok 14 - search_books rejects an explicitly empty source list
+  ---
+  duration_ms: 2.886599
+  ...
+# Subtest: every numeric setting is listed in --help with its real default
+ok 15 - every numeric setting is listed in --help with its real default
+  ---
+  duration_ms: 1.356625
+  ...
+# Subtest: readNumber takes a positive number from the environment and falls back otherwise
+ok 16 - readNumber takes a positive number from the environment and falls back otherwise
+  ---
+  duration_ms: 0.222282
+  ...
+# Subtest: the README environment table is generated from the registry
+ok 17 - the README environment table is generated from the registry
+  ---
+  duration_ms: 1.479069
+  ...
+# Subtest: zero disables only mirror staggering, not timeout or TTL budgets
+ok 18 - zero disables only mirror staggering, not timeout or TTL budgets
+  ---
+  duration_ms: 0.32486
+  ...
+# Subtest: empty mirror groups name their real documented configuration variables
+ok 19 - empty mirror groups name their real documented configuration variables
+  ---
+  duration_ms: 11.728875
+  ...
+# Subtest: a filename with parent-directory segments is rejected and writes nothing
+ok 20 - a filename with parent-directory segments is rejected and writes nothing
+  ---
+  duration_ms: 28.522314
+  ...
+# Subtest: a filename containing a path separator is rejected
+ok 21 - a filename containing a path separator is rejected
+  ---
+  duration_ms: 3.5606
+  ...
+# Subtest: a plain filename is saved inside output_dir
+ok 22 - a plain filename is saved inside output_dir
+  ---
+  duration_ms: 61.963581
+  ...
+# Subtest: a relative output_dir is resolved from HOME and reported after a real download
+ok 23 - a relative output_dir is resolved from HOME and reported after a real download
+  ---
+  duration_ms: 10.308971
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 959.090977

@@ -1,0 +1,130 @@
+TAP version 13
+# Subtest: every tool description ends with a runnable Example line
+ok 1 - every tool description ends with a runnable Example line
+  ---
+  duration_ms: 24.442943
+  ...
+# Subtest: each tool's example only uses arguments that tool accepts
+ok 2 - each tool's example only uses arguments that tool accepts
+  ---
+  duration_ms: 6.310767
+  ...
+# Subtest: TOOL_META covers every registered tool
+ok 3 - TOOL_META covers every registered tool
+  ---
+  duration_ms: 5.911714
+  ...
+# Subtest: a missing argument names the argument, instead of dumping zod issues
+ok 4 - a missing argument names the argument, instead of dumping zod issues
+  ---
+  duration_ms: 6.853306
+  ...
+# Subtest: readable tool validation performs only the SDK's single schema parse
+ok 5 - readable tool validation performs only the SDK's single schema parse
+  ---
+  duration_ms: 4.810093
+  ...
+# Subtest: a malformed md5 says what a valid one looks like
+ok 6 - a malformed md5 says what a valid one looks like
+  ---
+  duration_ms: 11.450399
+  ...
+# Subtest: an out-of-range value reports the range and the correct call
+ok 7 - an out-of-range value reports the range and the correct call
+  ---
+  duration_ms: 3.554977
+  ...
+# Subtest: download_book names both required arguments at once
+ok 8 - download_book names both required arguments at once
+  ---
+  duration_ms: 6.573699
+  ...
+# Subtest: describeArgsError stays informative for an error it does not recognise
+ok 9 - describeArgsError stays informative for an error it does not recognise
+  ---
+  duration_ms: 0.474012
+  ...
+# Subtest: download_book reports the resolved directory for a relative path
+ok 10 - download_book reports the resolved directory for a relative path
+  ---
+  duration_ms: 4.864571
+  ...
+# Subtest: an empty output_dir is rejected with a readable message
+ok 11 - an empty output_dir is rejected with a readable message
+  ---
+  duration_ms: 4.73784
+  ...
+# Subtest: healthcheck is registered and advertises only optional arguments
+ok 12 - healthcheck is registered and advertises only optional arguments
+  ---
+  duration_ms: 4.12232
+  ...
+# Subtest: every mirror group has a positive site-identity marker
+ok 13 - every mirror group has a positive site-identity marker
+  ---
+  duration_ms: 1.503342
+  ...
+# Subtest: search_books rejects an explicitly empty source list
+ok 14 - search_books rejects an explicitly empty source list
+  ---
+  duration_ms: 4.018368
+  ...
+# Subtest: search_books refuses "" before any provider request
+ok 15 - search_books refuses "" before any provider request
+  ---
+  duration_ms: 18.315106
+  ...
+# Subtest: search_books refuses " \\t\\n " before any provider request
+ok 16 - search_books refuses " \\t\\n " before any provider request
+  ---
+  duration_ms: 3.558026
+  ...
+# Subtest: search_papers refuses "" before any provider request
+ok 17 - search_papers refuses "" before any provider request
+  ---
+  duration_ms: 3.272718
+  ...
+# Subtest: search_papers refuses " \\t\\n " before any provider request
+ok 18 - search_papers refuses " \\t\\n " before any provider request
+  ---
+  duration_ms: 3.278269
+  ...
+# Subtest: get_paper refuses "" before any provider request
+ok 19 - get_paper refuses "" before any provider request
+  ---
+  duration_ms: 6.879123
+  ...
+# Subtest: get_paper refuses " \\t\\n " before any provider request
+ok 20 - get_paper refuses " \\t\\n " before any provider request
+  ---
+  duration_ms: 3.183086
+  ...
+# Subtest: search_books trims a non-empty query without changing its contents
+ok 21 - search_books trims a non-empty query without changing its contents
+  ---
+  duration_ms: 51.919956
+  ...
+# Subtest: search_papers trims a non-empty query without changing its contents
+ok 22 - search_papers trims a non-empty query without changing its contents
+  ---
+  duration_ms: 11.847893
+  ...
+# Subtest: get_paper preserves 10.1234/input-test after trimming
+ok 23 - get_paper preserves 10.1234/input-test after trimming
+  ---
+  duration_ms: 6.672744
+  ...
+# Subtest: get_paper preserves https://example.test/article/input-test after trimming
+ok 24 - get_paper preserves https://example.test/article/input-test after trimming
+  ---
+  duration_ms: 5.467865
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 24
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 970.366459

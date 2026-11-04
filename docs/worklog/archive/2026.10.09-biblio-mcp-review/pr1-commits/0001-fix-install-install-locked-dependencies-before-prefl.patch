@@ -1,0 +1,280 @@
+From bed58a270110697f5a073f846ac3a5142765ca66 Mon Sep 17 00:00:00 2001
+From: Arena Agent <agent@arena.invalid>
+Date: Thu, 8 Oct 2026 20:04:18 +0000
+Subject: [PATCH 1/3] fix(install): install locked dependencies before
+ preflight
+
+Exercise a truly clean checkout offline from the pnpm store; keep the installed SDK/Zod guard before build and stop immediately on unsupported Node.
+---
+ README.md             |  23 +++++-----
+ docs/decisions.md     |   2 +-
+ scripts/install.mjs   |  31 +++++++------
+ test/install.test.mjs | 101 +++++++++++++++++++++++++++++++++++++-----
+ 4 files changed, 119 insertions(+), 38 deletions(-)
+
+diff --git a/README.md b/README.md
+index 6ca8018..46c8f9f 100644
+--- a/README.md
++++ b/README.md
+@@ -10,9 +10,9 @@ The idea is the same as the original: one tool that lets your AI assistant find
+ research papers across the shadow libraries and get them for you. This fork is about making
+ that something you can rely on.
+ 
+-- **It works the first time.** Setup is a single command, and it checks itself before you use
+-  it. A broken setup is caught on the spot, with the fix spelled out, instead of failing every
+-  request.
++- **It works the first time.** One setup command installs what is missing and checks the
++  server before you use it. A broken setup is caught on the spot, with the fix spelled out,
++  instead of failing every request.
+ - **Faster answers.** Searches come back many times faster, because the server stops waiting on
+   websites that are no longer there.
+ - **Honest results.** A source that is down is reported, not silently dropped. A website that
+@@ -74,19 +74,16 @@ It connects to any MCP client (Claude, Cline, Cursor, Windsurf, or custom agents
+ 
+ ### One command
+ 
+-```bash
+-git clone https://github.com/vernikr/biblio-mcp.git && cd biblio-mcp
+-node scripts/install.mjs
+-```
++Use the [Quick start](#quick-start) command above.
+ 
+-The installer checks Node and your package manager, installs, builds, verifies that the tool
+-surface actually answers a call, and prints the config snippet to paste into your MCP client.
++The installer checks Node and your package manager, installs locked dependencies, checks the
++SDK/Zod pairing, builds, and verifies a real tool call before printing your MCP config.
+ Add `--write-config <path>` and it merges the entry into an existing config for you — keeping a
+ `.bak` copy, and refusing to touch a file it cannot parse. Add `--dry-run` to see every step
+-without writing anything. Network checks are skipped by default; pass `--live` to run
+-`dist/index.js --selfcheck --live` after the build. `--skip-network` is an explicit no-network switch
+-for scripted installs. If the checkout has a `pnpm-lock.yaml`, the installer requires pnpm and will
+-not try npm as a substitute.
++without writing anything. Live mirror checks are skipped by default; pass `--live` to run
++`dist/index.js --selfcheck --live` after the build, or `--skip-network` to explicitly skip them.
++Dependency installation may still need registry access. A checkout with `pnpm-lock.yaml`
++requires pnpm and installs with `--frozen-lockfile`; npm is not used as a substitute.
+ 
+ ```bash
+ node scripts/install.mjs --write-config ~/.config/claude/mcp.json
+diff --git a/docs/decisions.md b/docs/decisions.md
+index f4ddb48..86011ca 100644
+--- a/docs/decisions.md
++++ b/docs/decisions.md
+@@ -41,7 +41,7 @@ This file keeps the rationale for non-obvious behavior out of implementation com
+ 
+ ## Installation and project size
+ 
+-- A checkout with `pnpm-lock.yaml` must stop when pnpm is missing; silently falling back to npm can produce a different dependency tree. MCP config writes use a backup and atomic rename.
++- A checkout with `pnpm-lock.yaml` must stop when pnpm is missing; silently falling back to npm can produce a different dependency tree. After prerequisite checks, install with `--frozen-lockfile` before running the dependency preflight; an incompatible SDK/Zod pair must still stop the build. MCP config writes use a backup and atomic rename.
+ - Preflight checks the SDK's Zod range and runtime internals because an incompatible pair can answer `tools/list` but fail every `tools/call`. It locates package manifests by filesystem path before resolving an entry point, since `exports` can hide `package.json`; installed-package checks use the consumer's lockfile and dependencies.
+ - `package.json` is `private: true`: the upstream owns the `biblio-mcp` npm name, and this fork's supported install is from source. Keep `npm pack` tests working, but do not enable publishing without an explicit release/name decision.
+ - The original Phase 4 ceiling of 4,700 lines was set before Phase 0–3 and the subsequent completed Phase 4 work. The comparable baseline at `f6c4e42` is already 5,487 `.ts`/`.mjs` lines under `src/`, `scripts/`, and `test/`; the post-Phase-3/pre-D1 working tree had 7,127. Meeting 4,700 at that point would have required deleting 2,427 lines, including useful implementation and regression coverage, and is lower than the historical baseline itself.
+diff --git a/scripts/install.mjs b/scripts/install.mjs
+index 330fdc5..cc59133 100644
+--- a/scripts/install.mjs
++++ b/scripts/install.mjs
+@@ -71,7 +71,10 @@ async function main() {
+   step(1, "checking prerequisites");
+   const major = Number(process.versions.node.split(".")[0]);
+   if (major >= NODE_MIN_MAJOR) ok(`node ${process.versions.node}`);
+-  else bad(`node ${process.versions.node} is too old — ${NODE_MIN_MAJOR} or newer is required`);
++  else {
++    bad(`node ${process.versions.node} is too old — ${NODE_MIN_MAJOR} or newer is required`);
++    return finish();
++  }
+ 
+   const pm = findPackageManager();
+   if (!pm) {
+@@ -103,29 +106,31 @@ async function main() {
+     }
+   }
+ 
+-  // ----------------------------------------------------------- 3. preflight
+-  step(3, "preflight — the dependency guard");
+   const preflight = join(projectDir, "scripts", "preflight.mjs");
+   if (!existsSync(preflight)) {
+     bad(`scripts/preflight.mjs not found in ${projectDir}`);
+     return finish();
+   }
+-  // Preflight reports the zod/SDK pairing, which is the failure this whole
+-  // installer exists to prevent. It must not gate on dist/ yet — we have not
+-  // built.
+-  if (run(process.execPath, [preflight], { cwd: projectDir }) !== 0) {
+-    bad("preflight failed — the messages above include the exact fix command");
+-    return finish();
+-  }
+ 
+-  // ------------------------------------------------------------- 4. install
+-  step(4, "installing dependencies");
+-  const installArgs = ["install"];
++  // ------------------------------------------------------------- 3. install
++  step(3, "installing dependencies");
++  const installArgs = pm.name === "pnpm" && existsSync(join(projectDir, "pnpm-lock.yaml"))
++    ? ["install", "--frozen-lockfile"]
++    : ["install"];
+   if (run(pm.name, installArgs, { cwd: projectDir }) !== 0) {
+     bad(`${pm.name} install failed`);
+     return finish();
+   }
+ 
++  // ----------------------------------------------------------- 4. preflight
++  step(4, "preflight — the dependency guard");
++  // Validate the installed SDK/Zod pair before building; a clean checkout has
++  // neither dependencies nor dist yet.
++  if (run(process.execPath, [preflight], { cwd: projectDir }) !== 0) {
++    bad("preflight failed — the messages above include the exact fix command");
++    return finish();
++  }
++
+   // --------------------------------------------------------------- 5. build
+   step(5, "building");
+   if (run(pm.name, ["run", "build"], { cwd: projectDir }) !== 0) {
+diff --git a/test/install.test.mjs b/test/install.test.mjs
+index 4d65839..c6a6471 100644
+--- a/test/install.test.mjs
++++ b/test/install.test.mjs
+@@ -5,16 +5,18 @@ import assert from "node:assert/strict";
+ import { spawnSync } from "node:child_process";
+ import {
+   chmodSync,
++  cpSync,
+   existsSync,
+   mkdirSync,
+   mkdtempSync,
+   readFileSync,
+   readdirSync,
++  rmSync,
+   writeFileSync,
+ } from "node:fs";
+ import { tmpdir } from "node:os";
+-import { delimiter, join, dirname } from "node:path";
+-import { fileURLToPath } from "node:url";
++import { basename, delimiter, join, dirname } from "node:path";
++import { fileURLToPath, pathToFileURL } from "node:url";
+ import { runStartupSelftest } from "../dist/selfcheck.js";
+ import { readRootPackage } from "../scripts/lib/pkg.mjs";
+ 
+@@ -39,6 +41,17 @@ function runInstaller(args, cwd, env) {
+   return { status: r.status, stdout: r.stdout ?? "", stderr: r.stderr ?? "" };
+ }
+ 
++function freshCheckout(t) {
++  const dir = mkdtempSync(join(tmpdir(), "biblio-install-clean-"));
++  t.after(() => rmSync(dir, { recursive: true, force: true }));
++  const projectDir = join(dir, "repo");
++  cpSync(join(HERE, ".."), projectDir, {
++    recursive: true,
++    filter: (path) => !["node_modules", "dist", ".git"].includes(basename(path)),
++  });
++  return { dir, projectDir };
++}
++
+ // ---------------------------------------------------------------------------
+ // The startup self-test (item 25)
+ // ---------------------------------------------------------------------------
+@@ -96,6 +109,17 @@ test("the installer runs end to end in dry-run mode and writes nothing", needsPn
+   assert.ok(parsed.mcpServers.biblio.args[0].endsWith("dist/index.js"));
+ });
+ 
++test("the installer stops at an unsupported Node prerequisite", () => {
++  const r = spawnSync(process.execPath, ["--input-type=module", "-e", `
++    Object.defineProperty(process.versions, "node", { value: "17.0.0" });
++    process.argv = [process.execPath, ${JSON.stringify(INSTALLER)}, "--dry-run"];
++    await import(${JSON.stringify(pathToFileURL(INSTALLER).href)});
++  `], { encoding: "utf8" });
++  assert.equal(r.status, 1);
++  assert.match(r.stdout, /node 17\.0\.0 is too old/);
++  assert.doesNotMatch(r.stdout, /\[2\] obtaining|ok\s+pnpm|no package manager found/);
++});
++
+ test("the installer refuses npm fallback when the checkout has a pnpm lockfile", () => {
+   const dir = mkdtempSync(join(tmpdir(), "biblio-install-pm-"));
+   const bin = join(dir, "bin");
+@@ -156,20 +180,75 @@ test("the installer refuses a config that is not a JSON object", needsPnpm, () =
+   assert.equal(readFileSync(cfg, "utf8"), "[1,2,3]\n");
+ });
+ 
+-test("the installer merges into an existing config and keeps a backup", needsPnpm, () => {
+-  const dir = mkdtempSync(join(tmpdir(), "biblio-install-"));
++test("the installer builds a clean checkout, merges an existing config and keeps a backup", needsPnpm, (t) => {
++  const { dir, projectDir } = freshCheckout(t);
+   const cfg = join(dir, "mcp.json");
+-  writeFileSync(cfg, JSON.stringify({ mcpServers: { other: { command: "x" } } }));
+-
+-  const r = runInstaller(["--dir", join(dir, "repo"), "--write-config", cfg]);
++  const original = JSON.stringify({ mcpServers: { other: { command: "x" } }, theme: "dark" });
++  writeFileSync(cfg, original);
++  const lockfile = readFileSync(join(projectDir, "pnpm-lock.yaml"), "utf8");
++  assert.equal(existsSync(join(projectDir, "node_modules")), false);
++  assert.equal(existsSync(join(projectDir, "dist")), false);
++
++  // The outer install primes pnpm's store; dependency installation in this test
++  // must not need the registry or live mirrors.
++  const r = runInstaller(["--skip-network", "--dir", projectDir, "--write-config", cfg], projectDir, {
++    ...process.env,
++    npm_config_offline: "true",
++  });
+   assert.equal(r.status, 0, `installer failed:\n${r.stdout}\n${r.stderr}`);
++  assert.match(r.stdout, /\$ pnpm install --frozen-lockfile/);
++  assert.match(r.stdout, /the tool surface answers a real tool call/);
++  assert.equal(existsSync(join(projectDir, "node_modules", "zod", "package.json")), true);
++  assert.equal(existsSync(join(projectDir, "dist", "index.js")), true);
++  assert.equal(readFileSync(join(projectDir, "pnpm-lock.yaml"), "utf8"), lockfile);
++  assert.equal(existsSync(join(projectDir, "package-lock.json")), false);
+ 
+   const after = JSON.parse(readFileSync(cfg, "utf8"));
+-  // The pre-existing server must survive — this is the user's config, not ours.
+   assert.deepEqual(after.mcpServers.other, { command: "x" });
+-  assert.ok(after.mcpServers.biblio, "biblio entry must be added");
+-  assert.ok(after.mcpServers.biblio.args[0].endsWith("dist/index.js"));
+-  assert.ok(existsSync(`${cfg}.bak`), "a backup must be written before overwriting");
++  assert.equal(after.theme, "dark");
++  assert.equal(after.mcpServers.biblio.args[0], join(projectDir, "dist", "index.js"));
++  assert.equal(readFileSync(`${cfg}.bak`, "utf8"), original);
++});
++
++test("the installer rejects an incompatible pair after installation and before building", (t) => {
++  const { dir, projectDir } = freshCheckout(t);
++  const bin = join(dir, "bin");
++  const calls = join(dir, "pm-calls.jsonl");
++  mkdirSync(bin);
++  const fakePnpm = join(bin, "pnpm");
++  const packages = [
++    ["zod", { name: "zod", version: "4.4.3" }],
++    ["@modelcontextprotocol/sdk", { name: "@modelcontextprotocol/sdk", version: "1.12.1", peerDependencies: { zod: "^3.23.8" } }],
++  ];
++  // Model an unhealthy installation; the installer must still run the real
++  // preflight against what the package manager installed, not bypass its guard.
++  writeFileSync(fakePnpm, `#!${process.execPath}
++const { appendFileSync, mkdirSync, writeFileSync } = require("node:fs");
++const { join } = require("node:path");
++const args = process.argv.slice(2);
++if (args[0] === "--version") { console.log("12.10.1"); process.exit(0); }
++appendFileSync(${JSON.stringify(calls)}, JSON.stringify(args) + "\\n");
++if (args[0] !== "install") process.exit(2);
++for (const [name, pkg] of ${JSON.stringify(packages)}) {
++  const target = join(process.cwd(), "node_modules", name);
++  mkdirSync(target, { recursive: true });
++  writeFileSync(join(target, "package.json"), JSON.stringify(pkg));
++}
++`);
++  chmodSync(fakePnpm, 0o755);
++  const r = runInstaller(["--skip-network", "--dir", projectDir], projectDir, {
++    ...process.env,
++    PATH: bin,
++  });
++  assert.equal(r.status, 1);
++  assert.match(r.stdout, /preflight failed/);
++  assert.match(r.stdout, /keyValidator\._parse is not a function/);
++  assert.match(r.stdout, /pnpm add @modelcontextprotocol\/sdk/);
++  assert.deepEqual(readFileSync(calls, "utf8").trim().split("\n").map((line) => JSON.parse(line)), [
++    ["install", "--frozen-lockfile"],
++  ]);
++  assert.equal(existsSync(join(projectDir, "dist")), false);
++  assert.doesNotMatch(r.stdout, /\[5\] building|install complete/);
+ });
+ 
+ test("the installer validates the path it is about to put in a config", () => {
+-- 
+2.47.3
+

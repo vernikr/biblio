@@ -1,0 +1,33 @@
+package: @vernikr/biblio-mcp@2.0.0
+Tarball Contents
+dist/cache.js
+dist/config.js
+dist/http.js
+dist/index.js
+dist/mirrors.js
+dist/parse.js
+dist/providers/annas.js
+dist/providers/circuit.js
+dist/providers/index.js
+dist/providers/libgen.js
+dist/providers/scihub.js
+dist/providers/zlibrary.js
+dist/selfcheck.js
+dist/server.js
+dist/sniff.js
+dist/toolmeta.js
+dist/types.js
+LICENSE
+package.json
+README.md
+scripts/preflight.mjs
+Tarball Details
+/home/user/biblio-mcp-review/repo/artifacts/vernikr-biblio-mcp-2.0.0.tgz
+✓ Lockfile at ../../../../tmp/biblio-mcpb-stage-XLa09M/pnpm-lock.yaml passes supply-chain policies (verified 6m ago)
+Packages are copied from the content-addressable store to the virtual store.
+  Content-addressable store is at: /home/user/.local/share/pnpm/store/v11
+  Virtual store is at:             ../../../../tmp/biblio-mcpb-stage-XLa09M/node_modules/.pnpm
+../../../../tmp/biblio-mcpb-stage-XLa09M | Progress: resolved 114, reused 114, downloaded 0, added 116, done
+Done in 98ms using pnpm v12.10.1
+Manifest schema validation passes!
+Artifacts: /home/user/biblio-mcp-review/repo/artifacts/vernikr-biblio-mcp-2.0.0.{tgz,mcpb}

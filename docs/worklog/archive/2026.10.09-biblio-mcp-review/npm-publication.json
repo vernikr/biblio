@@ -1,0 +1,14 @@
+{
+  "package": "@vernikr/biblio-mcp",
+  "version": "2.0.0",
+  "registry_url": "https://registry.npmjs.org/@vernikr%2Fbiblio-mcp/2.0.0",
+  "npm_page": "https://www.npmjs.com/package/@vernikr/biblio-mcp",
+  "tarball_url": "https://registry.npmjs.org/@vernikr/biblio-mcp/-/biblio-mcp-2.0.0.tgz",
+  "integrity": "sha512-TZPkgRbJcteljhAAQDV+oJDNV0gAQBlpoqNNY9w8g2WTBCEb+50Met9kgCubDngExpN0W/lXN+3iXplD87yCow==",
+  "tarball_sha256": "5d2882d65df7a04441ad9397565f94d728cbb6bc77f5bbc400836f32547c142e",
+  "verified_at_utc": "2026-10-08T23:48:40.064298+00:00",
+  "publisher": "vernikr",
+  "access": "public",
+  "tag": "latest",
+  "registry_tarball_matches_tested_bytes": true
+}

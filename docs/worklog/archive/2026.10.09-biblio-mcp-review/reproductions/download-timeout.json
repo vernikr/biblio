@@ -1,0 +1,7 @@
+{
+  "check": "download-timeout",
+  "budgetMs": 150,
+  "elapsedMs": 636,
+  "saved": true,
+  "bytes": 59
+}

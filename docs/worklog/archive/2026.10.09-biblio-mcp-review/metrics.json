@@ -1,0 +1,38 @@
+{
+  "src": {
+    "files": 17,
+    "lines": 3182,
+    "blank_lines": 309,
+    "comment_only_lines": 305
+  },
+  "scripts": {
+    "files": 7,
+    "lines": 733,
+    "blank_lines": 76,
+    "comment_only_lines": 54
+  },
+  "test": {
+    "files": 30,
+    "lines": 3814,
+    "blank_lines": 418,
+    "comment_only_lines": 238
+  },
+  "README.md": {
+    "lines": 534
+  },
+  "AGENTS.md": {
+    "lines": 92
+  },
+  "CHANGELOG.md": {
+    "lines": 342
+  },
+  "docs/STATE.md": {
+    "lines": 42
+  },
+  "docs/decisions.md": {
+    "lines": 60
+  },
+  "docs/worklog/biblio-mcp-audit.md": {
+    "lines": 656
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "check": "settings",
+  "requestedStaggerMs": 0,
+  "effectiveStaggerMs": 120,
+  "emptyMirrorError": "No zlibrary mirrors configured; set BIBLIO_ZLIBRARY_MIRRORS to one or more base URLs."
+}

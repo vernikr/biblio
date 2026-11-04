@@ -1,0 +1,12 @@
+? Verifying lockfile at ../reproductions/mcpb-probe-32y844/pnpm-lock.yaml against supply-chain policies (114 entries)...
+Packages are hard linked from the content-addressable store to the virtual store.
+  Content-addressable store is at: /home/user/.local/share/pnpm/store/v11
+  Virtual store is at:             ../reproductions/mcpb-probe-32y844/node_modules/.pnpm
+✗ Lockfile at ../reproductions/mcpb-probe-32y844/pnpm-lock.yaml failed supply-chain policy check (114 entries in 161ms)
+Error: ERR_PNPM_META_FETCH_FAIL
+
+  × installing deployed dependencies
+  ╰─▶ ERR_PNPM_NO_OFFLINE_META: Failed to resolve @hono/node-server in package
+      mirror /home/user/.cache/pnpm/v12/metadata-full/
+      https%3A+registry.npmjs.org/@hono/node-server.jsonl
+

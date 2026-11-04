@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: a filename with parent-directory segments is rejected and writes nothing
+ok 1 - a filename with parent-directory segments is rejected and writes nothing
+  ---
+  duration_ms: 22.025671
+  ...
+# Subtest: a filename containing a path separator is rejected
+ok 2 - a filename containing a path separator is rejected
+  ---
+  duration_ms: 4.23001
+  ...
+# Subtest: a plain filename is saved inside output_dir
+ok 3 - a plain filename is saved inside output_dir
+  ---
+  duration_ms: 71.552222
+  ...
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 4 - two concurrent downloads of the same md5 into one directory both succeed intact
+  ---
+  duration_ms: 240.511663
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 5 - a filename that already exists is refused, and the existing file is untouched
+  ---
+  duration_ms: 9.51706
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 6 - a filename created after the precheck is preserved without retrying the download
+  ---
+  duration_ms: 161.5496
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 7 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 173.38755
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 8 - a filesystem without hard-link support fails safely instead of falling back to rename
+  ---
+  duration_ms: 167.483842
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1689.585974

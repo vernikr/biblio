@@ -1,0 +1,296 @@
+
+Run 1
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.10862
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.115568
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.136924
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 373.495976
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.344562
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 1033.684063
+
+Run 2
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.148653
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.17662
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.159613
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 305.078011
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.348421
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 716.984657
+
+Run 3
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.092211
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.149507
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.138554
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 246.684653
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.293811
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 607.973003
+
+Run 4
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.19086
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.111912
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.17629
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 252.678248
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.319737
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 608.662083
+
+Run 5
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.127894
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.119778
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.173303
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 274.501541
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.303951
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 633.997226
+
+Run 6
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.134559
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.117765
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.150078
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 231.585004
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.286056
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 603.885711
+
+Run 7
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.325677
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.136013
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.196241
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 252.585322
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.278689
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 629.758097
+
+Run 8
+TAP version 13
+# Subtest: two concurrent downloads of the same md5 into one directory both succeed intact
+ok 1 - two concurrent downloads of the same md5 into one directory both succeed intact # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.189554
+  ...
+# Subtest: a filename that already exists is refused, and the existing file is untouched
+ok 2 - a filename that already exists is refused, and the existing file is untouched # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.122743
+  ...
+# Subtest: a filename created after the precheck is preserved without retrying the download
+ok 3 - a filename created after the precheck is preserved without retrying the download # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.140295
+  ...
+# Subtest: two concurrent downloads to the same caller filename have exactly one winner
+ok 4 - two concurrent downloads to the same caller filename have exactly one winner
+  ---
+  duration_ms: 240.0348
+  ...
+# Subtest: a filesystem without hard-link support fails safely instead of falling back to rename
+ok 5 - a filesystem without hard-link support fails safely instead of falling back to rename # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.341513
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 4
+# todo 0
+# duration_ms 605.879354

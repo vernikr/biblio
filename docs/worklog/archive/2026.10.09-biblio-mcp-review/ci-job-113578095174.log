@@ -1,0 +1,289 @@
+﻿2026-10-08T22:44:33.7521752Z Current runner version: '2.337.0'
+2026-10-08T22:44:33.7557553Z ##[group]Runner Image Provisioner
+2026-10-08T22:44:33.7558929Z Hosted Compute Agent
+2026-10-08T22:44:33.7559931Z Version: 20261002.596
+2026-10-08T22:44:33.7561079Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-08T22:44:33.7562675Z Build Date: 2026-10-02T22:28:27Z
+2026-10-08T22:44:33.7563928Z Worker ID: {98d0abca-aa65-4c45-a103-73bbe0dc5bad}
+2026-10-08T22:44:33.7565317Z Region: eastus
+2026-10-08T22:44:33.7566213Z Cloud: Azure
+2026-10-08T22:44:33.7567239Z ##[endgroup]
+2026-10-08T22:44:33.7569559Z ##[group]Operating System
+2026-10-08T22:44:33.7570612Z Ubuntu
+2026-10-08T22:44:33.7572387Z 24.04.5
+2026-10-08T22:44:33.7573223Z LTS
+2026-10-08T22:44:33.7574116Z ##[endgroup]
+2026-10-08T22:44:33.7575086Z ##[group]Runner Image
+2026-10-08T22:44:33.7576110Z Image: ubuntu-24.04
+2026-10-08T22:44:33.7577187Z Version: 20261004.327.1
+2026-10-08T22:44:33.7579263Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-08T22:44:33.7582350Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-08T22:44:33.7584189Z ##[endgroup]
+2026-10-08T22:44:33.7586223Z ##[group]GITHUB_TOKEN Permissions
+2026-10-08T22:44:33.7589251Z Contents: read
+2026-10-08T22:44:33.7590207Z Metadata: read
+2026-10-08T22:44:33.7591122Z Packages: read
+2026-10-08T22:44:33.7592556Z ##[endgroup]
+2026-10-08T22:44:33.7595459Z Secret source: Actions
+2026-10-08T22:44:33.7597170Z Cache mode: write
+2026-10-08T22:44:33.7598616Z Prepare workflow directory
+2026-10-08T22:44:33.8040232Z Prepare all required actions
+2026-10-08T22:44:33.8088188Z Getting action download info
+2026-10-08T22:44:34.0145451Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-08T22:44:34.1257874Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+2026-10-08T22:44:34.3284626Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-08T22:44:34.4152468Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-08T22:44:34.6297602Z Complete job name: artifacts (ubuntu-latest)
+2026-10-08T22:44:34.7103634Z ##[group]Run actions/checkout@v4
+2026-10-08T22:44:34.7105043Z with:
+2026-10-08T22:44:34.7105749Z   repository: vernikr/biblio-mcp
+2026-10-08T22:44:34.7113111Z   token: ***
+2026-10-08T22:44:34.7113935Z   ssh-strict: true
+2026-10-08T22:44:34.7114796Z   ssh-user: git
+2026-10-08T22:44:34.7115588Z   persist-credentials: true
+2026-10-08T22:44:34.7116488Z   clean: true
+2026-10-08T22:44:34.7117322Z   sparse-checkout-cone-mode: true
+2026-10-08T22:44:34.7118289Z   fetch-depth: 1
+2026-10-08T22:44:34.7119075Z   fetch-tags: false
+2026-10-08T22:44:34.7119824Z   show-progress: true
+2026-10-08T22:44:34.7120611Z   lfs: false
+2026-10-08T22:44:34.7121647Z   submodules: false
+2026-10-08T22:44:34.7122538Z   set-safe-directory: true
+2026-10-08T22:44:34.7123514Z   allow-unsafe-pr-checkout: false
+2026-10-08T22:44:34.7124875Z ##[endgroup]
+2026-10-08T22:44:34.8224948Z Syncing repository: vernikr/biblio-mcp
+2026-10-08T22:44:34.8226892Z ##[group]Getting Git version info
+2026-10-08T22:44:34.8227764Z Working directory is '/home/runner/work/biblio-mcp/biblio-mcp'
+2026-10-08T22:44:34.8228878Z [command]/usr/bin/git version
+2026-10-08T22:44:34.8320117Z git version 2.55.0
+2026-10-08T22:44:34.8346154Z ##[endgroup]
+2026-10-08T22:44:34.8370577Z Temporarily overriding HOME='/home/runner/work/_temp/3fa6e0f4-3a61-4c90-8a7c-ec4aa7fa454e' before making global git config changes
+2026-10-08T22:44:34.8373675Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T22:44:34.8377578Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/biblio-mcp/biblio-mcp
+2026-10-08T22:44:34.8438302Z Deleting the contents of '/home/runner/work/biblio-mcp/biblio-mcp'
+2026-10-08T22:44:34.8442673Z ##[group]Initializing the repository
+2026-10-08T22:44:34.8447785Z [command]/usr/bin/git init /home/runner/work/biblio-mcp/biblio-mcp
+2026-10-08T22:44:34.8543282Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-08T22:44:34.8544674Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-08T22:44:34.8545685Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-08T22:44:34.8546463Z hint: call:
+2026-10-08T22:44:34.8547077Z hint:
+2026-10-08T22:44:34.8547612Z hint: 	git config --global init.defaultBranch <name>
+2026-10-08T22:44:34.8548239Z hint:
+2026-10-08T22:44:34.8548832Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-08T22:44:34.8549778Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-08T22:44:34.8550548Z hint:
+2026-10-08T22:44:34.8550968Z hint: 	git branch -m <name>
+2026-10-08T22:44:34.8551702Z hint:
+2026-10-08T22:44:34.8552348Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-08T22:44:34.8558145Z Initialized empty Git repository in /home/runner/work/biblio-mcp/biblio-mcp/.git/
+2026-10-08T22:44:34.8569069Z [command]/usr/bin/git remote add origin https://github.com/vernikr/biblio-mcp
+2026-10-08T22:44:34.8618960Z ##[endgroup]
+2026-10-08T22:44:34.8619779Z ##[group]Disabling automatic garbage collection
+2026-10-08T22:44:34.8623848Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-08T22:44:34.8654591Z ##[endgroup]
+2026-10-08T22:44:34.8655351Z ##[group]Setting up auth
+2026-10-08T22:44:34.8663350Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T22:44:34.8695781Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-08T22:44:34.9066021Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T22:44:34.9117461Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-08T22:44:34.9365635Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T22:44:34.9401777Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-08T22:44:34.9626272Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-08T22:44:34.9666707Z ##[endgroup]
+2026-10-08T22:44:34.9667559Z ##[group]Fetching the repository
+2026-10-08T22:44:34.9678766Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9065bd947714576d8701c7da88d2ef4bdd11d55a:refs/remotes/origin/main
+2026-10-08T22:44:35.2477306Z From https://github.com/vernikr/biblio-mcp
+2026-10-08T22:44:35.2481956Z  * [new ref]         9065bd947714576d8701c7da88d2ef4bdd11d55a -> origin/main
+2026-10-08T22:44:35.2486292Z ##[endgroup]
+2026-10-08T22:44:35.2488265Z ##[group]Determining the checkout info
+2026-10-08T22:44:35.2489701Z ##[endgroup]
+2026-10-08T22:44:35.2490928Z [command]/usr/bin/git sparse-checkout disable
+2026-10-08T22:44:35.2544628Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-08T22:44:35.2578823Z ##[group]Checking out the ref
+2026-10-08T22:44:35.2582468Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-08T22:44:35.2719473Z Switched to a new branch 'main'
+2026-10-08T22:44:35.2725357Z branch 'main' set up to track 'origin/main'.
+2026-10-08T22:44:35.2730621Z ##[endgroup]
+2026-10-08T22:44:35.2770764Z [command]/usr/bin/git log -1 --format=%H
+2026-10-08T22:44:35.2797709Z 9065bd947714576d8701c7da88d2ef4bdd11d55a
+2026-10-08T22:44:35.3193043Z ##[group]Run pnpm/action-setup@v4
+2026-10-08T22:44:35.3194209Z with:
+2026-10-08T22:44:35.3195186Z   dest: ~/setup-pnpm
+2026-10-08T22:44:35.3196085Z   run_install: null
+2026-10-08T22:44:35.3196961Z   cache: false
+2026-10-08T22:44:35.3197871Z   cache_dependency_path: pnpm-lock.yaml
+2026-10-08T22:44:35.3199091Z   package_json_file: package.json
+2026-10-08T22:44:35.3200161Z   standalone: false
+2026-10-08T22:44:35.3201044Z ##[endgroup]
+2026-10-08T22:44:35.4686878Z ##[group]Running self-installer...
+2026-10-08T22:44:35.9033167Z (node:2310) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-08T22:44:35.9035154Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T22:44:36.0603289Z Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-10-08T22:44:36.2012615Z Packages: +3
+2026-10-08T22:44:36.2018420Z +++
+2026-10-08T22:44:36.7861050Z Progress: resolved 15, reused 0, downloaded 3, added 3, done
+2026-10-08T22:44:36.8026334Z .../.pnpm/pnpm@12.10.1/node_modules/pnpm preinstall$ node install.js
+2026-10-08T22:44:37.3782484Z .../.pnpm/pnpm@12.10.1/node_modules/pnpm preinstall: Done
+2026-10-08T22:44:37.3786917Z .../.pnpm/pnpm@12.10.1/node_modules/pnpm postinstall$ node install.js
+2026-10-08T22:44:37.4196496Z .../.pnpm/pnpm@12.10.1/node_modules/pnpm postinstall: Done
+2026-10-08T22:44:41.5046078Z 
+2026-10-08T22:44:41.5046543Z dependencies:
+2026-10-08T22:44:41.5046990Z + pnpm 12.10.1
+2026-10-08T22:44:41.5047239Z 
+2026-10-08T22:44:41.5107216Z Done in 5.8s
+2026-10-08T22:44:41.5479177Z ##[endgroup]
+2026-10-08T22:44:41.5479917Z Installation Completed!
+2026-10-08T22:44:41.5740801Z ##[group]Run actions/setup-node@v4
+2026-10-08T22:44:41.5741272Z with:
+2026-10-08T22:44:41.5741902Z   node-version: 24
+2026-10-08T22:44:41.5742249Z   cache: pnpm
+2026-10-08T22:44:41.5742577Z   always-auth: false
+2026-10-08T22:44:41.5742949Z   check-latest: false
+2026-10-08T22:44:41.5747338Z   token: ***
+2026-10-08T22:44:41.5747659Z env:
+2026-10-08T22:44:41.5748163Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-10-08T22:44:41.5748697Z ##[endgroup]
+2026-10-08T22:44:41.7210980Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-08T22:44:41.7214644Z (node:2342) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-08T22:44:41.7215864Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-08T22:44:41.7217336Z ##[group]Environment details
+2026-10-08T22:44:42.2463215Z node: v24.21.0
+2026-10-08T22:44:42.2482474Z npm: 11.19.0
+2026-10-08T22:44:42.2483022Z yarn: 1.22.22
+2026-10-08T22:44:42.2484139Z ##[endgroup]
+2026-10-08T22:44:42.2522297Z [command]/home/runner/setup-pnpm/node_modules/.bin/pnpm store path --silent
+2026-10-08T22:44:42.2757087Z /home/runner/setup-pnpm/node_modules/.bin/store/v11
+2026-10-08T22:44:42.4284667Z pnpm cache is not found
+2026-10-08T22:44:42.7663396Z ##[group]Run pnpm install --frozen-lockfile
+2026-10-08T22:44:42.7664076Z [36;1mpnpm install --frozen-lockfile[0m
+2026-10-08T22:44:43.2193939Z shell: /usr/bin/bash -e {0}
+2026-10-08T22:44:43.2194227Z env:
+2026-10-08T22:44:43.2194496Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-10-08T22:44:43.2194832Z ##[endgroup]
+2026-10-08T22:44:43.3047722Z ? Verifying lockfile against supply-chain policies (214 entries)...
+2026-10-08T22:44:43.4848710Z Packages are hard linked from the content-addressable store to the virtual store.
+2026-10-08T22:44:43.4863909Z   Content-addressable store is at: /home/runner/setup-pnpm/node_modules/.bin/store/v11
+2026-10-08T22:44:43.4865343Z   Virtual store is at:             node_modules/.pnpm
+2026-10-08T22:44:43.5427724Z Downloading @typescript/typescript-linux-x64@7.0.2: 0.00 B/9.66 MB
+2026-10-08T22:44:44.4263443Z ✓ Lockfile passes supply-chain policies (214 entries in 1.1s)
+2026-10-08T22:44:44.4264402Z Lockfile is up to date, resolution step is skipped
+2026-10-08T22:44:44.4578186Z Packages: +170
+2026-10-08T22:44:44.4578923Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-10-08T22:44:44.4694310Z Progress: resolved 170, reused 0, downloaded 169, added 170, done
+2026-10-08T22:44:44.4710701Z .../esbuild@0.28.2/node_modules/esbuild postinstall$ node install.js
+2026-10-08T22:44:44.5220529Z .../esbuild@0.28.2/node_modules/esbuild postinstall: Done
+2026-10-08T22:44:44.5619260Z 
+2026-10-08T22:44:44.5620194Z dependencies:
+2026-10-08T22:44:44.5621285Z + @modelcontextprotocol/sdk 1.32.1
+2026-10-08T22:44:44.5622443Z + cheerio 1.2.0
+2026-10-08T22:44:44.5623175Z + zod 4.6.5
+2026-10-08T22:44:44.5623405Z 
+2026-10-08T22:44:44.5623597Z devDependencies:
+2026-10-08T22:44:44.5624034Z + @anthropic-ai/mcpb 2.1.2
+2026-10-08T22:44:44.5624485Z + @types/node 22.20.5
+2026-10-08T22:44:44.5624887Z + cross-spawn 7.0.6
+2026-10-08T22:44:44.5625262Z + tsx 4.23.15
+2026-10-08T22:44:44.5625626Z + typescript 7.0.2
+2026-10-08T22:44:44.5625841Z 
+2026-10-08T22:44:44.5669607Z Done in 1.3s using pnpm v12.10.1
+2026-10-08T22:44:44.5895181Z ##[group]Run pnpm run package:artifacts
+2026-10-08T22:44:44.5895548Z [36;1mpnpm run package:artifacts[0m
+2026-10-08T22:44:44.5961184Z shell: /usr/bin/bash -e {0}
+2026-10-08T22:44:44.5961681Z env:
+2026-10-08T22:44:44.5961949Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-10-08T22:44:44.5962275Z ##[endgroup]
+2026-10-08T22:44:44.6200871Z $ pnpm run build && node scripts/package-artifacts.mjs
+2026-10-08T22:44:44.6359703Z $ tsc
+2026-10-08T22:44:45.1112818Z package: @vernikr/biblio-mcp@2.0.0
+2026-10-08T22:44:45.1113747Z Tarball Contents
+2026-10-08T22:44:45.1114410Z dist/cache.js
+2026-10-08T22:44:45.1115362Z dist/config.js
+2026-10-08T22:44:45.1115778Z dist/http.js
+2026-10-08T22:44:45.1116043Z dist/index.js
+2026-10-08T22:44:45.1116259Z dist/mirrors.js
+2026-10-08T22:44:45.1116469Z dist/parse.js
+2026-10-08T22:44:45.1116705Z dist/providers/annas.js
+2026-10-08T22:44:45.1116994Z dist/providers/circuit.js
+2026-10-08T22:44:45.1117250Z dist/providers/index.js
+2026-10-08T22:44:45.1117566Z dist/providers/libgen.js
+2026-10-08T22:44:45.1117831Z dist/providers/scihub.js
+2026-10-08T22:44:45.1118079Z dist/providers/zlibrary.js
+2026-10-08T22:44:45.1118326Z dist/selfcheck.js
+2026-10-08T22:44:45.1118532Z dist/server.js
+2026-10-08T22:44:45.1118751Z dist/sniff.js
+2026-10-08T22:44:45.1118954Z dist/toolmeta.js
+2026-10-08T22:44:45.1119155Z dist/types.js
+2026-10-08T22:44:45.1119354Z LICENSE
+2026-10-08T22:44:45.1119554Z package.json
+2026-10-08T22:44:45.1119751Z README.md
+2026-10-08T22:44:45.1119963Z scripts/preflight.mjs
+2026-10-08T22:44:45.1120185Z Tarball Details
+2026-10-08T22:44:45.1120629Z /home/runner/work/biblio-mcp/biblio-mcp/artifacts/vernikr-biblio-mcp-2.0.0.tgz
+2026-10-08T22:44:45.1611966Z ? Verifying lockfile at ../../../../../tmp/biblio-mcpb-stage-rLymz2/pnpm-lock.yaml against supply-chain policies (114 entries)...
+2026-10-08T22:44:45.3510335Z ✓ Lockfile at ../../../../../tmp/biblio-mcpb-stage-rLymz2/pnpm-lock.yaml passes supply-chain policies (114 entries in 189ms)
+2026-10-08T22:44:45.3539748Z Packages are hard linked from the content-addressable store to the virtual store.
+2026-10-08T22:44:45.3541606Z   Content-addressable store is at: /home/runner/setup-pnpm/node_modules/.bin/store/v11
+2026-10-08T22:44:45.3543102Z   Virtual store is at:             ../../../../../tmp/biblio-mcpb-stage-rLymz2/node_modules/.pnpm
+2026-10-08T22:44:45.4096747Z .../../../tmp/biblio-mcpb-stage-rLymz2   | Progress: resolved 114, reused 114, downloaded 0, added 116, done
+2026-10-08T22:44:45.4189635Z Done in 290ms using pnpm v12.10.1
+2026-10-08T22:44:45.4279928Z Manifest schema validation passes!
+2026-10-08T22:44:46.5494467Z Artifacts: /home/runner/work/biblio-mcp/biblio-mcp/artifacts/vernikr-biblio-mcp-2.0.0.{tgz,mcpb}
+2026-10-08T22:44:46.6357239Z ##[group]Run node scripts/check-artifacts.mjs
+2026-10-08T22:44:46.6357630Z [36;1mnode scripts/check-artifacts.mjs[0m
+2026-10-08T22:44:46.6422046Z shell: /usr/bin/bash -e {0}
+2026-10-08T22:44:46.6422488Z env:
+2026-10-08T22:44:46.6422752Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+2026-10-08T22:44:46.6423276Z ##[endgroup]
+2026-10-08T22:44:52.4859360Z npm-installed: initialize + 7 tools + invalid call + complete download passed
+2026-10-08T22:44:53.2429498Z npx-pinned: initialize + 7 tools + invalid call + complete download passed
+2026-10-08T22:44:53.5019546Z file:///home/runner/work/biblio-mcp/biblio-mcp/scripts/check-artifacts.mjs:74
+2026-10-08T22:44:53.5020516Z     throw new Error(`${label}: ${stderr}`, { cause: error });
+2026-10-08T22:44:53.5021131Z           ^
+2026-10-08T22:44:53.5021333Z 
+2026-10-08T22:44:53.5021912Z Error: pnpm-dlx: Error: ERR_PNPM_NO_OFFLINE_TARBALL
+2026-10-08T22:44:53.5022323Z 
+2026-10-08T22:44:53.5022701Z   × adding a new package
+2026-10-08T22:44:53.5023415Z   ╰─▶ Failed to fetch tarball for bytes@3.1.2 from https://registry.npmjs.org/
+2026-10-08T22:44:53.5024112Z       bytes/-/bytes-3.1.2.tgz in offline mode: snapshot not present in local
+2026-10-08T22:44:53.5024498Z       store
+2026-10-08T22:44:53.5024870Z   help: Drop `--offline` (or `offline=true` in pnpm-workspace.yaml) or run an
+2026-10-08T22:44:53.5025356Z         online install first to populate the store.
+2026-10-08T22:44:53.5025572Z 
+2026-10-08T22:44:53.5025578Z 
+2026-10-08T22:44:53.5025921Z     at exercise (file:///home/runner/work/biblio-mcp/biblio-mcp/scripts/check-artifacts.mjs:74:11)
+2026-10-08T22:44:53.5026589Z     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+2026-10-08T22:44:53.5027237Z     at async file:///home/runner/work/biblio-mcp/biblio-mcp/scripts/check-artifacts.mjs:97:3 {
+2026-10-08T22:44:53.5027785Z   [cause]: McpError: MCP error -32000: Connection closed
+2026-10-08T22:44:53.5028783Z       at McpError.fromError (file:///home/runner/work/biblio-mcp/biblio-mcp/node_modules/.pnpm/@modelcontextprotocol+sdk@1.32.1_zod@4.6.5/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js:2048:16)
+2026-10-08T22:44:53.5030270Z       at Client._onclose (file:///home/runner/work/biblio-mcp/biblio-mcp/node_modules/.pnpm/@modelcontextprotocol+sdk@1.32.1_zod@4.6.5/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js:267:32)
+2026-10-08T22:44:53.5032411Z       at _transport.onclose (file:///home/runner/work/biblio-mcp/biblio-mcp/node_modules/.pnpm/@modelcontextprotocol+sdk@1.32.1_zod@4.6.5/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js:227:18)
+2026-10-08T22:44:53.5035380Z       at ChildProcess.<anonymous> (file:///home/runner/work/biblio-mcp/biblio-mcp/node_modules/.pnpm/@modelcontextprotocol+sdk@1.32.1_zod@4.6.5/node_modules/@modelcontextprotocol/sdk/dist/esm/client/stdio.js:85:31)
+2026-10-08T22:44:53.5036985Z       at ChildProcess.emit (node:events:514:28)
+2026-10-08T22:44:53.5037522Z       at maybeClose (node:internal/child_process:1141:16)
+2026-10-08T22:44:53.5038005Z       at ChildProcess._handle.onexit (node:internal/child_process:306:5) {
+2026-10-08T22:44:53.5038464Z     code: -32000,
+2026-10-08T22:44:53.5038787Z     data: undefined
+2026-10-08T22:44:53.5039116Z   }
+2026-10-08T22:44:53.5039399Z }
+2026-10-08T22:44:53.5039562Z 
+2026-10-08T22:44:53.5039695Z Node.js v24.21.0
+2026-10-08T22:44:53.5114996Z ##[error]Process completed with exit code 1.
+2026-10-08T22:44:53.5213635Z Post job cleanup.
+2026-10-08T22:44:53.6688758Z Pruning is unnecessary.
+2026-10-08T22:44:53.6857864Z Post job cleanup.
+2026-10-08T22:44:53.7787697Z [command]/usr/bin/git version
+2026-10-08T22:44:53.7832429Z git version 2.55.0
+2026-10-08T22:44:53.7881992Z Temporarily overriding HOME='/home/runner/work/_temp/a9bc40de-581c-450d-8266-bb7810f98ecd' before making global git config changes
+2026-10-08T22:44:53.7884055Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-08T22:44:53.7887546Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/biblio-mcp/biblio-mcp
+2026-10-08T22:44:53.7943829Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-08T22:44:53.7990077Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-08T22:44:53.8272485Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-08T22:44:53.8317330Z http.https://github.com/.extraheader
+2026-10-08T22:44:53.8352657Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-08T22:44:53.8368563Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-08T22:44:53.8620867Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-08T22:44:53.8664396Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-08T22:44:53.9066467Z Cleaning up orphan processes
+2026-10-08T22:44:53.9349308Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, pnpm/action-setup@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

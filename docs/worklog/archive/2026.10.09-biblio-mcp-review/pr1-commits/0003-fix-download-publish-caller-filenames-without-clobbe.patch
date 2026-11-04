@@ -1,0 +1,227 @@
+From 40c563032fdad138e7af2ce0ff235234b6602f9b Mon Sep 17 00:00:00 2001
+From: Arena Agent <agent@arena.invalid>
+Date: Thu, 8 Oct 2026 20:19:12 +0000
+Subject: [PATCH 3/3] fix(download): publish caller filenames without
+ clobbering
+
+Use an atomic same-directory hard link; collisions and unsupported filesystems fail without another download or an unsafe rename fallback. Preserve replacement for default MD5 names and cover deterministic concurrent publication.
+---
+ README.md                    |  6 ++-
+ docs/decisions.md            |  4 +-
+ src/server.ts                | 21 ++++++++--
+ test/download-races.test.mjs | 77 +++++++++++++++++++++++++++++++++++-
+ 4 files changed, 101 insertions(+), 7 deletions(-)
+
+diff --git a/README.md b/README.md
+index 090a06d..2b9b9f1 100644
+--- a/README.md
++++ b/README.md
+@@ -18,7 +18,7 @@ that something you can rely on.
+ - **Honest results.** A source that is down is reported, not silently dropped. A website that
+   has stopped being the real library is refused, and a page that asks you to prove you are a
+   human is reported as such, not handed over as the book. Downloaded files are checked, so you know you
+-  got the right book.
++  got the right book. Files you name explicitly won't replace an existing file.
+ - **Cleaner information.** Titles, authors and formats come from the right fields, and broken
+   or useless links are filtered out.
+ - **Less time lost.** When something goes wrong, the message says what happened and what to do
+@@ -399,6 +399,10 @@ that admits them.
+   title. Columns are now resolved from the table's `<th>` row, with a positional fallback for
+   mirrors that ship no header, and `series` is its own field. File sizes go through a bounded
+   parser, so a digit run from the pages column (`00264mB`) can no longer be reported as a size.
++- **Explicit download filenames are never overwritten**, even if a file appears during the
++  transfer. This needs hard-link support in the output filesystem; without it, the tool fails
++  safely rather than risking an overwrite. Without `filename`, existing MD5-based files may
++  still be replaced.
+ - **Download links are filtered before they reach you.** Providers scrape anchors, and some
+   anchors are not downloads — Libgen's `ads.php` page links the bare `http://annas-archive.org/`
+   homepage, which used to appear as a download option. A link is only reported if it has a path
+diff --git a/docs/decisions.md b/docs/decisions.md
+index 391447f..f0db4d8 100644
+--- a/docs/decisions.md
++++ b/docs/decisions.md
+@@ -12,7 +12,7 @@ This file keeps the rationale for non-obvious behavior out of implementation com
+ ## Timeouts and downloads
+ 
+ - The HTML request budget covers body consumption, not just response headers. Large file downloads have a separate budget and an idle stall watchdog.
+-- Downloads stream through a hash transform to a `.part` file and are renamed only after success. Reject HTML interstitials instead of saving them as books; report the actual MD5 because mirror links can serve a different file.
++- Downloads stream through a hash transform to a `.part` file and are published only after a complete transfer. Reject HTML interstitials instead of saving them as books; report the actual MD5 because mirror links can serve a different file.
+ - Probe requests without an identity marker cancel unread bodies so health checks do not leave connections open.
+ 
+ ## Provider parsing and data
+@@ -56,6 +56,6 @@ This file keeps the rationale for non-obvious behavior out of implementation com
+ - **A losing Anna's request is cancelled; a losing Libgen request is not.** Once Libgen answers first, the slower Anna's detail request is cancelled, and that cancellation does not count against the Anna's circuit. Libgen's ads page is cached and reused by the download step, so cancelling it would waste work the next call needs.
+ - **Member links race the verified mirrors.** Each verified mirror is asked at once, the first usable answer wins, and the rest are cancelled. Sequential tries cost one full timeout per dead mirror.
+ - **Not-found responses are health, not failure.** A 404 or "no such record" answer proves the source responded. It does not open a mirror's cooldown or a source's circuit. Real failures still do.
+-- **A caller's filename is never overwritten.** A default name is the catalogue MD5 with the sniffed extension, which means the same book. A name the caller chose is refused if it already exists. Each download stages under a unique temporary name, so parallel calls for the same MD5 cannot delete each other's bytes.
++- **A caller's filename is never overwritten.** Publish a caller-chosen name with an atomic hard link from unique same-directory staging, so a file created during the transfer is refused too. Without hard-link support, fail rather than fall back to `rename`; a publication failure must not re-download from another URL. Default catalogue-MD5 names retain their replacement behavior. Unique staging keeps concurrent calls from writing or deleting each other's temporary bytes.
+ - **One settings registry and one tool-description source.** Every `BIBLIO_*` setting is listed once in `src/config.ts`, and the README table is generated from it. Each tool's text and example live together in `src/toolmeta.ts`, and a test checks each example against its schema. Argument text stays in the Zod schemas.
+ - **The installer's end-to-end test runs a real build and stays in the default suite.** Cutting it would make the suite faster but would drop coverage of the actual install path, so it stays. The cost is about five seconds of the roughly fifteen-second suite.
+diff --git a/src/server.ts b/src/server.ts
+index 417004b..e7403f4 100644
+--- a/src/server.ts
++++ b/src/server.ts
+@@ -2,7 +2,7 @@
+ 
+ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+ import { z } from "zod";
+-import { access, mkdir, open, rename, unlink } from "node:fs/promises";
++import { access, link as linkFile, mkdir, open, rename, unlink } from "node:fs/promises";
+ import { join, isAbsolute, resolve } from "node:path";
+ import { randomUUID } from "node:crypto";
+ import { createRequire } from "node:module";
+@@ -288,7 +288,7 @@ export function createServer(): McpServer {
+       filename: z
+         .string()
+         .optional()
+-        .describe("Optional filename; defaults to <md5>.<ext>."),
++        .describe("Optional plain filename; defaults to <md5>.<ext>. Existing names are never overwritten."),
+     },
+     async ({ md5, output_dir, filename }, extra) => {
+       const hash = md5.toLowerCase();
+@@ -336,7 +336,22 @@ export function createServer(): McpServer {
+             plainName ??
+             `${hash}.${sniffExt(await readFileHead(staging, 4096), result.contentType)}`;
+           const path = join(dir, name);
+-          await rename(staging, path);
++          try {
++            // A precheck cannot prevent a concurrent writer. link is atomic and
++            // refuses an existing caller-chosen name; never fall back to rename.
++            if (plainName !== undefined) await linkFile(staging, path);
++            else await rename(staging, path);
++          } catch (e) {
++            await unlink(staging).catch(() => {});
++            // Publication is a local failure, not a reason to try another URL.
++            return jsonError({
++              saved: false,
++              reason: (e as NodeJS.ErrnoException).code === "EEXIST"
++                ? `${name} already exists in ${dir}; choose another filename.`
++                : `Cannot publish ${name} in ${dir}: ${(e as Error).message}`,
++            });
++          }
++          if (plainName !== undefined) await unlink(staging).catch(() => {});
+ 
+           return json({
+             saved: true,
+diff --git a/test/download-races.test.mjs b/test/download-races.test.mjs
+index b0a7830..60b02e2 100644
+--- a/test/download-races.test.mjs
++++ b/test/download-races.test.mjs
+@@ -5,6 +5,8 @@ import test from "node:test";
+ import assert from "node:assert/strict";
+ import { createServer } from "node:http";
+ import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
++import fs from "node:fs/promises";
++import { syncBuiltinESMExports } from "node:module";
+ import { tmpdir } from "node:os";
+ import { join } from "node:path";
+ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+@@ -13,16 +15,21 @@ import { closeServer, listenLocal } from "./helpers/mirror-server.mjs";
+ 
+ const md5 = "d".repeat(32);
+ const body = Buffer.concat([Buffer.from("%PDF-1.4 race test "), Buffer.alloc(256 * 1024, 7)]);
++let downloadRequests = 0;
++let beforeDownload = () => {};
+ 
+-const server = createServer((req, res) => {
++const server = createServer(async (req, res) => {
+   if (req.url?.startsWith("/ads.php")) {
+     res.writeHead(200, { "content-type": "text/html; charset=UTF-8" }).end(
+       `<html><body>Library Genesis <a href="get.php?md5=${md5}&key=K">GET</a> ` +
++        `<a href="get.php?md5=${md5}&key=SECOND">GET</a> ` +
+         `@book{book:1, title={Race Book}, author={Tester}}</body></html>`
+     );
+     return;
+   }
+   if (req.url?.startsWith("/get.php")) {
++    downloadRequests += 1;
++    await beforeDownload();
+     // Slow enough that two calls overlap on disk.
+     res.writeHead(200, { "content-type": "application/octet-stream", "content-length": body.length });
+     res.write(body.subarray(0, body.length / 2));
+@@ -36,10 +43,15 @@ process.env.BIBLIO_LIBGEN_MIRRORS = mirror;
+ process.env.BIBLIO_ANNAS_MIRRORS = mirror;
+ process.env.BIBLIO_MIRROR_STAGGER_MS = "0";
+ process.env.BIBLIO_TIMEOUT_MS = "2000";
++process.env.BIBLIO_DOWNLOAD_TIMEOUT_MS = "3000";
+ delete process.env.BIBLIO_ANNAS_API_KEY;
+ 
+ const { createServer: createMcpServer } = await import("../dist/server.js");
+ 
++test.beforeEach(() => {
++  downloadRequests = 0;
++  beforeDownload = () => {};
++});
+ test.after(() => closeServer(server));
+ 
+ async function download(args) {
+@@ -88,3 +100,66 @@ test("a filename that already exists is refused, and the existing file is untouc
+     rmSync(dir, { recursive: true, force: true });
+   }
+ });
++
++test("a filename created after the precheck is preserved without retrying the download", async () => {
++  const dir = mkdtempSync(join(tmpdir(), "biblio-race-"));
++  const keep = join(dir, "mine.pdf");
++  beforeDownload = () => writeFileSync(keep, "created while the download was running");
++  try {
++    const result = await download({ output_dir: dir, filename: "mine.pdf" });
++    assert.equal(result.isError, true);
++    assert.equal(result.payload.saved, false);
++    assert.match(result.payload.reason, /already exists.*choose another filename/);
++    assert.equal(readFileSync(keep, "utf8"), "created while the download was running");
++    assert.equal(downloadRequests, 1, "a local filename conflict must not try the second link");
++    assert.deepEqual(readdirSync(dir), ["mine.pdf"]);
++  } finally {
++    rmSync(dir, { recursive: true, force: true });
++  }
++});
++
++test("two concurrent downloads to the same caller filename have exactly one winner", async () => {
++  const dir = mkdtempSync(join(tmpdir(), "biblio-race-"));
++  let release;
++  const bothStarted = new Promise((resolve) => { release = resolve; });
++  beforeDownload = async () => {
++    if (downloadRequests === 2) release();
++    await bothStarted;
++  };
++  try {
++    const results = await Promise.all([
++      download({ output_dir: dir, filename: "mine.pdf" }),
++      download({ output_dir: dir, filename: "mine.pdf" }),
++    ]);
++    assert.equal(results.filter((r) => r.payload.saved === true).length, 1);
++    const loser = results.find((r) => r.isError);
++    assert.ok(loser, "the other call must report a conflict");
++    assert.equal(loser.payload.saved, false);
++    assert.match(loser.payload.reason, /already exists/);
++    assert.equal(readFileSync(join(dir, "mine.pdf")).equals(body), true);
++    assert.equal(downloadRequests, 2, "neither call may re-download after publication");
++    assert.deepEqual(readdirSync(dir), ["mine.pdf"]);
++  } finally {
++    release();
++    rmSync(dir, { recursive: true, force: true });
++  }
++});
++
++test("a filesystem without hard-link support fails safely instead of falling back to rename", async () => {
++  const dir = mkdtempSync(join(tmpdir(), "biblio-race-"));
++  const originalLink = fs.link;
++  fs.link = async () => { throw Object.assign(new Error("hard links unsupported"), { code: "ENOTSUP" }); };
++  syncBuiltinESMExports();
++  try {
++    const result = await download({ output_dir: dir, filename: "mine.pdf" });
++    assert.equal(result.isError, true);
++    assert.equal(result.payload.saved, false);
++    assert.match(result.payload.reason, /hard links unsupported/);
++    assert.equal(downloadRequests, 1, "publication failure must not try the second download link");
++    assert.deepEqual(readdirSync(dir), [], "no destination or temporary file may remain");
++  } finally {
++    fs.link = originalLink;
++    syncBuiltinESMExports();
++    rmSync(dir, { recursive: true, force: true });
++  }
++});
+-- 
+2.47.3
+

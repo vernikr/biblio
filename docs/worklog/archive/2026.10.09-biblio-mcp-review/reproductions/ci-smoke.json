@@ -1,0 +1,13 @@
+{
+  "entrypointExit": 0,
+  "actualResponseIds": [
+    1,
+    2,
+    3
+  ],
+  "remainingIds": [
+    1,
+    2
+  ],
+  "ciGrepsStillPassWithToolCallResponseRemoved": true
+}

@@ -1,0 +1,17 @@
+{
+  "protocolErrors": [],
+  "initialized": true,
+  "tools": [
+    "search_books",
+    "book_details",
+    "get_download_links",
+    "download_book",
+    "search_papers",
+    "get_paper",
+    "healthcheck"
+  ],
+  "callerFilenameNoOverwriteAdvertised": true,
+  "invalidCallFlagged": true,
+  "guidance": "download_book: \"md5\" is missing; \"output_dir\" is missing. Schema: required: \"md5\", \"output_dir\" — Directory to save into; created if missing. Use an absolute path. A relative path is resolved against $HOME (not the server's working directory, which you cannot see), and the resolved directory is reported back as `outputDir`; optional: \"filename\" — Optional plain filename; defaults to <md5>.<ext>. Existing names are never overwritten. Example: {\"md5\":\"524037f395462d37b31f2b28fede24fb\",\"output_dir\":\"/home/me/books\"}",
+  "stderr": "biblio-mcp v1.8.0 ready on stdio\n"
+}

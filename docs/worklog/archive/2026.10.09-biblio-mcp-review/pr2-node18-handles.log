@@ -1,0 +1,98 @@
+TAP version 13
+# Subtest: the member key is sent only to the mirror that proves it is Anna's Archive
+ok 1 - the member key is sent only to the mirror that proves it is Anna's Archive
+  ---
+  duration_ms: 48.299821
+  ...
+HANDLES 12119 [
+  {
+    type: 'Socket',
+    address: {},
+    connections: undefined,
+    remote: undefined,
+    port: undefined,
+    destroyed: false
+  },
+  {
+    type: 'Socket',
+    address: {},
+    connections: undefined,
+    remote: undefined,
+    port: undefined,
+    destroyed: false
+  },
+  {
+    type: 'Socket',
+    address: {},
+    connections: undefined,
+    remote: undefined,
+    port: undefined,
+    destroyed: false
+  },
+  {
+    type: 'ChildProcess',
+    address: null,
+    connections: undefined,
+    remote: undefined,
+    port: undefined,
+    destroyed: undefined
+  }
+]
+# HANDLES 12126 [
+#   {
+#     type: 'Socket',
+#     address: {},
+#     connections: undefined,
+#     remote: undefined,
+#     port: undefined,
+#     destroyed: false
+#   },
+#   {
+#     type: 'Socket',
+#     address: {},
+#     connections: undefined,
+#     remote: undefined,
+#     port: undefined,
+#     destroyed: false
+#   },
+#   {
+#     type: 'Server',
+#     address: { address: '127.0.0.1', family: 'IPv4', port: 40347 },
+#     connections: 1,
+#     remote: undefined,
+#     port: undefined,
+#     destroyed: undefined
+#   },
+#   {
+#     type: 'Server',
+#     address: { address: '127.0.0.1', family: 'IPv4', port: 46587 },
+#     connections: 2,
+#     remote: undefined,
+#     port: undefined,
+#     destroyed: undefined
+#   },
+#   {
+#     type: 'Socket',
+#     address: { address: '127.0.0.1', family: 'IPv4', port: 40347 },
+#     connections: undefined,
+#     remote: '127.0.0.1',
+#     port: 37340,
+#     destroyed: false
+#   },
+#   {
+#     type: 'Socket',
+#     address: { address: '127.0.0.1', family: 'IPv4', port: 46587 },
+#     connections: undefined,
+#     remote: '127.0.0.1',
+#     port: 35178,
+#     destroyed: false
+#   },
+#   {
+#     type: 'Socket',
+#     address: { address: '127.0.0.1', family: 'IPv4', port: 46587 },
+#     connections: undefined,
+#     remote: '127.0.0.1',
+#     port: 35184,
+#     destroyed: false
+#   }
+# ]

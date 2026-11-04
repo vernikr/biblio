@@ -1,0 +1,15 @@
+{
+  "repository": "vernikr/biblio-mcp",
+  "branch": "main",
+  "base_sha": "40c563032fdad138e7af2ce0ff235234b6602f9b",
+  "pushed_sha": "e07743a61f18a85d2a07edd1d798a794da94206e",
+  "github_verified_sha": "e07743a61f18a85d2a07edd1d798a794da94206e",
+  "github_api_verified_sha": "e07743a61f18a85d2a07edd1d798a794da94206e",
+  "verified_at_utc": "2026-10-08T21:33:03.624993+00:00",
+  "force": false,
+  "commits": [
+    "37a14835da117b021086b4a9b8364dfd37edf0b3 fix(config): honor zero mirror stagger and the Z-Library override",
+    "f23e8162ed293bdfd38a6737b19bae520cc0e5bd fix(mcp): reject blank search text before provider requests",
+    "e07743a61f18a85d2a07edd1d798a794da94206e build: make verification offline and validate real MCP responses"
+  ]
+}

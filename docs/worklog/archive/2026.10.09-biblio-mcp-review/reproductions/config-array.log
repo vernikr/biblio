@@ -1,0 +1,45 @@
+biblio-mcp installer
+
+[1] checking prerequisites
+  ok   node 20.20.2
+  ok   pnpm 12.10.1
+  ok   git version 2.47.3
+
+[2] obtaining the source into /home/user/biblio-mcp-review/repo
+  ok   already present — reusing it (run `git pull` yourself to update)
+
+[3] preflight — the dependency guard
+  $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+biblio-mcp preflight — Node v20.20.2
+project: /home/user/biblio-mcp-review/repo
+
+  ok   node            v20.20.2
+  ok   lockfiles       pnpm-lock.yaml
+  ok   dependencies    node_modules present
+  ok   zod-sdk-compat  sdk 1.29.0 + zod 4.4.3 (range "^3.25 || ^4.0")
+  ok   build           /home/user/biblio-mcp-review/repo/dist/index.js
+
+ready to run: node dist/index.js
+
+[4] installing dependencies
+  $ pnpm install
+Already up to date
+Done in 6ms using pnpm v12.10.1
+
+[5] building
+  $ pnpm run build
+  ok   /home/user/biblio-mcp-review/repo/dist/index.js
+
+[6] verifying the tool surface
+  ok   the tool surface answers a real tool call
+  ·    skipping the live mirror check (--skip-network)
+
+[7] MCP client configuration
+  ·    backed up the existing config to /home/user/biblio-mcp-review/reproductions/config-cf7pb1e4/mcp.json.bak
+  ok   wrote /home/user/biblio-mcp-review/reproductions/config-cf7pb1e4/mcp.json
+  ·    verify the path it points at: /home/user/biblio-mcp-review/repo/dist/index.js
+
+install complete.
+
+STDERR
+$ tsc

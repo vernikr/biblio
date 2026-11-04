@@ -1,0 +1,327 @@
+TAP version 13
+# Subtest: runStartupSelftest passes on a healthy build
+ok 1 - runStartupSelftest passes on a healthy build # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.284638
+  ...
+# Subtest: the entry point refuses to start when the tool surface is broken
+ok 2 - the entry point refuses to start when the tool surface is broken # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.135236
+  ...
+# Subtest: the startup check can be bypassed, and says so when it refuses
+ok 3 - the startup check can be bypassed, and says so when it refuses # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.096367
+  ...
+# Subtest: the installer runs end to end in dry-run mode and writes nothing
+ok 4 - the installer runs end to end in dry-run mode and writes nothing # SKIP test name does not match pattern
+  ---
+  duration_ms: 1.70526
+  ...
+# Subtest: the installer stops at an unsupported Node prerequisite
+not ok 5 - the installer stops at an unsupported Node prerequisite
+  ---
+  duration_ms: 106.371376
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:112:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input was expected to not match the regular expression /\[2\] obtaining|ok\s+pnpm|no package manager found/. Input:
+    
+    'biblio-mcp installer (dry run — nothing is written)\n' +
+      '\n' +
+      '[1] checking prerequisites\n' +
+      '  FAIL node 17.0.0 is too old — 18 or newer is required\n' +
+      '  ok   pnpm 12.10.1\n' +
+      '  ok   git version 2.47.3\n' +
+      '\n' +
+      '[2] obtaining the source into /home/user/Tools/biblio-mcp\n' +
+      '  ok   running from the existing checkout at /home/user/biblio-mcp-review/repo\n' +
+      '\n' +
+      '[3] preflight — the dependency guard\n' +
+      '  $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs\n' +
+      '\n' +
+      '[4] installing dependencies\n' +
+      '  $ pnpm install\n' +
+      '\n' +
+      '[5] building\n' +
+      '  $ pnpm run build\n' +
+      '  ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js\n' +
+      '\n' +
+      '[6] verifying the tool surface\n' +
+      '  ·    would run the in-process tool-surface self-test\n' +
+      '  ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)\n' +
+      '\n' +
+      '[7] MCP client configuration\n' +
+      '  ok   add this to your MCP client config (Claude Desktop, Cline, Cursor, …):\n' +
+      '\n' +
+      '{\n' +
+      '  "mcpServers": {\n' +
+      '    "biblio": {\n' +
+      '      "command": "/usr/bin/node",\n' +
+      '      "args": [\n' +
+      '        "/home/user/biblio-mcp-review/repo/dist/index.js"\n' +
+      '      ]\n' +
+      '    }\n' +
+      '  }\n' +
+      '}\n' +
+      '\n' +
+      '  ·    or re-run with --write-config <path> to merge it in for you\n' +
+      '\n' +
+      'install FAILED — 1 problem(s) above. Nothing further was attempted.\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    biblio-mcp installer (dry run — nothing is written)
+    
+    [1] checking prerequisites
+      FAIL node 17.0.0 is too old — 18 or newer is required
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /home/user/Tools/biblio-mcp
+      ok   running from the existing checkout at /home/user/biblio-mcp-review/repo
+    
+    [3] preflight — the dependency guard
+      $ /usr/bin/node /home/user/biblio-mcp-review/repo/scripts/preflight.mjs
+    
+    [4] installing dependencies
+      $ pnpm install
+    
+    [5] building
+      $ pnpm run build
+      ·    would expect /home/user/biblio-mcp-review/repo/dist/index.js
+    
+    [6] verifying the tool surface
+      ·    would run the in-process tool-surface self-test
+      ·    skipping the live mirror check (pass --live to run `--selfcheck --live`)
+    
+    [7] MCP client configuration
+      ok   add this to your MCP client config (Claude Desktop, Cline, Cursor, …):
+    
+    {
+      "mcpServers": {
+        "biblio": {
+          "command": "/usr/bin/node",
+          "args": [
+            "/home/user/biblio-mcp-review/repo/dist/index.js"
+          ]
+        }
+      }
+    }
+    
+      ·    or re-run with --write-config <path> to merge it in for you
+    
+    install FAILED — 1 problem(s) above. Nothing further was attempted.
+    
+  operator: 'doesNotMatch'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:120:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer refuses npm fallback when the checkout has a pnpm lockfile
+ok 6 - the installer refuses npm fallback when the checkout has a pnpm lockfile # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.154756
+  ...
+# Subtest: the installer --live flag runs the live selfcheck
+ok 7 - the installer --live flag runs the live selfcheck # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.137124
+  ...
+# Subtest: the installer rejects contradictory --live and --skip-network flags immediately
+ok 8 - the installer rejects contradictory --live and --skip-network flags immediately # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.23241
+  ...
+# Subtest: the installer refuses to overwrite a config it cannot parse
+ok 9 - the installer refuses to overwrite a config it cannot parse # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.165993
+  ...
+# Subtest: the installer refuses a config that is not a JSON object
+ok 10 - the installer refuses a config that is not a JSON object # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.224762
+  ...
+# Subtest: the installer builds a clean checkout, merges an existing config and keeps a backup
+not ok 11 - the installer builds a clean checkout, merges an existing config and keeps a backup
+  ---
+  duration_ms: 151.470589
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:183:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    installer failed:
+    biblio-mcp installer
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ok   git version 2.47.3
+    
+    [2] obtaining the source into /tmp/biblio-install-clean-BqyvFz/repo
+      ok   already present — reusing it (run `git pull` yourself to update)
+    
+    [3] preflight — the dependency guard
+      $ /usr/bin/node /tmp/biblio-install-clean-BqyvFz/repo/scripts/preflight.mjs
+    biblio-mcp preflight — Node v20.20.2
+    project: /tmp/biblio-install-clean-BqyvFz/repo
+    
+      ok   node            v20.20.2
+      ok   lockfiles       pnpm-lock.yaml
+     FAIL  dependencies    missing
+            ↳ run `pnpm install`
+     FAIL  zod-sdk-compat  n/a
+            ↳ zod is not installed (run pnpm install)
+    
+    not ready — fix the FAIL lines above, then re-run this script.
+      FAIL preflight failed — the messages above include the exact fix command
+    
+    install FAILED — 1 problem(s) above. Nothing further was attempted.
+    
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:198:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer rejects an incompatible pair after installation and before building
+not ok 12 - the installer rejects an incompatible pair after installation and before building
+  ---
+  duration_ms: 117.519879
+  location: '/home/user/biblio-mcp-review/repo/test/install.test.mjs:213:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /keyValidator\._parse is not a function/. Input:
+    
+    'biblio-mcp installer\n' +
+      '\n' +
+      '[1] checking prerequisites\n' +
+      '  ok   node 20.20.2\n' +
+      '  ok   pnpm 12.10.1\n' +
+      '  ·    git not found — needed only if the target directory does not exist yet\n' +
+      '\n' +
+      '[2] obtaining the source into /tmp/biblio-install-clean-5fQYXp/repo\n' +
+      '  ok   already present — reusing it (run `git pull` yourself to update)\n' +
+      '\n' +
+      '[3] preflight — the dependency guard\n' +
+      '  $ /usr/bin/node /tmp/biblio-install-clean-5fQYXp/repo/scripts/preflight.mjs\n' +
+      'biblio-mcp preflight — Node v20.20.2\n' +
+      'project: /tmp/biblio-install-clean-5fQYXp/repo\n' +
+      '\n' +
+      '  ok   node            v20.20.2\n' +
+      '  ok   lockfiles       pnpm-lock.yaml\n' +
+      ' FAIL  dependencies    missing\n' +
+      '        ↳ run `pnpm install`\n' +
+      ' FAIL  zod-sdk-compat  n/a\n' +
+      '        ↳ zod is not installed (run pnpm install)\n' +
+      '\n' +
+      'not ready — fix the FAIL lines above, then re-run this script.\n' +
+      '  FAIL preflight failed — the messages above include the exact fix command\n' +
+      '\n' +
+      'install FAILED — 1 problem(s) above. Nothing further was attempted.\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    biblio-mcp installer
+    
+    [1] checking prerequisites
+      ok   node 20.20.2
+      ok   pnpm 12.10.1
+      ·    git not found — needed only if the target directory does not exist yet
+    
+    [2] obtaining the source into /tmp/biblio-install-clean-5fQYXp/repo
+      ok   already present — reusing it (run `git pull` yourself to update)
+    
+    [3] preflight — the dependency guard
+      $ /usr/bin/node /tmp/biblio-install-clean-5fQYXp/repo/scripts/preflight.mjs
+    biblio-mcp preflight — Node v20.20.2
+    project: /tmp/biblio-install-clean-5fQYXp/repo
+    
+      ok   node            v20.20.2
+      ok   lockfiles       pnpm-lock.yaml
+     FAIL  dependencies    missing
+            ↳ run `pnpm install`
+     FAIL  zod-sdk-compat  n/a
+            ↳ zod is not installed (run pnpm install)
+    
+    not ready — fix the FAIL lines above, then re-run this script.
+      FAIL preflight failed — the messages above include the exact fix command
+    
+    install FAILED — 1 problem(s) above. Nothing further was attempted.
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/biblio-mcp-review/repo/test/install.test.mjs:245:10)
+    Test.runInAsyncScope (node:async_hooks:206:9)
+    Test.run (node:internal/test_runner/test:796:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:526:18)
+    Test.postRun (node:internal/test_runner/test:889:19)
+    Test.run (node:internal/test_runner/test:835:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:526:7)
+  ...
+# Subtest: the installer validates the path it is about to put in a config
+ok 13 - the installer validates the path it is about to put in a config # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.193171
+  ...
+# Subtest: the installer is plain JavaScript with no imports from src
+ok 14 - the installer is plain JavaScript with no imports from src # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.165209
+  ...
+# Subtest: every BIBLIO_* variable in the code is documented in --help and the README
+ok 15 - every BIBLIO_* variable in the code is documented in --help and the README # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.137851
+  ...
+# Subtest: every command the README tells you to run actually exists
+ok 16 - every command the README tells you to run actually exists # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.194126
+  ...
+# Subtest: the published tarball contains the installer the README points at
+ok 17 - the published tarball contains the installer the README points at # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.169115
+  ...
+# Subtest: the fork package is private while the upstream owns the npm name
+ok 18 - the fork package is private while the upstream owns the npm name # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.171452
+  ...
+# Subtest: every version in the CHANGELOG has a matching compare link
+ok 19 - every version in the CHANGELOG has a matching compare link # SKIP test name does not match pattern
+  ---
+  duration_ms: 0.161206
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 16
+# todo 0
+# duration_ms 804.388915

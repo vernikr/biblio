@@ -1,0 +1,27 @@
+exit=1
+biblio-mcp installer
+
+[1] checking prerequisites
+  ok   node 20.20.2
+  ok   pnpm 12.10.1
+  ok   git version 2.47.3
+
+[2] obtaining the source into /home/user/biblio-mcp-review/reproductions/fresh-checkout
+  ok   already present — reusing it (run `git pull` yourself to update)
+
+[3] preflight — the dependency guard
+  $ /usr/bin/node /home/user/biblio-mcp-review/reproductions/fresh-checkout/scripts/preflight.mjs
+biblio-mcp preflight — Node v20.20.2
+project: /home/user/biblio-mcp-review/reproductions/fresh-checkout
+
+  ok   node            v20.20.2
+  ok   lockfiles       pnpm-lock.yaml
+ FAIL  dependencies    missing
+        ↳ run `pnpm install`
+ FAIL  zod-sdk-compat  n/a
+        ↳ zod is not installed (run pnpm install)
+
+not ready — fix the FAIL lines above, then re-run this script.
+  FAIL preflight failed — the messages above include the exact fix command
+
+install FAILED — 1 problem(s) above. Nothing further was attempted.

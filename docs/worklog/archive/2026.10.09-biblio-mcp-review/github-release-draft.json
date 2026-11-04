@@ -1,0 +1,30 @@
+{
+  "id": 407357475,
+  "tag": "v2.0.0",
+  "draft": true,
+  "url": "https://github.com/vernikr/biblio-mcp/releases/tag/untagged-0e64022fff3652635f00",
+  "assets": [
+    {
+      "id": 623350423,
+      "name": "vernikr-biblio-mcp-2.0.0.tgz",
+      "bytes": 49062,
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/untagged-0e64022fff3652635f00/vernikr-biblio-mcp-2.0.0.tgz",
+      "sha256": "5d2882d65df7a04441ad9397565f94d728cbb6bc77f5bbc400836f32547c142e"
+    },
+    {
+      "id": 623350444,
+      "name": "vernikr-biblio-mcp-2.0.0.mcpb",
+      "bytes": 5603303,
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/untagged-0e64022fff3652635f00/vernikr-biblio-mcp-2.0.0.mcpb",
+      "sha256": "21c5d132678670d71a0a153f623d06d378bee99ef9c20c6725fed99d5cb841ec"
+    },
+    {
+      "id": 623350504,
+      "name": "SHA256SUMS",
+      "bytes": 191,
+      "url": "https://github.com/vernikr/biblio-mcp/releases/download/untagged-0e64022fff3652635f00/SHA256SUMS",
+      "sha256": "5c3c0e49f70480c5b470e86610ade9e90daeba1ad5c7bcc442a33fd7a3e9cd8b"
+    }
+  ],
+  "stage": "draft uploaded; publish after main CI"
+}

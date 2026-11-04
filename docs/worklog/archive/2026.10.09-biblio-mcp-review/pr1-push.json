@@ -1,0 +1,15 @@
+{
+  "repository": "vernikr/biblio-mcp",
+  "branch": "main",
+  "previous_sha": "e9b30ca60de1f954e91f69fcd66735f526f18b30",
+  "pushed_sha": "40c563032fdad138e7af2ce0ff235234b6602f9b",
+  "github_verified_sha": "40c563032fdad138e7af2ce0ff235234b6602f9b",
+  "pushed_at_utc": "2026-10-08T20:40:33.098478+00:00",
+  "mode": "normal fast-forward push; no force",
+  "commits": [
+    "bed58a270110697f5a073f846ac3a5142765ca66 fix(install): install locked dependencies before preflight",
+    "a9b5c557d7020bad6b76afdcf4bdef8d6d99b57f fix(install): validate MCP config before touching backups",
+    "40c563032fdad138e7af2ce0ff235234b6602f9b fix(download): publish caller filenames without clobbering"
+  ],
+  "commit_url": "https://github.com/vernikr/biblio-mcp/commit/40c563032fdad138e7af2ce0ff235234b6602f9b"
+}
