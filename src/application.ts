@@ -26,6 +26,11 @@ export const appSchemas = {
   sources: z.array(z.enum(BOOK_SOURCE_IDS)).min(1, "select at least one source").optional(),
   limit: z.number().int().min(1).max(100).optional(),
   timeoutMs: z.number().int().min(250).max(30000).optional(),
+  maxAttempts: z.number().int().min(1).max(5).optional(),
+  format: z.string().min(1).optional(),
+  outputDir: z.string().min(1).optional(),
+  filename: z.string().optional(),
+  resolvePdfs: z.boolean().optional(),
 };
 
 export interface AppResult<T = unknown> {

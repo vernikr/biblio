@@ -123,6 +123,23 @@ Rules: no `sudo`, no global installs. Never put a path containing `fnm_multishel
 config. Put API keys only into the client's `env` block, and only if the user gives them to you.
 Never print a key back.
 
+## Command-line interface
+
+The package also installs a `biblio-mcp` executable. It calls the same application logic as the MCP server and works as a one-shot command:
+
+```sh
+biblio-mcp search books "dune frank herbert" --limit 10
+biblio-mcp book details <md5>
+biblio-mcp book links <md5>
+biblio-mcp download book <md5> --output-dir ~/Downloads/books
+biblio-mcp fetch book "dune frank herbert" --format EPUB
+biblio-mcp search papers "retrieval augmented generation" --resolve-pdfs
+biblio-mcp paper get "10.1038/nature12373"
+biblio-mcp healthcheck
+```
+
+Use `--json` on any command for machine-readable output. Results go to stdout; diagnostics, validation errors, and download progress go to stderr. Exit codes are `0` for success, `1` when an operation completed without its requested result (for example, a failed download), and `2` for invalid command-line input. `biblio-mcp --help` lists all commands and options. Running `biblio-mcp` without arguments still starts the MCP stdio server.
+
 ## What is biblio-mcp?
 
 biblio-mcp is an open-source MCP server that acts as a unified search layer across the four largest shadow libraries on the internet. Instead of installing and configuring separate MCP servers for each source, biblio-mcp combines them into a single server with a shared data model and automatic deduplication.
